@@ -35,10 +35,8 @@ const TitleCard = props => {
   )
 }
 
-
 const mapStateToProps = state => {
   return {locations: state.locations}
 }
-
 
 export default connect(mapStateToProps)(TitleCard)

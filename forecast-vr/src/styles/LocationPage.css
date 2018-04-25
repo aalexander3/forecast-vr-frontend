@@ -1,6 +1,6 @@
 #location-page {
   display: inline-block;
-  height: stretch;
+  width: 66%;
   margin: 2%;
   vertical-align: top;
 }

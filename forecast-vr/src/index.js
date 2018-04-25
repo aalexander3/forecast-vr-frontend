@@ -11,7 +11,6 @@ import registerServiceWorker from './registerServiceWorker';
 
 require('dotenv').config()
 
-
 const store = createStore(rootReducer, compose(applyMiddleware(thunk),
    window.devToolsExtension ? window.devToolsExtension() : f => f
  ));
