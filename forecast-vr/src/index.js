@@ -1,20 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
 import { rootReducer } from './reducers/reducer.js'
+import { BrowserRouter as Router} from 'react-router-dom'
+import thunk from 'redux-thunk'
 import './styles/index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
-const store = createStore(rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-console.log(store);
-console.log(store.getState());
+require('dotenv').config()
+
+
+const store = createStore(rootReducer, compose(applyMiddleware(thunk),
+   window.devToolsExtension ? window.devToolsExtension() : f => f
+ ));
+
+console.log('store is', store);
+console.log('state is', store.getState());
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <App />
+    </Router>
   </Provider>,
    document.getElementById('root'));
 registerServiceWorker();
+
+store.dispatch({type: '@@INIT'})

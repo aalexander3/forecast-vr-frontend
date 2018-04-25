@@ -4,17 +4,17 @@ function locationReducer(state = [], action){
   switch (action.type) {
     case 'ADD_LOCATION':
       return [...state, action.location]
-      break;
+    case 'START_ADD_LOCATION_REQUEST':
+      return state
     default:
       return state
   }
 }
 
-function weatherReducer(state = [], action){
+function defaultReducer(state = {}, action){
   switch (action.type) {
-    case 'ADD_WEATHER':
+    case 'INIT_LOCATION':
       return state
-      break;
     default:
       return state
   }
@@ -22,7 +22,7 @@ function weatherReducer(state = [], action){
 
 const rootReducer = combineReducers({
   locations: locationReducer,
-  weathers: weatherReducer
+  defaultLocation: defaultReducer
 })
 
 export { rootReducer }

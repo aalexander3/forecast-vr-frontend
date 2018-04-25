@@ -7,8 +7,10 @@ const NavBar = () => {
   return(
     <div id="nav-bar">
       <TitleCard />
-      <SearchBar />
-      <h3>IMPORT BUTTON FORECASTERSSSS HERE</h3>
+      <div id='bottom-nav'>
+        <SearchBar />
+        <h3>IMPORT BUTTON FORECASTERSSSS HERE</h3>
+      </div>
     </div>
   )
 }

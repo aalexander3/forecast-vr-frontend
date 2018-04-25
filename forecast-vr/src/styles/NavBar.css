@@ -3,5 +3,9 @@
   width: 28%;
   display: inline-block;
   border-right: #EDECEB solid 3px;
-  height: -webkit-fill-available;
+  height: stretch;
+}
+
+#bottom-nav {
+  margin: 10%;
 }

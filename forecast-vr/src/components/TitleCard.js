@@ -1,9 +1,27 @@
 import React from 'react'
 import '../styles/TitleCard.css'
-import {emojify} from 'react-emojione';
+import { connect } from 'react-redux';
+import { emojify } from 'react-emojione';
 import { Divider} from 'antd'
 
-const TitleCard = () => {
+const TitleCard = props => {
+  let [default_location] = props.locations
+
+  const showCityDetails = () => {
+    if (default_location){
+      const time = default_location.local_time.slice(17, -9)
+      const date = default_location.obs_time.slice(16, -11)
+      const day = default_location.local_time.slice(0, 4)
+      const dayTimeString = day + ' ' + date + ' ' + time
+
+      return (
+        <div>
+          <h3>{default_location.full_city_name}</h3>
+          <h3>{dayTimeString} </h3>
+        </div>
+      )
+    }
+  }
 
   return(
     <div id="title-card">
@@ -11,11 +29,16 @@ const TitleCard = () => {
 
       <h3>Tomorrow's view on today's weather</h3>
       <br/><br/>
-      <h3>CURRENT LOCATION</h3>
-      <h3>CURRENT TIME</h3>
+      {showCityDetails()}
       <Divider style={{width: '80%', display: 'inline-block'}}/>
     </div>
   )
 }
 
-export default TitleCard
+
+const mapStateToProps = state => {
+  return {locations: state.locations}
+}
+
+
+export default connect(mapStateToProps)(TitleCard)
