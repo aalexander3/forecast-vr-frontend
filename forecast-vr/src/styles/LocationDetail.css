@@ -1,0 +1,24 @@
+.close-icon-detail {
+  position: absolute;
+  top: 2%;
+  transform: scale(1.5);
+}
+
+.close-icon-detail:hover {
+ color: blue;
+}
+
+#location-detail {
+  position: absolute;
+  float: right;
+  top: 0;
+  left: 40%;
+  width: 60%;
+  display: inline-block;
+  border-left: #EDECEB solid 3px;
+  height: stretch;
+  z-index: 10;
+  background-color: white;
+  opacity: 1;
+  padding: 5% 2%
+}

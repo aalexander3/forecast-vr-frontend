@@ -8,17 +8,3 @@
 .location-cards {
   margin: 2%;
 }
-
-.location-detail {
-  position: absolute;
-  float: right;
-  top: 0;
-  left: 58%;
-  width: 100%;
-  display: inline-block;
-  border-left: #EDECEB solid 3px;
-  height: stretch;
-  z-index: 10;
-  background-color: white;
-  opacity: 1;
-}

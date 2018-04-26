@@ -6,6 +6,10 @@ export let deleteLocation = location => {
   return { type: 'DELETE_LOCATION', location: location }
 }
 
+export let deleteDetail = location => {
+  return { type: 'DELETE_DETAIL', location: location}
+}
+
 export let selectLocation = location => {
   // return { type: 'SELECT_LOCATION', location: location }
   return (dispatch) => {
@@ -20,8 +24,8 @@ export let selectLocation = location => {
         let {sunriseTime, sunsetTime} = json.daily.data[0]
 
         let newDate = new Date(parseInt(`${time}000`)).toLocaleString()
-        let sunrise = new Date(parseInt(`${sunriseTime}000`)).toTimeString()
-        let sunset = new Date(parseInt(`${sunsetTime}000`)).toTimeString()
+        let sunrise = new Date(parseInt(`${sunriseTime}000`)).toLocaleTimeString()
+        let sunset = new Date(parseInt(`${sunsetTime}000`)).toLocaleTimeString()
 
         dispatch({
           type: 'SELECT_LOCATION',
