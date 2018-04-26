@@ -16,6 +16,15 @@ function locationReducer(state = [], action){
   }
 }
 
+function fetchReducer(state = {}, action){
+  switch (action.type) {
+    case 'FETCH_LOCATION':
+      return action.location
+    default:
+      return state
+  }
+}
+
 function selectReducer(state = null, action){
   switch (action.type) {
     case 'SELECT_LOCATION':
@@ -27,7 +36,8 @@ function selectReducer(state = null, action){
 
 const rootReducer = combineReducers({
   locations: locationReducer,
-  selectedLocation: selectReducer
+  selectedLocation: selectReducer,
+  fetchLocation: fetchReducer
 })
 
 export { rootReducer }

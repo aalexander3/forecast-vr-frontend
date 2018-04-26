@@ -2,11 +2,11 @@
   position: relative;
   display: inline-block;
   width: 66%;
-  margin: 2%;
   vertical-align: top;
 }
 
 .location-cards {
+  margin: 2%;
 }
 
 .location-detail {
@@ -19,7 +19,6 @@
   border-left: #EDECEB solid 3px;
   height: stretch;
   z-index: 10;
-  background-color: grey;
+  background-color: white;
   opacity: 1;
-  margin: -2%;
 }

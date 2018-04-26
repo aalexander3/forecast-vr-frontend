@@ -7,7 +7,39 @@ export let deleteLocation = location => {
 }
 
 export let selectLocation = location => {
-  return { type: 'SELECT_LOCATION', location: location }
+  // return { type: 'SELECT_LOCATION', location: location }
+  return (dispatch) => {
+    dispatch({ type: 'START_ADD_LOCATION_REQUEST' });
+    return fetch(process.env.REACT_APP_DARK_SKY_QUERY + location.latitude + ',' + location.longitude)
+      .then(res => res.json()).then(json => {
+        console.log(json)
+
+        let {time, temperature, summary: shortSummary, windSpeed} = json.currently
+        let {latitude, longitude} = json
+        let {summary: dailySummary} = json.daily
+        let {sunriseTime, sunsetTime} = json.daily.data[0]
+
+        let newDate = new Date(parseInt(`${time}000`)).toLocaleString()
+        let sunrise = new Date(parseInt(`${sunriseTime}000`)).toTimeString()
+        let sunset = new Date(parseInt(`${sunsetTime}000`)).toTimeString()
+
+        dispatch({
+          type: 'SELECT_LOCATION',
+          location: {
+            full_city_name: location.full_city_name,
+            latitude: latitude,
+            longitude: longitude,
+            obs_time: newDate,
+            temp: temperature,
+            conditions: shortSummary,
+            windSpeed: windSpeed,
+            dailySummary: dailySummary,
+            sunriseTime: sunrise,
+            sunsetTime: sunset
+          }
+        })
+      })
+  }
 }
 
 
@@ -32,13 +64,47 @@ export let fetchLocation = location => {
               conditions: weather,
               wind: wind_mph,
               obs_time: dayTimeString,
-              precip: precip_1hr_in
+              precip: precip_1hr_in,
+              latitude: display_location.latitude,
+              longitude: display_location.longitude
             }
           })
         }
       })
   };
 }
+
+// export let newFetchLocation = (lat, long, cityName) => {
+//   return (dispatch) => {
+//     dispatch({ type: 'START_ADD_LOCATION_REQUEST' });
+//     return fetch(process.env.REACT_APP_DARK_SKY_QUERY + lat +','+long)
+//       .then(res => res.json()).then(json => {
+//         console.log(json)
+//
+//         let {time, temperature, summary: shortSummary, windSpeed} = json.currently
+//         let {latitude, longitude} = json
+//         let {summary: dailySummary} = json.daily
+//         let {sunriseTime, sunsetTime} = json.daily.data[0]
+//
+//         let newDate = new Date(parseInt(`${time}000`)).toLocaleString()
+//
+//         dispatch({
+//           type: 'ADD_LOCATION',
+//           location: {
+//             full_city_name: cityName,
+//             latitude: latitude,
+//             obs_time: newDate,
+//             temp: temperature,
+//             conditions: shortSummary,
+//             windSpeed: windSpeed,
+//             dailySummary: dailySummary,
+//             sunriseTime: sunriseTime,
+//             sunsetTime: sunsetTime
+//           }
+//         })
+//       })
+//   }
+// }
 
 const stringifyDate = (date, time) => {
   const newTime = time.slice(17, -9)

@@ -19,6 +19,7 @@ class SearchBar extends Component {
   }
 
   submitIt = () => {
+
     this.props.fetchLocation(this.state.text)
     this.setState({text: ''})
   }
