@@ -5,7 +5,7 @@
   border: solid black 1px;
   padding: 3%;
   display: inline-block;
-  margin: 2% 4% 2% 2% 
+  margin: 2% 4% 2% 2%
 }
 
 .iframe-cards {
@@ -13,4 +13,20 @@
   border-radius: 8rem;
   width: 90%;
   height: 60%;
+}
+
+.card-city-name:hover {
+  position: relative;
+  color: blue;
+  text-decoration: underline;
+  top: 2px;
+}
+
+.close-icon {
+  position: absolute;
+  margin: -1rem;
+}
+
+.close-icon:hover {
+  color: blue;
 }

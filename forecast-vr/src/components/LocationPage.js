@@ -1,7 +1,8 @@
 import React from 'react'
-import LocationCard from './LocationCard'
-import '../styles/LocationPage.css'
 import { connect } from 'react-redux';
+import LocationCard from './LocationCard'
+import LocationDetail from './LocationDetail'
+import '../styles/LocationPage.css'
 
 // import { fetchLocation } from  '../actions/actions';
 
@@ -12,15 +13,20 @@ const LocationPage = props => {
     return props.locations.map(loc => <LocationCard key={loc.full_city_name} location={loc} />)
   }
 
+  const makeLocationDetail = () => {
+    return (props.selectedLocation) ? <div className='location-detail'><LocationDetail /></div> : null
+  }
+
   return (
     <div id="location-page">
-        {makeLocationCards()}
+      <div className='location-cards'>{makeLocationCards()}</div>
+      {makeLocationDetail()}
     </div>
   )
 }
 
 const mapStateToProps = state => {
-  return {locations: state.locations}
+  return {locations: state.locations, selectedLocation: state.selectedLocation}
 }
 
 export default connect(mapStateToProps)(LocationPage)

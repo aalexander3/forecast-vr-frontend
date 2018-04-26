@@ -9,15 +9,10 @@ const TitleCard = props => {
 
   const showCityDetails = () => {
     if (default_location){
-      const time = default_location.local_time.slice(17, -9)
-      const date = default_location.obs_time.slice(16, -11)
-      const day = default_location.local_time.slice(0, 4)
-      const dayTimeString = day + ' ' + date + ' ' + time
-
       return (
         <div>
           <h3>{default_location.full_city_name}</h3>
-          <h3>{dayTimeString} </h3>
+          <h3>{default_location.obs_time} </h3>
         </div>
       )
     }
