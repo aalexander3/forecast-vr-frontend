@@ -5,7 +5,7 @@ function locationReducer(state = [], action){
     case 'ADD_LOCATION':
       return [...state, action.location]
     case 'START_ADD_LOCATION_REQUEST':
-      return state
+      return [...state]
     case 'DELETE_LOCATION':
       let index = state.indexOf(action.location)
       let firstPart = [...state.slice(0, index)]
@@ -16,21 +16,21 @@ function locationReducer(state = [], action){
   }
 }
 
-function fetchReducer(state = {}, action){
-  switch (action.type) {
-    case 'FETCH_LOCATION':
-      return action.location
-    default:
-      return state
-  }
-}
+// function fetchReducer(state = {}, action){
+//   switch (action.type) {
+//     case 'FETCH_LOCATION':
+//       return action.location
+//     default:
+//       return state
+//   }
+// }
 
 function selectReducer(state = null, action){
   switch (action.type) {
     case 'SELECT_LOCATION':
       return action.location
     case 'DELETE_DETAIL':
-      return null
+      return state
     default:
       return state
   }
@@ -39,7 +39,7 @@ function selectReducer(state = null, action){
 const rootReducer = combineReducers({
   locations: locationReducer,
   selectedLocation: selectReducer,
-  fetchLocation: fetchReducer
+  // fetchLocation: fetchReducer
 })
 
 export { rootReducer }

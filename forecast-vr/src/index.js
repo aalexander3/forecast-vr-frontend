@@ -15,8 +15,9 @@ const store = createStore(rootReducer, compose(applyMiddleware(thunk),
    window.devToolsExtension ? window.devToolsExtension() : f => f
  ));
 
-console.log('store is', store);
-console.log('state is', store.getState());
+store.subscribe(() => {
+  console.log(store.getState());
+})
 
 ReactDOM.render(
   <Provider store={store}>
@@ -27,4 +28,4 @@ ReactDOM.render(
    document.getElementById('root'));
 registerServiceWorker();
 
-store.dispatch({type: '@@INIT'})
+// store.dispatch({type: '@@INIT'})

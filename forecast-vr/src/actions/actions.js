@@ -11,7 +11,6 @@ export let deleteDetail = location => {
 }
 
 export let selectLocation = location => {
-  // return { type: 'SELECT_LOCATION', location: location }
   return (dispatch) => {
     dispatch({ type: 'START_ADD_LOCATION_REQUEST' });
     return fetch(process.env.REACT_APP_DARK_SKY_QUERY + location.latitude + ',' + location.longitude)
@@ -59,6 +58,7 @@ export let fetchLocation = location => {
           console.log(json.current_observation)
           let {display_location, temp_f, weather, wind_mph, local_time_rfc822: local_time, observation_time, precip_1hr_in} = json.current_observation
           let dayTimeString = stringifyDate(observation_time, local_time)
+          let citySlug = display_location.full.toLowerCase().replace(/, | /gi, "-")
 
           dispatch({
             type: 'ADD_LOCATION',
@@ -70,7 +70,8 @@ export let fetchLocation = location => {
               obs_time: dayTimeString,
               precip: precip_1hr_in,
               latitude: display_location.latitude,
-              longitude: display_location.longitude
+              longitude: display_location.longitude,
+              citySlug: citySlug
             }
           })
         }
