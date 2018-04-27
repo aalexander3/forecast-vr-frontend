@@ -8,3 +8,8 @@
 .location-cards {
   margin: 2%;
 }
+
+#selected-card {
+  margin: 18% 0 0 10%;
+  transform: scale(1.2);
+}

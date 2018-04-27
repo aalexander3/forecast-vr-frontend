@@ -33,9 +33,9 @@ export let selectLocation = location => {
             full_city_name: location.full_city_name,
             latitude: latitude,
             longitude: longitude,
-            obs_time: newDate,
-            temp: temperature,
-            conditions: shortSummary,
+            obs_time: location.obs_time,
+            temp: location.temp,
+            conditions: location.conditions,
             windSpeed: windSpeed,
             dailySummary: dailySummary,
             sunriseTime: sunrise,
@@ -49,7 +49,7 @@ export let selectLocation = location => {
 
 export let fetchLocation = location => {
   return (dispatch) => {
-    dispatch({ type: 'START_ADD_LOCATION_REQUEST' });
+    dispatch({ type: 'DELETE_DETAIL' });
     return fetch(process.env.REACT_APP_QUERY_API_URL + location + '.json')
       .then(response => response.json())
       .then(json => {
