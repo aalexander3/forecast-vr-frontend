@@ -9,7 +9,7 @@ import Snow from './Snow'
 import Rain from './Rain'
 
 const LocationCard = (props) => {
-  console.log(props);
+
   let {full_city_name, conditions, obs_time, temp, wind, citySlug} = props.location
 
   const sendDelete = () => {
@@ -21,27 +21,27 @@ const LocationCard = (props) => {
   }
 
   const renderIFrame = () => {
-    return <iframe seamless title={full_city_name} className='iframe-cards' src='http://localhost:3000/new-york-ny' />
+    return <iframe seamless title={full_city_name} className='iframe-cards' src={switchSource() }/>
   }
 
-  // const switchSource = () => {
-  //   switch (props.location.conditions) {
-  //     case "Overcast": case "Partly Cloudy": case "Mostly Cloudy": case "Scattered Clouds": case "Cloudy":
-  //       return 'https://media2.giphy.com/media/26BGDQxDCZDFHW5Ne/giphy.gif'
-  //     case "Clear": case "Sunny": case "Mostly Sunny": case "Partly Sunny":
-  //       return "https://media1.giphy.com/media/26u6dryuZH98z5KuY/giphy.gif"
-  //     case "Snow": case "Sleet":
-  //       return 'http://localhost:3000/snow'
-  //     case "Rain": case "Freezing Rain": case "Flurries": case "Light Rain":
-  //       return 'http://localhost:3000/rain'
-  //     case "Thunderstorm": case "Thunderstorms":
-  //       return 'https://media2.giphy.com/media/ESfdA1EX02VW/giphy.gif'
-  //     case "Fog": case "Haze":
-  //       return 'https://media2.giphy.com/media/26BGDQxDCZDFHW5Ne/giphy.gif'
-  //     default:
-  //       return 'https://media1.giphy.com/media/26BREnyYXsPOxlUKk/giphy.gif'
-  //   }
-  // }
+  const switchSource = () => {
+    switch (props.location.conditions) {
+      case "Overcast": case "Partly Cloudy": case "Mostly Cloudy": case "Scattered Clouds": case "Cloudy":
+        return 'http://localhost:3000/cloud'
+      case "Clear": case "Sunny": case "Mostly Sunny": case "Partly Sunny":
+        return "http://localhost:3000/sun"
+      case "Snow": case "Sleet":
+        return 'http://localhost:3000/snow'
+      case "Rain": case "Freezing Rain": case "Flurries": case "Light Rain":
+        return 'http://localhost:3000/rain'
+      case "Thunderstorm": case "Thunderstorms":
+        return 'http://localhost:3000/storm'
+      case "Fog": case "Haze":
+        return 'http://localhost:3000/fog'
+      default:
+        return 'http://localhost:3000/sun'
+    }
+  }
 
   return(
     <div className='location-card'>

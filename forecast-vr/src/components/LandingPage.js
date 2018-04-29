@@ -8,9 +8,9 @@ import { fetchLocation } from  '../actions/actions';
 
 class LandingPage extends Component {
 
-  componentDidMount = () => {
-    this.props.fetchLocation("new york ny")
-  }
+  // componentDidMount = () => {
+  //   this.props.fetchLocation("new york ny")
+  // }
 
   render(){
     return(

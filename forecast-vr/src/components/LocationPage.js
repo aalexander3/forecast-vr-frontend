@@ -9,7 +9,6 @@ import Snow from './Snow'
 
 
 const LocationPage = props => {
-  console.log(props);
 
   const makeLocationCards = () => {
     return props.locations.map(loc => <LocationCard key={loc.full_city_name} location={loc} />)
@@ -39,7 +38,6 @@ const LocationPage = props => {
 
   return (
     <div id="location-page">
-      <Route exact path='/rain' render={ () => <Rain /> } />
       {/* {mapRoutes} */}
       {detailVsCards()}
     </div>

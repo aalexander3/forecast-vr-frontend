@@ -71,9 +71,17 @@ aframe-particle-system-component@^1.0.11:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/aframe-particle-system-component/-/aframe-particle-system-component-1.0.11.tgz#ac1f3abef2307b238df58c9358982c987fb10016"
 
+aframe-rain@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/aframe-rain/-/aframe-rain-1.0.2.tgz#57b9e17845f163f66850829054f269bcc1cfd4b6"
+
 aframe-react@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/aframe-react/-/aframe-react-4.4.0.tgz#f8af660bc4f64746d7cddb065ad9cc5e88f358b9"
+
+aframe-sun-sky@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/aframe-sun-sky/-/aframe-sun-sky-3.0.3.tgz#73d0ae364d2665e95109cc6497a919407d503be6"
 
 aframe@0.7.0:
   version "0.7.0"
@@ -2089,7 +2097,7 @@ debug@^3.0.1, debug@^3.1.0:
   dependencies:
     ms "2.0.0"
 
-"debug@github:ngokevin/debug#noTimestamp":
+debug@ngokevin/debug#noTimestamp:
   version "2.2.0"
   resolved "https://codeload.github.com/ngokevin/debug/tar.gz/ef5f8e66d49ce8bc64c6f282c15f8b7164409e3a"
 
@@ -2287,7 +2295,7 @@ doctrine@^2.0.0:
   dependencies:
     esutils "^2.0.2"
 
-"document-register-element@github:dmarcos/document-register-element#8ccc532b7":
+document-register-element@dmarcos/document-register-element#8ccc532b7:
   version "0.5.4"
   resolved "https://codeload.github.com/dmarcos/document-register-element/tar.gz/8ccc532b7f3744be954574caf3072a5fd260ca90"
 
