@@ -22,7 +22,6 @@ class LandingPage extends Component {
   }
 }
 
-
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     fetchLocation: fetchLocation

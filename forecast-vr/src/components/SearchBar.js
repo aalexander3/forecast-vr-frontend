@@ -19,13 +19,12 @@ class SearchBar extends Component {
   }
 
   submitIt = () => {
-
     this.props.fetchLocation(this.state.text)
     this.setState({text: ''})
   }
 
   render(){
-    return(
+    return (
       <Search placeholder="what's it like in..." value={this.state.text} onChange={this.handleChange} onSearch={this.submitIt} enterButton/>
     )
   }

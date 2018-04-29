@@ -5,8 +5,6 @@ import { Icon } from 'antd'
 import { deleteDetail } from '../actions/actions.js'
 import '../styles/LocationDetail.css'
 
-
-
 const LocationDetail = props => {
 
   const {full_city_name, conditions, obs_time, temp, windSpeed, dailySummary, sunriseTime, sunsetTime, latitude, longitude} = props.location
@@ -14,7 +12,6 @@ const LocationDetail = props => {
   const sendDelete = () => {
     props.deleteDetail(props.location)
   }
-
 
   return (
     <div id="location-detail">

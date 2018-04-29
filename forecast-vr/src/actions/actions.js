@@ -48,7 +48,7 @@ export let selectLocation = location => {
 
 export let fetchLocation = location => {
   return (dispatch) => {
-    dispatch({ type: 'DELETE_DETAIL' });
+    // dispatch({ type: 'DO_NOTHING' });
     return fetch(process.env.REACT_APP_QUERY_API_URL + location + '.json')
       .then(response => response.json())
       .then(json => {

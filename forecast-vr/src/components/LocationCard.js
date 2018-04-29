@@ -3,7 +3,10 @@ import { deleteLocation, selectLocation } from '../actions/actions.js'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Icon } from 'antd'
+import { Route } from 'react-router-dom'
 import '../styles/LocationCard.css'
+import Snow from './Snow'
+import Rain from './Rain'
 
 const LocationCard = (props) => {
   console.log(props);
@@ -18,10 +21,8 @@ const LocationCard = (props) => {
   }
 
   const renderIFrame = () => {
-    return <iframe seamless title={full_city_name} className='iframe-cards' src={'http://localhost:3000/' + citySlug} />
+    return <iframe seamless title={full_city_name} className='iframe-cards' src='http://localhost:3000/new-york-ny' />
   }
-
-  const getSource = () => ("/" + citySlug)
 
   // const switchSource = () => {
   //   switch (props.location.conditions) {
@@ -44,13 +45,13 @@ const LocationCard = (props) => {
 
   return(
     <div className='location-card'>
-        <div className='close-icon' onClick={sendDelete}><Icon type="close-square-o" /></div>
-        <h3 className='card-city-name' onClick={selectLocation}>{full_city_name}</h3>
-        {renderIFrame()}
-        <br/>
-        <h4>{conditions} </h4>
-        <h4>{obs_time} </h4>
-        <h4>{temp} F </h4>
+      <div className='close-icon' onClick={sendDelete}><Icon type="close-square-o" /></div>
+      <h3 className='card-city-name' onClick={selectLocation}>{full_city_name}</h3>
+      {renderIFrame()}
+      <br/>
+      <h4>{conditions} </h4>
+      <h4>{obs_time} </h4>
+      <h4>{temp} F </h4>
     </div>)
 }
 

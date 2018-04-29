@@ -10,11 +10,9 @@ class Rain extends React.Component {
 
   rain_palette = ["231 232 232", "219 230 229", "205 220 220", "175 195 197", "76 77 83", "210 216 216"]
 
-
   getColors = () => {
     return "shader: gradient; topColor: " + this.rain_palette[3] + "; bottomColor: " + this.rain_palette[4] + ";"
   }
-
 
   render(){
     return(

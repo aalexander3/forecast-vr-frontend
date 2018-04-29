@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 import LocationCard from './LocationCard'
 import LocationDetail from './LocationDetail'
 import '../styles/LocationPage.css'
+import { Route, Switch } from 'react-router-dom'
+import Rain from './Rain'
+import Snow from './Snow'
 
 
 const LocationPage = props => {
+  console.log(props);
 
   const makeLocationCards = () => {
     return props.locations.map(loc => <LocationCard key={loc.full_city_name} location={loc} />)
@@ -31,8 +35,12 @@ const LocationPage = props => {
     }
   }
 
+  // const mapRoutes = props.locations.map(loc => <Route exact path={`/${loc.citySlug}`} component={Rain} /> )
+
   return (
     <div id="location-page">
+      <Route exact path='/rain' render={ () => <Rain /> } />
+      {/* {mapRoutes} */}
       {detailVsCards()}
     </div>
   )

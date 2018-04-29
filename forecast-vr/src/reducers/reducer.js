@@ -12,7 +12,7 @@ function locationReducer(state = [], action){
       let secondpart = [...state.slice(index+1)]
       return [...firstPart, ...secondpart]
     default:
-      return state
+      return [...state]
   }
 }
 
@@ -30,7 +30,7 @@ function selectReducer(state = null, action){
     case 'SELECT_LOCATION':
       return action.location
     case 'DELETE_DETAIL':
-      return state
+      return null
     default:
       return state
   }
