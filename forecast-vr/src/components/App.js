@@ -3,6 +3,10 @@ import '../styles/App.css';
 import LandingPage from './LandingPage'
 import Rain from './Rain'
 import Snow from './Snow'
+import Sun from './Sun'
+import Fog from './Fog'
+import Cloud from './Cloud'
+import Storm from './Storm'
 import { bindActionCreators } from 'redux';
 import { fetchLocation } from  '../actions/actions';
 import { connect } from 'react-redux';
@@ -30,10 +34,10 @@ class App extends Component {
           <Route exact path='/' component={ LandingPage } />
           <Route path="/snow" render={() => <Snow /> } />
           <Route path="/rain" render={() => <Rain /> } />
-          <Route path="/sun" render={() => <Snow /> } />
-          <Route path="/storm" render={() => <Rain /> } />
-          <Route path="/fog" render={() => <Snow /> } />
-          <Route path="/cloud" render={() => <Rain /> } />
+          <Route path="/sun" render={() => <Sun /> } />
+          <Route path="/storm" render={() => <Storm /> } />
+          <Route path="/fog" render={() => <Fog /> } />
+          <Route path="/cloud" render={() => <Cloud /> } />
 
           {/* {(this.props.locations.length > 0) ? this.makeRoutes() : null} */}
         </Switch>
