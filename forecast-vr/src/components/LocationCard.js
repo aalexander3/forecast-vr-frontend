@@ -21,7 +21,8 @@ const LocationCard = (props) => {
   }
 
   const renderIFrame = () => {
-    return <iframe seamless title={full_city_name} className='iframe-cards' src={switchSource() }/>
+    // return <iframe seamless title={full_city_name} className='iframe-cards' src={switchSource() }/>
+    return <iframe seamless title={full_city_name} className='iframe-cards' src={"http://localhost:3000/" + citySlug}/>
   }
 
   const switchSource = () => {

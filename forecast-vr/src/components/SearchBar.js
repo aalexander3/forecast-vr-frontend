@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Input } from 'antd'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { addLocation, fetchLocation } from  '../actions/actions';
+import { addLocation, newFetchLocation } from  '../actions/actions';
 
 const Search = Input.Search
 
@@ -19,7 +19,7 @@ class SearchBar extends Component {
   }
 
   submitIt = () => {
-    this.props.fetchLocation(this.state.text)
+    // this.props.fetchLocation(this.state.text)
     this.setState({text: ''})
   }
 
@@ -34,7 +34,7 @@ class SearchBar extends Component {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     addLocation: addLocation,
-    fetchLocation: fetchLocation
+    // fetchLocation: fetchLocation
   }, dispatch)
 }
 

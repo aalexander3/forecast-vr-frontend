@@ -20,7 +20,7 @@ class Cloud extends React.Component {
         preset: starry;
         skyType: atmosphere;
         seed: 1;
-        lightPosition: 0.8, .3, -1.4;
+        lightPosition: 1.75, .0, -1.4;
         fog: 0.2;
         ground: hills;
         groundYScale: 6.31;

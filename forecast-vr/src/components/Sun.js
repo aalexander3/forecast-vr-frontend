@@ -10,36 +10,61 @@ import 'aframe-environment-component'
 
 class Sun extends React.Component {
 
-  rain_palette = ["231 232 232", "219 230 229", "205 220 220", "175 195 197", "76 77 83", "210 216 216"]
-
-  // getColors = () => {
-  //   return "shader: gradient; topColor: " + this.rain_palette[4] + "; bottomColor: " + this.rain_palette[5] + ";"
-  // }
-
-  // getPosition = () => {
-  //   let radius = 10
-  //   let x = 1
-  //   let y;
-  //   // (y * y) = 100 - (x * x)
-  // }
-
+  getSunPosition = () => {
+    if (this.props.location) {
+      switch (this.props.location.obs_time.slice(-5,-3)) {
+        case "06":
+          return {x: -2.0, y: 0, z: -1.4}
+        case "07":
+          return {x: -1.75, y: 0.25, z: -1.4}
+        case "08":
+          return {x: -1.5, y: 0.5, z: -1.4}
+        case "09":
+          return {x: -1.25, y: 0.75, z: -1.4}
+        case "10":
+          return {x: -1, y: 1, z: -1.4}
+        case "11":
+          return {x: -.75, y: 1.25, z: -1.4}
+        case "12":
+          return {x: -.5, y: 1.5, z: -1.4}
+        case "13":
+          return {x: 0, y: 2, z: -1.4}
+        case "14":
+          return {x: .25, y: 1.75, z: -1.4}
+        case "15":
+          return {x: .5, y: 1.5, z: -1.4}
+        case "16":
+          return {x: .75, y: 1.25, z: -1.4}
+        case "17":
+          return {x: 1.0, y: .9, z: -1.4}
+        case "18":
+          return {x: 1.25, y: 0.65, z: -1.4}
+        case "19":
+          return {x: 1.5, y: 0.3, z: -1.4}
+        case "20":
+          return {x: 1.75, y: 0, z: -1.4}
+        default:
+          return {x: -2.0, y: -2.0, z: -1.4}
+      }
+    }
+  }
 
   render(){
+    console.log(this.props);
     return(
-        <a-scene rain>
-            <a-entity environment="
-            preset: starry;
-            skyType: atmosphere;
-            seed: 1;
-            lightPosition: 0.0, .2, -1.4;
-            fog: 0.2;
-            ground: hills;
-            groundYScale: 6.31;
-            groundColor: #B17F6C;
-            groundColor2: #705F60;
-            groundTexture: walkernoise;
-            grid: none">
-            </a-entity>
+        <a-scene>
+          <Entity environment={{lightPosition: this.getSunPosition(),
+            preset: 'starry',
+            skyType: 'atmosphere',
+            seed: 1,
+            fog: 0.2,
+            ground: 'hills',
+            groundYScale: 6.31,
+            groundColor: '#425E44',
+            groundColor2: '#789767',
+            groundTexture: 'walkernoise',
+            grid: 'none'}}>
+          </Entity>
 
           <Entity primitive="a-light" type="ambient" color="white" />
 

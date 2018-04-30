@@ -3,7 +3,7 @@ import NavBar from './NavBar'
 import LocationPage from './LocationPage'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchLocation } from  '../actions/actions';
+import { newFetchLocation } from  '../actions/actions';
 
 
 class LandingPage extends Component {
@@ -22,10 +22,11 @@ class LandingPage extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    fetchLocation: fetchLocation
-  }, dispatch)
-}
+// const mapDispatchToProps = dispatch => {
+//   return bindActionCreators({
+//     fetchLocation: newFetchLocation
+//   }, dispatch)
+// }
 
-export default connect(null, mapDispatchToProps)(LandingPage)
+// export default connect(null, mapDispatchToProps)(LandingPage)
+export default LandingPage

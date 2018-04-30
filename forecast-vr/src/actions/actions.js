@@ -12,7 +12,7 @@ export let deleteDetail = location => {
 
 export let selectLocation = location => {
   return (dispatch) => {
-    dispatch({ type: 'START_ADD_LOCATION_REQUEST' });
+    // dispatch({ type: 'START_ADD_LOCATION_REQUEST' });
     return fetch(process.env.REACT_APP_DARK_SKY_QUERY + location.latitude + ',' + location.longitude)
       .then(res => res.json()).then(json => {
         console.log(json)
@@ -25,6 +25,7 @@ export let selectLocation = location => {
         let newDate = new Date(parseInt(`${time}000`)).toLocaleString()
         let sunrise = new Date(parseInt(`${sunriseTime}000`)).toLocaleTimeString()
         let sunset = new Date(parseInt(`${sunsetTime}000`)).toLocaleTimeString()
+        let citySlug = location.full_city_name.toLowerCase().replace(/, | /gi, "-")
 
         dispatch({
           type: 'SELECT_LOCATION',
@@ -38,7 +39,8 @@ export let selectLocation = location => {
             windSpeed: windSpeed,
             dailySummary: dailySummary,
             sunriseTime: sunrise,
-            sunsetTime: sunset
+            sunsetTime: sunset,
+            citySlug: citySlug
           }
         })
       })
@@ -46,38 +48,77 @@ export let selectLocation = location => {
 }
 
 
-export let fetchLocation = location => {
+export let newFetchLocation = location => {
+  console.log('starting dispatch for', location);
   return (dispatch) => {
-    // dispatch({ type: 'DO_NOTHING' });
-    return fetch(process.env.REACT_APP_QUERY_API_URL + location + '.json')
-      .then(response => response.json())
-      .then(json => {
-        if (json.response.results) {
-          console.log({response: 'please enter your query in city state format'});
-        } else {
-          console.log(json.current_observation)
-          let {display_location, temp_f, weather, wind_mph, local_time_rfc822: local_time, observation_time, precip_1hr_in} = json.current_observation
-          let dayTimeString = stringifyDate(observation_time, local_time)
-          let citySlug = display_location.full.toLowerCase().replace(/, | /gi, "-")
+    // dispatch({ type: 'START_ADD_LOCATION_REQUEST' });
+    return fetch(process.env.REACT_APP_DARK_SKY_QUERY + location.latitude + ',' + location.longitude)
+      .then(res => res.json()).then(json => {
+        console.log(json)
 
-          dispatch({
-            type: 'ADD_LOCATION',
-            location: {
-              full_city_name: display_location.full,
-              temp: temp_f,
-              conditions: weather,
-              wind: wind_mph,
-              obs_time: dayTimeString,
-              precip: precip_1hr_in,
-              latitude: display_location.latitude,
-              longitude: display_location.longitude,
-              citySlug: citySlug
-            }
-          })
-        }
+        let {time, temperature, summary: shortSummary, windSpeed} = json.currently
+        let {latitude, longitude} = json
+        let {summary: dailySummary} = json.daily
+        let {sunriseTime, sunsetTime} = json.daily.data[0]
+
+        let newDate = new Date(parseInt(`${time}000`)).toLocaleString()
+        let sunrise = new Date(parseInt(`${sunriseTime}000`)).toLocaleTimeString()
+        let sunset = new Date(parseInt(`${sunsetTime}000`)).toLocaleTimeString()
+        let citySlug = location.full_city_name.toLowerCase().replace(/, | /gi, "-")
+
+        dispatch({
+          type: 'ADD_LOCATION',
+          location: {
+            full_city_name: location.full_city_name,
+            latitude: location.latitude,
+            longitude: location.longitude,
+            obs_time: newDate,
+            temp: temperature,
+            conditions: shortSummary,
+            windSpeed: windSpeed,
+            dailySummary: dailySummary,
+            sunriseTime: sunrise,
+            sunsetTime: sunset,
+            citySlug: citySlug
+          }
+        })
       })
-  };
+  }
 }
+
+
+// export let fetchLocation = location => {
+//   return (dispatch) => {
+//     dispatch({ type: 'DELETE_DETAIL' });
+//     return fetch(process.env.REACT_APP_QUERY_API_URL + location + '.json')
+//       .then(response => response.json())
+//       .then(json => {
+//         if (json.response.results) {
+//           console.log({response: 'please enter your query in city state format'});
+//         } else {
+//           console.log(json.current_observation)
+//           let {display_location, temp_f, weather, wind_mph, local_time_rfc822: local_time, observation_time, precip_1hr_in} = json.current_observation
+//           let dayTimeString = stringifyDate(observation_time, local_time)
+//           let citySlug = display_location.full.toLowerCase().replace(/, | /gi, "-")
+//
+//           dispatch({
+//             type: 'ADD_LOCATION',
+//             location: {
+//               full_city_name: display_location.full,
+//               temp: temp_f,
+//               conditions: weather,
+//               wind: wind_mph,
+//               obs_time: dayTimeString,
+//               precip: precip_1hr_in,
+//               latitude: display_location.latitude,
+//               longitude: display_location.longitude,
+//               citySlug: citySlug
+//             }
+//           })
+//         }
+//       })
+//   };
+// }
 
 // export let newFetchLocation = (lat, long, cityName) => {
 //   return (dispatch) => {
