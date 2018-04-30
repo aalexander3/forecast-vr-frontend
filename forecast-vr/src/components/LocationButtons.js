@@ -1,10 +1,8 @@
-import React, {Component} from 'react'
+import React from 'react'
 import { connect } from 'react-redux';
-import { Button } from 'antd'
 import ButtonCard from './ButtonCard'
-import { newFetchLocation } from '../actions/actions.js'
+import { selectLocation } from '../actions/actions.js'
 import { bindActionCreators } from 'redux';
-
 
 const LocationButtons = (props) => {
 
@@ -13,7 +11,7 @@ const LocationButtons = (props) => {
   }
 
   const addNewLocation = (location) => {
-    props.newFetchLocation(location)
+    props.selectLocation(location)
   }
 
     return(
@@ -29,7 +27,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    newFetchLocation: newFetchLocation
+    selectLocation: selectLocation
   }, dispatch)
 }
 

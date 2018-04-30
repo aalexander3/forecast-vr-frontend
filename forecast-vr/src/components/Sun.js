@@ -4,7 +4,7 @@ import 'aframe-animation-component';
 import 'aframe-particle-system-component';
 import 'aframe-gradient-sky'
 import 'babel-polyfill';
-import {Entity, Scene} from 'aframe-react';
+import {Entity} from 'aframe-react';
 import 'aframe-rain'
 import 'aframe-environment-component'
 
@@ -12,7 +12,7 @@ class Sun extends React.Component {
 
   getSunPosition = () => {
     if (this.props.location) {
-      switch (this.props.location.obs_time.slice(-5,-3)) {
+      switch (this.props.location.time.slice(0,2)) {
         case "06":
           return {x: -2.0, y: 0, z: -1.4}
         case "07":

@@ -12,38 +12,48 @@ export let deleteDetail = location => {
 
 export let selectLocation = location => {
   return (dispatch) => {
-    // dispatch({ type: 'START_ADD_LOCATION_REQUEST' });
     return fetch(process.env.REACT_APP_DARK_SKY_QUERY + location.latitude + ',' + location.longitude)
       .then(res => res.json()).then(json => {
-        console.log(json)
-
-        let {time, temperature, summary: shortSummary, windSpeed} = json.currently
-        let {latitude, longitude} = json
-        let {summary: dailySummary} = json.daily
-        let {sunriseTime, sunsetTime} = json.daily.data[0]
-
-        let newDate = new Date(parseInt(`${time}000`)).toLocaleString()
-        let sunrise = new Date(parseInt(`${sunriseTime}000`)).toLocaleTimeString()
-        let sunset = new Date(parseInt(`${sunsetTime}000`)).toLocaleTimeString()
-        let citySlug = location.full_city_name.toLowerCase().replace(/, | /gi, "-")
-
         dispatch({
           type: 'SELECT_LOCATION',
-          location: {
-            full_city_name: location.full_city_name,
-            latitude: latitude,
-            longitude: longitude,
-            obs_time: location.obs_time,
-            temp: location.temp,
-            conditions: location.conditions,
-            windSpeed: windSpeed,
-            dailySummary: dailySummary,
-            sunriseTime: sunrise,
-            sunsetTime: sunset,
-            citySlug: citySlug
-          }
+          location: getVars(json, location)
         })
       })
+  }
+}
+
+const getVars = (json, location) => {
+  let {time, temperature, summary: shortSummary, windSpeed} = json.currently
+  let {summary: dailySummary} = json.daily
+  let {sunriseTime, sunsetTime} = json.daily.data[0]
+
+  let offsetBy = json.offset + 4
+
+  let useThisTime = time * 1000 + (offsetBy * 3600000)
+
+  let sunrise = new Date(parseInt(`${sunriseTime}000`)).toTimeString().slice(0,5)
+  let sunset = new Date(parseInt(`${sunsetTime}000`)).toTimeString().slice(0,5)
+
+  let stringTime = new Date(parseInt(useThisTime)).toTimeString().slice(0,5)
+  let date = new Date(parseInt(useThisTime)).toDateString().slice(0, -5)
+
+  let citySlug = location.full_city_name.toLowerCase().replace(/, | /gi, "-")
+  let hourly = json.hourly.data
+
+  return {
+    full_city_name: location.full_city_name,
+    latitude: location.latitude,
+    longitude: location.longitude,
+    date: date,
+    time: stringTime,
+    temp: temperature,
+    conditions: shortSummary,
+    windSpeed: windSpeed,
+    dailySummary: dailySummary,
+    sunriseTime: sunrise,
+    sunsetTime: sunset,
+    citySlug: citySlug,
+    hourly: hourly
   }
 }
 
@@ -54,37 +64,15 @@ export let newFetchLocation = location => {
     // dispatch({ type: 'START_ADD_LOCATION_REQUEST' });
     return fetch(process.env.REACT_APP_DARK_SKY_QUERY + location.latitude + ',' + location.longitude)
       .then(res => res.json()).then(json => {
-        console.log(json)
-
-        let {time, temperature, summary: shortSummary, windSpeed} = json.currently
-        let {latitude, longitude} = json
-        let {summary: dailySummary} = json.daily
-        let {sunriseTime, sunsetTime} = json.daily.data[0]
-
-        let newDate = new Date(parseInt(`${time}000`)).toLocaleString()
-        let sunrise = new Date(parseInt(`${sunriseTime}000`)).toLocaleTimeString()
-        let sunset = new Date(parseInt(`${sunsetTime}000`)).toLocaleTimeString()
-        let citySlug = location.full_city_name.toLowerCase().replace(/, | /gi, "-")
 
         dispatch({
           type: 'ADD_LOCATION',
-          location: {
-            full_city_name: location.full_city_name,
-            latitude: location.latitude,
-            longitude: location.longitude,
-            obs_time: newDate,
-            temp: temperature,
-            conditions: shortSummary,
-            windSpeed: windSpeed,
-            dailySummary: dailySummary,
-            sunriseTime: sunrise,
-            sunsetTime: sunset,
-            citySlug: citySlug
-          }
+          location: getVars(json, location)
         })
       })
   }
 }
+
 
 
 // export let fetchLocation = location => {

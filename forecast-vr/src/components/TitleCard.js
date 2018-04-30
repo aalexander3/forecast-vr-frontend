@@ -12,7 +12,7 @@ const TitleCard = props => {
       return (
         <div>
           <h3>{default_location.full_city_name}</h3>
-          <h3>{default_location.obs_time} </h3>
+          <h3>{default_location.date}, {default_location.time} </h3>
         </div>
       )
     }

@@ -3,14 +3,11 @@ import { deleteLocation, selectLocation } from '../actions/actions.js'
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Icon } from 'antd'
-import { Route } from 'react-router-dom'
 import '../styles/LocationCard.css'
-import Snow from './Snow'
-import Rain from './Rain'
 
 const LocationCard = (props) => {
 
-  let {full_city_name, conditions, obs_time, temp, wind, citySlug} = props.location
+  let {full_city_name, conditions, time, date, temp, citySlug} = props.location
 
   const sendDelete = () => {
     props.deleteLocation(props.location)
@@ -20,27 +17,31 @@ const LocationCard = (props) => {
     props.selectLocation(props.location)
   }
 
+  const handleMouse = (e) => {
+    e.target.src = 'http://localhost:3000/' + props.location.citySlug
+  }
+
   const renderIFrame = () => {
-    // return <iframe seamless title={full_city_name} className='iframe-cards' src={switchSource() }/>
-    return <iframe seamless title={full_city_name} className='iframe-cards' src={"http://localhost:3000/" + citySlug}/>
+    return <iframe onMouseOver={handleMouse} seamless title={full_city_name} className='iframe-cards' src={switchSource() }/>
+    // return <iframe seamless title={full_city_name} className='iframe-cards' src={"http://localhost:3000/" + citySlug}/>
   }
 
   const switchSource = () => {
     switch (props.location.conditions) {
       case "Overcast": case "Partly Cloudy": case "Mostly Cloudy": case "Scattered Clouds": case "Cloudy":
-        return 'http://localhost:3000/cloud'
+        return 'https://images.pexels.com/photos/6566/sea-sky-clouds-weather.jpg?auto=compress&cs=tinysrgb&h=350'
       case "Clear": case "Sunny": case "Mostly Sunny": case "Partly Sunny":
-        return "http://localhost:3000/sun"
+        return "https://images.pexels.com/photos/186980/pexels-photo-186980.jpeg?auto=compress&cs=tinysrgb&h=350"
       case "Snow": case "Sleet":
-        return 'http://localhost:3000/snow'
+        return 'https://images.pexels.com/photos/718857/pexels-photo-718857.jpeg?auto=compress&cs=tinysrgb&h=350'
       case "Rain": case "Freezing Rain": case "Flurries": case "Light Rain":
-        return 'http://localhost:3000/rain'
+        return 'https://images.pexels.com/photos/17739/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350'
       case "Thunderstorm": case "Thunderstorms":
-        return 'http://localhost:3000/storm'
+        return 'https://images.pexels.com/photos/355989/pexels-photo-355989.jpeg?auto=compress&cs=tinysrgb&h=350'
       case "Fog": case "Haze":
-        return 'http://localhost:3000/fog'
+        return 'https://images.pexels.com/photos/584580/pexels-photo-584580.jpeg?auto=compress&cs=tinysrgb&h=350'
       default:
-        return 'http://localhost:3000/sun'
+        return 'https://images.pexels.com/photos/584580/pexels-photo-584580.jpeg?auto=compress&cs=tinysrgb&h=350'
     }
   }
 
@@ -51,7 +52,7 @@ const LocationCard = (props) => {
       {renderIFrame()}
       <br/>
       <h4>{conditions} </h4>
-      <h4>{obs_time} </h4>
+      <h4>{date}, {time} </h4>
       <h4>{temp} F </h4>
     </div>)
 }

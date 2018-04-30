@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/NavBar.css'
 import TitleCard from './TitleCard'
-import SearchBar from './SearchBar'
+// import SearchBar from './SearchBar'
 import LocationButtons from './LocationButtons'
 
 const NavBar = () => {

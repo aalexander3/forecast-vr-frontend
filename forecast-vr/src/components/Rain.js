@@ -4,7 +4,7 @@ import 'aframe-animation-component';
 import 'aframe-particle-system-component';
 import 'aframe-gradient-sky'
 import 'babel-polyfill';
-import {Entity, Scene} from 'aframe-react';
+import {Entity } from 'aframe-react';
 import 'aframe-rain'
 import 'aframe-sun-sky'
 import 'aframe-environment-component'

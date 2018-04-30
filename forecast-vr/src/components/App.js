@@ -1,42 +1,42 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
 import LandingPage from './LandingPage'
-import Rain from './Rain'
-import Snow from './Snow'
+
 import Sun from './Sun'
-import Fog from './Fog'
-import Cloud from './Cloud'
-import Storm from './Storm'
 import { bindActionCreators } from 'redux';
 import { newFetchLocation } from  '../actions/actions';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom'
-
+import { Route, Switch, withRouter } from 'react-router-dom'
 
 class App extends Component {
 
-  componentDidMount = () => {
-    this.props.newFetchLocation({
-      full_city_name: "New York City",
-      latitude: 40.71,
-      longitude: -74.00
-    })
+  state = {
+    done: false
   }
 
-  // makeRoutes = () => {
-  //   debugger
-  //   if (this.props.locations.length > 0) {
-  //     return this.props.locations.map(loc => {
-  //       return <Route path={"/" + loc.citySlug} render={() => <Snow /> } />
-  //     })
-  //   }
-  // }
+  componentDidMount = () => {
+    (!this.state.done) ? this.doThisOnce() : null
+    // this.props.newFetchLocation({
+    //   full_city_name: "New York City",
+    //   latitude: 40.71,
+    //   longitude: -74.00
+    // })
+    // this.props.defaultLocations.forEach(city => this.props.newFetchLocation(city))
+  }
 
   findLocation = (cityName) => {
     return this.props.locations.find(city => city.full_city_name === cityName)
   }
 
+  doThisOnce = () => {
+    this.setState({
+      done: true
+    })
+    this.props.defaultLocations.forEach(city => this.props.newFetchLocation(city))
+  }
+
   render() {
+
     return (
       <div>
         <Switch>
@@ -55,8 +55,8 @@ class App extends Component {
           <Route path="/cairo" render={() => <Sun location={this.findLocation("Cairo")} /> } />
           <Route path="/moscow" render={() => <Sun location={this.findLocation("Moscow")} /> } />
 
-          {/* {(this.props.locations.length > 0) ? this.makeRoutes() : null} */}
         </Switch>
+        {/* {(this.props.locations.length > 0) ? this.makeRoutes() : null} */}
       </div>
     );
   }
@@ -69,8 +69,12 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = state => {
-  return {locations: state.locations}
+  console.log('mapping', state.locations);
+  return {
+    locations: state.locations,
+    defaultLocations: state.defaultLocations
+  }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));
 // export default App;
