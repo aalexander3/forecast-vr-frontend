@@ -9,7 +9,11 @@ import { newFetchLocation } from  '../actions/actions';
 class LandingPage extends Component {
 
   // componentDidMount = () => {
-  //   this.props.fetchLocation("new york ny")
+  //   this.props.newFetchLocation({
+  //       full_city_name: "New York City",
+  //       latitude: 40.71,
+  //       longitude: -74.00
+  //   })
   // }
 
   render(){
@@ -24,7 +28,7 @@ class LandingPage extends Component {
 
 // const mapDispatchToProps = dispatch => {
 //   return bindActionCreators({
-//     fetchLocation: newFetchLocation
+//     newFetchLocation: newFetchLocation
 //   }, dispatch)
 // }
 

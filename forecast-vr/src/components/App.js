@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
 import LandingPage from './LandingPage'
-
 import Sun from './Sun'
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import { newFetchLocation } from  '../actions/actions';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom'
@@ -11,17 +10,43 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 class App extends Component {
 
   state = {
-    done: false
+    which: "first",
   }
 
   componentDidMount = () => {
-    (!this.state.done) ? this.doThisOnce() : null
-    // this.props.newFetchLocation({
-    //   full_city_name: "New York City",
-    //   latitude: 40.71,
-    //   longitude: -74.00
-    // })
-    // this.props.defaultLocations.forEach(city => this.props.newFetchLocation(city))
+    this.doThisOnce()
+  }
+
+  shouldComponentUpdate = (nextProps, nextState) => {
+    if (nextProps.locations.length === 6) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  // componentDidUpdate = (prevProps, prevState, snapshot) => {
+  //   console.log('heyo from did update');
+  //   console.log('prev props are', prevProps.whichCities);
+  //   console.log('current props are', this.props.whichCities);
+  //   if (this.props.whichCities !== prevProps.whichCities) {
+  //     this.doThisOnce()
+  //   }
+  // }
+
+  whichCities = (cities) => {
+    switch (cities) {
+      case "first":
+        return this.props.defaultLocations.slice(0,3)
+      case "second":
+        return this.props.defaultLocations.slice(3,6)
+      case "third":
+        return this.props.defaultLocations.slice(6,9)
+      case "fourth":
+        return this.props.defaultLocations.slice(9,12)
+      default:
+        this.props.defaultLocations.slice(0,3)
+    }
   }
 
   findLocation = (cityName) => {
@@ -29,10 +54,10 @@ class App extends Component {
   }
 
   doThisOnce = () => {
-    this.setState({
-      done: true
-    })
-    this.props.defaultLocations.forEach(city => this.props.newFetchLocation(city))
+    // let whichCities = this.props.whichCities
+    // console.log(whichCities[whichCities.length -1]);
+    // this.props.newFetchLocation(whichCities[whichCities.length -1])
+    this.props.defaultLocations.slice(0,6).forEach(city => this.props.newFetchLocation(city))
   }
 
   render() {
@@ -42,18 +67,18 @@ class App extends Component {
         <Switch>
           <Route exact path='/' component={ LandingPage } />
 
-          <Route path="/new-york-city" render={() => <Sun location={this.findLocation("New York City")} /> } />
-          <Route path="/london" render={() => <Sun location={this.findLocation("London")} /> } />
-          <Route path="/delhi" render={() => <Sun location={this.findLocation("Delhi")} /> } />
-          <Route path="/istanbul" render={() => <Sun location={this.findLocation("Istanbul")} /> } />
-          <Route path="/sao-paulo" render={() => <Sun location={this.findLocation("Sao Paulo")} /> } />
-          <Route path="/dubai" render={() => <Sun location={this.findLocation("Dubai")} /> } />
-          <Route path="/sydney" render={() => <Sun location={this.findLocation("Sydney")} /> } />
-          <Route path="/paris" render={() => <Sun location={this.findLocation("Paris")} /> } />
-          <Route path="/seattle" render={() => <Sun location={this.findLocation("Seattle")} /> } />
-          <Route path="/mexico-city" render={() => <Sun location={this.findLocation("Mexico City")} /> } />
-          <Route path="/cairo" render={() => <Sun location={this.findLocation("Cairo")} /> } />
-          <Route path="/moscow" render={() => <Sun location={this.findLocation("Moscow")} /> } />
+          <Route path="/new-york-city" render={() => <Sun city={this.findLocation("New York City")} /> } />
+          <Route path="/london" render={() => <Sun city={this.findLocation("London")} /> } />
+          <Route path="/delhi" render={() => <Sun city={this.findLocation("Delhi")} /> } />
+          <Route path="/istanbul" render={() => <Sun city={this.findLocation("Istanbul")} /> } />
+          <Route path="/sao-paulo" render={() => <Sun city={this.findLocation("Sao Paulo")} /> } />
+          <Route path="/dubai" render={() => <Sun city={this.findLocation("Dubai")} /> } />
+          <Route path="/sydney" render={() => <Sun city={this.findLocation("Sydney")} /> } />
+          <Route path="/paris" render={() => <Sun city={this.findLocation("Paris")} /> } />
+          <Route path="/seattle" render={() => <Sun city={this.findLocation("Seattle")} /> } />
+          <Route path="/mexico-city" render={() => <Sun city={this.findLocation("Mexico City")} /> } />
+          <Route path="/cairo" render={() => <Sun city={this.findLocation("Cairo")} /> } />
+          <Route path="/moscow" render={() => <Sun city={this.findLocation("Moscow")} /> } />
 
         </Switch>
         {/* {(this.props.locations.length > 0) ? this.makeRoutes() : null} */}
@@ -72,9 +97,10 @@ const mapStateToProps = state => {
   console.log('mapping', state.locations);
   return {
     locations: state.locations,
-    defaultLocations: state.defaultLocations
+    defaultLocations: state.defaultLocations,
+    whichCities: state.whichCities
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));
+export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(App);
 // export default App;

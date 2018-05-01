@@ -59,6 +59,12 @@ let defaultLocations = [
     }
 ]
 
+let defaultCities = [{
+  full_city_name: "New York City",
+  latitude: 40.71,
+  longitude: -74.00
+}]
+
 function defaultReducer(state = defaultLocations, action){
   switch (action.type) {
     default:
@@ -93,10 +99,20 @@ function selectReducer(state = null, action){
   }
 }
 
+function cityReducer(state = defaultCities, action){
+  switch (action.type) {
+    case 'ADD_CITY':
+      return [...state, action.location]
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   locations: locationReducer,
   selectedLocation: selectReducer,
-  defaultLocations: defaultReducer
+  defaultLocations: defaultReducer,
+  whichCities: cityReducer
 })
 
 export { rootReducer }

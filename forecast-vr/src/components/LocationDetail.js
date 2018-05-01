@@ -1,26 +1,36 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, compose } from 'redux';
 import { Icon, Button } from 'antd'
 import { deleteDetail } from '../actions/actions.js'
 import '../styles/LocationDetail.css'
 import { withRouter } from 'react-router-dom'
 
+
 class LocationDetail extends React.Component {
+
+  state = {
+    fullscreen: false
+  }
 
   sendDelete = () => {
     this.props.deleteDetail(this.props.location)
   }
 
+  handleClick = () => {
+    this.setState({
+      fullscreen: true
+    }, () => this.props.history.replace(`/${this.props.selection.citySlug}`))
+  }
+
   render(){
-    console.log(this.props);
 
     let {full_city_name, conditions, date, time, temp, windSpeed, dailySummary, sunriseTime, sunsetTime, latitude, longitude, citySlug} = this.props.selection
 
     return (
       <div id="location-detail">
         <div className='close-icon-detail' onClick={this.sendDelete}><Icon type="close-square-o" /></div>
-        <Button type="primary" onClick={() => { this.props.history.push(`/${citySlug}`) }}>ENTER FULLSCREEN VR</Button>
+        <Button type="primary" onClick={this.handleClick}>ENTER FULLSCREEN VR</Button>
         <h1>{full_city_name}</h1>
         <p>{dailySummary}</p>
         <h2>Current Conditions</h2>
@@ -48,4 +58,4 @@ const mapDispatchToProps = dispatch => {
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LocationDetail))
+export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(LocationDetail)
