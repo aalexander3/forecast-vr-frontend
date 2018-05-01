@@ -30,9 +30,9 @@ class LocationDetail extends React.Component {
     return (
       <div id="location-detail">
         <div className='close-icon-detail' onClick={this.sendDelete}><Icon type="close-square-o" /></div>
-        <Button type="primary" onClick={this.handleClick}>ENTER FULLSCREEN VR</Button>
         <h1>{full_city_name}</h1>
         <p>{dailySummary}</p>
+        <Button type="primary" onClick={this.handleClick}>ENTER FULLSCREEN VR</Button>
         <h2>Current Conditions</h2>
         <p>{date}, {time}</p>
         <p>{temp} F</p>
@@ -40,7 +40,7 @@ class LocationDetail extends React.Component {
         <h3>Sunrise: {sunriseTime}</h3>
         <h3>Sunset: {sunsetTime}</h3>
         <iframe seamless title="cool-map"
-          src={`https://maps.darksky.net/@emoji,${latitude},${longitude},5`}
+          src={`https://maps.darksky.net/@temperature,${latitude},${longitude},5`}
           style={{width: '100%', height: '30rem', margin: '2%', border: 'none', 'borderRadius':'10px'}}>
         </iframe>
       </div>

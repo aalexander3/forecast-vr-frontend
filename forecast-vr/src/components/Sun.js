@@ -12,6 +12,84 @@ import 'aframe-html-shader'
 
 class Sun extends React.Component {
 
+  cloudPositions = ["6 20 -40", ]
+
+
+  // cloudTypes = [circleCloud, bigCloud, spikyCloud, fluffyCloud]
+
+  generatePosition = () => {
+    let x =  Math.random() * (140) -70;
+    let y =  Math.random() * (60 - 15) + 15;
+    let z =  Math.random() * (140) -70;
+    return `${x} ${y} ${z}`
+  }
+
+  generateStartingPosition = () => {
+    let x =  Math.random() * (140) -70;
+    let y =  Math.random() * (60 - 15) + 15;
+    let z =  Math.random() * (140) -70;
+    return `${x} ${y} ${z}`
+  }
+
+  generateEndingPosition = () => {
+    let x =  Math.random() * (140) ;
+    let y =  Math.random() * (60 - 15) + 15;
+    let z =  Math.random() * (140) -70;
+    return `${x} ${y} ${z}`
+  }
+
+  generateClouds = () => {
+    return [
+      this.getCircle(),
+      this.getCircle(),
+      this.getCircle(),
+      this.getCircle(),
+      this.getCircle(),
+      this.getBig(),
+      this.getSpiky(),
+      this.getFluff(),
+      this.getFluff()
+    ]
+  }
+
+  getCircle = () => {
+    let circleCloud = (
+      <a-torus-knot color="white" arc="180" p="3" q="8" radius="1" segments-radial='5' radius-tubular="0.2" position={this.generateStartingPosition()} opacity='.4'>
+        <a-animation attribute="rotation"
+           dur="20000"
+           fill="forwards"
+           to='0 0 360'
+           repeat="indefinite">
+       </a-animation>
+     </a-torus-knot>)
+    return circleCloud
+  }
+
+  getFluff = () => {
+    let fluffyCloud = <a-torus-knot color="white" arc="180" p="3" q="23" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="2" position={this.generatePosition()} opacity='.4'></a-torus-knot>
+    return fluffyCloud
+  }
+
+  getBig = () => {
+    let bigCloud = (
+    <a-torus-knot color="white" arc="180" p="3" q="6" radius="2" segments-radial='14' radius-tubular="2" position={this.generatePosition()} opacity='.4'>
+      <a-animation attribute="position"
+         dur="60000"
+         fill="forwards"
+         to={this.generateEndingPosition()}
+         repeat="indefinite">
+     </a-animation>
+    </a-torus-knot>)
+    return bigCloud
+  }
+
+  getSpiky = () => {
+    let spikyCloud = <a-torus-knot color="white" arc="180" p="3" q="6" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="1" position={this.generatePosition()} opacity='.4'></a-torus-knot>
+    return spikyCloud
+  }
+
+
+
   switchSource = () => {
     switch (this.props.city.icon) {
       case "fog": case "cloudy": case "partly-cloudy-day": case "partly-cloudy-night":
@@ -84,11 +162,28 @@ class Sun extends React.Component {
     this.props.history.replace('/')
   }
 
+  showCityDetails = () => {
+    if (this.props.city){
+      return (
+        <Entity
+          primitive='a-plane'
+          color='red'
+          width='1'
+          height='1'
+          position="4 2 -4"
+          text={{value: `Currently in \n ${this.props.city.full_city_name}: \n ${this.props.city.temp} F  \n ${this.props.city.conditions}`, align: 'center', wrapCount: 14, side: 'double'}}
+          opacity='.6'>
+        </Entity>
+      )
+    }
+  }
+
   render(){
+
     (this.props.city) ? console.log(this.props.city) : null;
+
     return(
       <a-scene rain={this.props.city ? this.isItRaining() : "count: 0;"}>
-
 
         <Entity environment={{lightPosition: this.getSunPosition(),
           preset: 'starry',
@@ -116,6 +211,18 @@ class Sun extends React.Component {
           text={{value: 'Exit VR', align: 'center', wrapCount: 12, side: 'double'}}
           opacity='.6'>
         </Entity>
+
+        {this.generateClouds()}
+        {this.generateClouds()}
+        {this.generateClouds()}
+        {this.generateClouds()}
+        {this.generateClouds()}
+        {this.generateClouds()}
+        {this.generateClouds()}
+        {this.generateClouds()}
+        {this.generateClouds()}
+
+        {this.showCityDetails()}
 
         <Entity primitive="a-camera" >
           <Entity primitive="a-cursor" animation__click={{property: 'scale', startEvents: 'click', from: '0.1 0.1 0.1', to: '1 1 1', dur: 150}}/>

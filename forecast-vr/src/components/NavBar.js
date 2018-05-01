@@ -9,10 +9,8 @@ const NavBar = () => {
     <div id="nav-bar">
       <TitleCard />
       <div id='bottom-nav'>
-        {/* <SearchBar /> */}
         <h1>What's it like in... </h1>
         <LocationButtons />
-        <h3>IMPORT BUTTON FORECASTERSSSS HERE</h3>
       </div>
     </div>
   )
