@@ -54,11 +54,12 @@ class Sun extends React.Component {
 
   getCircle = () => {
     let circleCloud = (
-      <a-torus-knot color="white" arc="180" p="3" q="8" radius="1" segments-radial='5' radius-tubular="0.2" position={this.generateStartingPosition()} opacity='.4'>
+      <a-torus-knot scale="3 2 1" color="white" arc="180" p="3" q="8" radius="1.2" segments-radial='5' radius-tubular="0.3" position={this.generateStartingPosition()} opacity='.4'>
         <a-animation attribute="rotation"
            dur="20000"
            fill="forwards"
            to='0 0 360'
+           direction='alternate-reverse'
            repeat="indefinite">
        </a-animation>
      </a-torus-knot>)
@@ -66,7 +67,16 @@ class Sun extends React.Component {
   }
 
   getFluff = () => {
-    let fluffyCloud = <a-torus-knot color="white" arc="180" p="3" q="23" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="2" position={this.generatePosition()} opacity='.4'></a-torus-knot>
+    let fluffyCloud = (
+      <a-torus-knot color="white" arc="180" p="3" q="23" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="2" position={this.generatePosition()} opacity='.4'>
+        <a-animation attribute="scale"
+           dur="20000"
+           fill="forwards"
+           to='2 2 2'
+           direction='alternate-reverse'
+           repeat="indefinite">
+       </a-animation>
+      </a-torus-knot>)
     return fluffyCloud
   }
 
@@ -77,6 +87,7 @@ class Sun extends React.Component {
          dur="60000"
          fill="forwards"
          to={this.generateEndingPosition()}
+         direction='alternate-reverse'
          repeat="indefinite">
      </a-animation>
     </a-torus-knot>)
@@ -84,7 +95,16 @@ class Sun extends React.Component {
   }
 
   getSpiky = () => {
-    let spikyCloud = <a-torus-knot color="white" arc="180" p="3" q="6" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="1" position={this.generatePosition()} opacity='.4'></a-torus-knot>
+    let spikyCloud = (
+      <a-torus-knot color="white" arc="180" p="3" q="6" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="1" position={this.generatePosition()} opacity='.4'>
+        <a-animation attribute="material.color"
+           dur="10000"
+           from='#F4DFE4'
+           to='#F9EBDB'
+           direction='alternate-reverse'
+           repeat="indefinite">
+       </a-animation>
+      </a-torus-knot>)
     return spikyCloud
   }
 
@@ -179,7 +199,7 @@ class Sun extends React.Component {
   }
 
   render(){
-
+    
     (this.props.city) ? console.log(this.props.city) : null;
 
     return(

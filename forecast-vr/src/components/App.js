@@ -18,7 +18,7 @@ class App extends Component {
   }
 
   shouldComponentUpdate = (nextProps, nextState) => {
-    if (nextProps.locations.length === 6) {
+    if (nextProps.locations.length === 3) {
       return true
     } else {
       return false
@@ -57,7 +57,7 @@ class App extends Component {
     // let whichCities = this.props.whichCities
     // console.log(whichCities[whichCities.length -1]);
     // this.props.newFetchLocation(whichCities[whichCities.length -1])
-    this.props.defaultLocations.slice(0,6).forEach(city => this.props.newFetchLocation(city))
+    this.props.defaultLocations.slice(0,3).forEach(city => this.props.newFetchLocation(city))
   }
 
   render() {
@@ -69,16 +69,18 @@ class App extends Component {
 
           <Route path="/new-york-city" render={() => <Sun city={this.findLocation("New York City")} /> } />
           <Route path="/london" render={() => <Sun city={this.findLocation("London")} /> } />
+          <Route path="/paris" render={() => <Sun city={this.findLocation("Paris")} /> } />
           <Route path="/delhi" render={() => <Sun city={this.findLocation("Delhi")} /> } />
           <Route path="/istanbul" render={() => <Sun city={this.findLocation("Istanbul")} /> } />
           <Route path="/sao-paulo" render={() => <Sun city={this.findLocation("Sao Paulo")} /> } />
           <Route path="/dubai" render={() => <Sun city={this.findLocation("Dubai")} /> } />
           <Route path="/sydney" render={() => <Sun city={this.findLocation("Sydney")} /> } />
-          <Route path="/paris" render={() => <Sun city={this.findLocation("Paris")} /> } />
           <Route path="/seattle" render={() => <Sun city={this.findLocation("Seattle")} /> } />
           <Route path="/mexico-city" render={() => <Sun city={this.findLocation("Mexico City")} /> } />
           <Route path="/cairo" render={() => <Sun city={this.findLocation("Cairo")} /> } />
           <Route path="/moscow" render={() => <Sun city={this.findLocation("Moscow")} /> } />
+          <Route path="/kiruna" render={() => <Sun city={this.findLocation("Kiruna")} /> } />
+          <Route path="/denver" render={() => <Sun city={this.findLocation("Denver")} /> } />
 
         </Switch>
         {/* {(this.props.locations.length > 0) ? this.makeRoutes() : null} */}
