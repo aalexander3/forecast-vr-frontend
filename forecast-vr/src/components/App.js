@@ -57,7 +57,8 @@ class App extends Component {
     // let whichCities = this.props.whichCities
     // console.log(whichCities[whichCities.length -1]);
     // this.props.newFetchLocation(whichCities[whichCities.length -1])
-    this.props.defaultLocations.slice(0,3).forEach(city => this.props.newFetchLocation(city))
+    Promise.all(this.props.defaultLocations.slice(0,3).map(city => this.props.newFetchLocation(city)))
+      .then((values) => {console.log('promise all', values)})
   }
 
   render() {

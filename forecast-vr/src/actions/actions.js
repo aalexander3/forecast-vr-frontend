@@ -27,9 +27,9 @@ export let addCityToWhich = location => {
 }
 
 const getVars = (json, location) => {
-  let {time, temperature, summary: shortSummary, icon, windSpeed} = json.currently
+  let {time, temperature, summary: shortSummary, icon, windSpeed, cloudCover, humidity} = json.currently
   let {summary: dailySummary} = json.daily
-  let {sunriseTime, sunsetTime} = json.daily.data[0]
+  let {sunriseTime, sunsetTime, temperatureLow, temperatureHigh} = json.daily.data[0]
 
   let offsetBy = json.offset + 4
 
@@ -51,6 +51,9 @@ const getVars = (json, location) => {
     date: date,
     time: stringTime,
     temp: temperature,
+    high: temperatureHigh,
+    low: temperatureLow,
+    humidity: humidity,
     conditions: shortSummary,
     windSpeed: windSpeed,
     dailySummary: dailySummary,
@@ -58,7 +61,8 @@ const getVars = (json, location) => {
     sunsetTime: sunset,
     citySlug: citySlug,
     hourly: hourly,
-    icon: icon
+    icon: icon,
+    cloudCover: cloudCover
   }
 }
 
