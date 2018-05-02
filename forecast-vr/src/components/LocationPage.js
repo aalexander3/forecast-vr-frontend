@@ -40,7 +40,7 @@ const LocationPage = props => {
 }
 
 const mapStateToProps = state => {
-  return {locations: state.locations, selectedLocation: state.selectedLocation}
+  return {locations: state.whichCities, selectedLocation: state.selectedLocation}
 }
 
 export default connect(mapStateToProps)(LocationPage)

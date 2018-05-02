@@ -7,11 +7,12 @@ import { bindActionCreators } from 'redux';
 const LocationButtons = (props) => {
 
   const makeButtons = () => {
-    return props.locations.slice(0,6).map(loc => <ButtonCard addNewLocation={addNewLocation} location={ loc } key={loc.full_city_name} />)
+    return props.locations.map(loc => <ButtonCard addNewLocation={addNewLocation} location={ loc } key={loc.full_city_name} />)
   }
 
   const addNewLocation = (location) => {
-    props.selectLocation(location)
+    debugger
+    props.addCityToWhich(location)
   }
 
     return (
@@ -22,7 +23,7 @@ const LocationButtons = (props) => {
 }
 
 const mapStateToProps = state => {
-  return {locations: state.defaultLocations}
+  return {locations: state.locations}
 }
 
 const mapDispatchToProps = dispatch => {

@@ -3,11 +3,15 @@ export let addLocation = location => {
 }
 
 export let deleteLocation = location => {
-  return { type: 'DELETE_LOCATION', location: location }
+  return { type: 'DELETE_CITY', location: location }
 }
 
 export let deleteDetail = location => {
   return { type: 'DELETE_DETAIL', location: location}
+}
+
+export let batchFetch = locations => {
+  return {type: 'BATCH_LOCATIONS', locations: locations}
 }
 
 export let selectLocation = location => {
@@ -26,7 +30,7 @@ export let addCityToWhich = location => {
   return { type: 'ADD_CITY', location: location}
 }
 
-const getVars = (json, location) => {
+export const getVars = (json, location) => {
   let {time, temperature, summary: shortSummary, icon, windSpeed, cloudCover, humidity} = json.currently
   let {summary: dailySummary} = json.daily
   let {sunriseTime, sunsetTime, temperatureLow, temperatureHigh} = json.daily.data[0]
@@ -68,18 +72,18 @@ const getVars = (json, location) => {
 
 
 export let newFetchLocation = location => {
-  console.log('starting dispatch for', location);
-  return (dispatch) => {
-    // dispatch({ type: 'START_ADD_LOCATION_REQUEST' });
+  console.log('starting fetch for', location);
+  // return (dispatch) => {
+  //   // dispatch({ type: 'START_ADD_LOCATION_REQUEST' });
     return fetch(process.env.REACT_APP_DARK_SKY_QUERY + location.latitude + ',' + location.longitude + "?exclude=flags,minutely")
       .then(res => res.json()).then(json => {
-
-        dispatch({
-          type: 'ADD_LOCATION',
-          location: getVars(json, location)
-        })
-      })
-  }
+        return {location: getVars(json, location)}
+        // dispatch({
+        //   type: 'DO_NOTHING_FOR_NOW',
+        //   location: getVars(json, location)
+        // })
+      // })
+  })
 }
 
 

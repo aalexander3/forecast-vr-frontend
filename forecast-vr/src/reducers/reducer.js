@@ -74,7 +74,8 @@ let defaultLocations = [
 let defaultCities = [{
   full_city_name: "New York City",
   latitude: 40.71,
-  longitude: -74.00
+  longitude: -74.00,
+
 }]
 
 function defaultReducer(state = defaultLocations, action){
@@ -90,6 +91,8 @@ function locationReducer(state = [], action){
       return [...state, action.location]
     case 'START_ADD_LOCATION_REQUEST':
       return [...state]
+    case "BATCH_LOCATIONS":
+      return action.locations
     case 'DELETE_LOCATION':
       let index = state.indexOf(action.location)
       let firstPart = [...state.slice(0, index)]
@@ -111,10 +114,15 @@ function selectReducer(state = null, action){
   }
 }
 
-function cityReducer(state = defaultCities, action){
+function cityReducer(state = [], action){
   switch (action.type) {
     case 'ADD_CITY':
       return [...state, action.location]
+    case 'DELETE_CITY':
+      let index = state.indexOf(action.location)
+      let firstPart = [...state.slice(0, index)]
+      let secondpart = [...state.slice(index+1)]
+      return [...firstPart, ...secondpart]
     default:
       return state
   }

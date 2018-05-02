@@ -3,50 +3,20 @@ import '../styles/App.css';
 import LandingPage from './LandingPage'
 import Sun from './Sun'
 import { bindActionCreators, compose } from 'redux';
-import { newFetchLocation } from  '../actions/actions';
+import { newFetchLocation, batchFetch, getVars } from  '../actions/actions';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom'
 
 class App extends Component {
-
-  state = {
-    which: "first",
-  }
-
   componentDidMount = () => {
     this.doThisOnce()
   }
 
-  shouldComponentUpdate = (nextProps, nextState) => {
-    if (nextProps.locations.length === 3) {
-      return true
-    } else {
-      return false
-    }
-  }
-
-  // componentDidUpdate = (prevProps, prevState, snapshot) => {
-  //   console.log('heyo from did update');
-  //   console.log('prev props are', prevProps.whichCities);
-  //   console.log('current props are', this.props.whichCities);
-  //   if (this.props.whichCities !== prevProps.whichCities) {
-  //     this.doThisOnce()
-  //   }
-  // }
-
-  whichCities = (cities) => {
-    switch (cities) {
-      case "first":
-        return this.props.defaultLocations.slice(0,3)
-      case "second":
-        return this.props.defaultLocations.slice(3,6)
-      case "third":
-        return this.props.defaultLocations.slice(6,9)
-      case "fourth":
-        return this.props.defaultLocations.slice(9,12)
-      default:
-        this.props.defaultLocations.slice(0,3)
-    }
+  appFetch = (location) => {
+    return fetch(process.env.REACT_APP_DARK_SKY_QUERY + location.latitude + ',' + location.longitude + "?exclude=flags,minutely")
+      .then(res => res.json()).then(json => {
+        return getVars(json, location)
+    })
   }
 
   findLocation = (cityName) => {
@@ -54,11 +24,10 @@ class App extends Component {
   }
 
   doThisOnce = () => {
-    // let whichCities = this.props.whichCities
-    // console.log(whichCities[whichCities.length -1]);
-    // this.props.newFetchLocation(whichCities[whichCities.length -1])
-    Promise.all(this.props.defaultLocations.slice(0,3).map(city => this.props.newFetchLocation(city)))
-      .then((values) => {console.log('promise all', values)})
+    Promise.all(this.props.defaultLocations.map(city => this.appFetch(city)))
+      .then((locations) => {
+        this.props.batchFetch(locations)
+      })
   }
 
   render() {
@@ -91,9 +60,12 @@ class App extends Component {
   }
 }
 
+
+
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    newFetchLocation: newFetchLocation
+    newFetchLocation: newFetchLocation,
+    batchFetch: batchFetch
   }, dispatch)
 }
 
