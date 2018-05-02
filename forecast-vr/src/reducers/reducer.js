@@ -6,9 +6,9 @@ let defaultLocations = [
       latitude: 40.71,
       longitude: -74.00
     }, {
-      full_city_name: "Kiruna",
-      latitude: 67.85,
-      longitude: 20.22
+      full_city_name: "Husavik",
+      latitude: 66.04,
+      longitude: 17.33
     }, {
       full_city_name: "Denver",
       latitude: 39.73,
@@ -64,7 +64,11 @@ let defaultLocations = [
       full_city_name: "Cairo",
       latitude: 30.04,
       longitude: 31.23
-    },
+    }, {
+      full_city_name: "Kiruna",
+      latitude: 67.85,
+      longitude: 20.22
+    }
 ]
 
 let defaultCities = [{

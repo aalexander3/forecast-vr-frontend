@@ -80,6 +80,7 @@ class App extends Component {
           <Route path="/cairo" render={() => <Sun city={this.findLocation("Cairo")} /> } />
           <Route path="/moscow" render={() => <Sun city={this.findLocation("Moscow")} /> } />
           <Route path="/kiruna" render={() => <Sun city={this.findLocation("Kiruna")} /> } />
+          <Route path="/husavik" render={() => <Sun city={this.findLocation("Husavik")} /> } />
           <Route path="/denver" render={() => <Sun city={this.findLocation("Denver")} /> } />
 
         </Switch>
