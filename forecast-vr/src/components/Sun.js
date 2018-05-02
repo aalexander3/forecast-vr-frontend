@@ -12,11 +12,6 @@ import 'aframe-html-shader'
 
 class Sun extends React.Component {
 
-  cloudPositions = ["6 20 -40", ]
-
-
-  // cloudTypes = [circleCloud, bigCloud, spikyCloud, fluffyCloud]
-
   generatePosition = () => {
     let x =  Math.random() * (140) -70;
     let y =  Math.random() * (60 - 15) + 15;
@@ -38,6 +33,13 @@ class Sun extends React.Component {
     return `${x} ${y} ${z}`
   }
 
+  generateSize = () => {
+    let x =  Math.random() * (3);
+    let y =  Math.random() * (3);
+    let z =  Math.random() * (3);
+    return `${x} ${y} ${z}`
+  }
+
   generateClouds = () => {
     return [
       this.getCircle(),
@@ -45,8 +47,15 @@ class Sun extends React.Component {
       this.getCircle(),
       this.getCircle(),
       this.getCircle(),
+      this.getCircle(),
+      this.getCircle(),
+      this.getCircle(),
+      this.getBig(),
       this.getBig(),
       this.getSpiky(),
+      this.getSpiky(),
+      this.getFluff(),
+      this.getFluff(),
       this.getFluff(),
       this.getFluff()
     ]
@@ -54,7 +63,7 @@ class Sun extends React.Component {
 
   getCircle = () => {
     let circleCloud = (
-      <a-torus-knot scale="3 2 1" color="white" arc="180" p="3" q="8" radius="1.2" segments-radial='5' radius-tubular="0.3" position={this.generateStartingPosition()} opacity='.4'>
+      <a-torus-knot scale={this.generateSize()} color="white" arc="180" p="3" q="8" radius="1.2" segments-radial='5' radius-tubular="0.3" position={this.generateStartingPosition()} opacity='.4'>
         <a-animation attribute="rotation"
            dur="20000"
            fill="forwards"
@@ -68,11 +77,11 @@ class Sun extends React.Component {
 
   getFluff = () => {
     let fluffyCloud = (
-      <a-torus-knot color="white" arc="180" p="3" q="23" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="2" position={this.generatePosition()} opacity='.4'>
+      <a-torus-knot scale={this.generateSize()} color="white" arc="180" p="3" q="23" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="2" position={this.generatePosition()} opacity='.4'>
         <a-animation attribute="scale"
            dur="20000"
            fill="forwards"
-           to='2 2 2'
+           to={this.generateSize()}
            direction='alternate-reverse'
            repeat="indefinite">
        </a-animation>
@@ -82,7 +91,7 @@ class Sun extends React.Component {
 
   getBig = () => {
     let bigCloud = (
-    <a-torus-knot color="white" arc="180" p="3" q="6" radius="2" segments-radial='14' radius-tubular="2" position={this.generatePosition()} opacity='.4'>
+    <a-torus-knot scale={this.generateSize()} color="white" arc="180" p="3" q="6" radius="2" segments-radial='14' radius-tubular="2" position={this.generatePosition()} opacity='.4'>
       <a-animation attribute="position"
          dur="60000"
          fill="forwards"
@@ -96,7 +105,7 @@ class Sun extends React.Component {
 
   getSpiky = () => {
     let spikyCloud = (
-      <a-torus-knot color="white" arc="180" p="3" q="6" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="1" position={this.generatePosition()} opacity='.4'>
+      <a-torus-knot scale={this.generateSize()} color="white" arc="180" p="3" q="6" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="1" position={this.generatePosition()} opacity='.4'>
         <a-animation attribute="material.color"
            dur="10000"
            from='#F4DFE4'
@@ -108,36 +117,94 @@ class Sun extends React.Component {
     return spikyCloud
   }
 
+  getGroundColor1 = () => {
+    if (this.props.city) {
+      switch (this.props.city.icon) {
+        case "fog": case "cloudy": case "partly-cloudy-day": case "partly-cloudy-night":
+          return '#797278'
+        case "clear-day": case "clear-night": case "wind":
+          return '#425E44'
+        case "snow": case "sleet":
+          return '#E7EBF0'
+        case "rain":
+          return '#C1C8D9'
+        default:
+          return '#425E44'
+      }
+    }
+  }
 
-
-  switchSource = () => {
-    switch (this.props.city.icon) {
-      case "fog": case "cloudy": case "partly-cloudy-day": case "partly-cloudy-night":
-        return 'IDK'
-      case "clear-day": case "clear-night": case "wind":
-        return "https://images.pexels.com/photos/186980/pexels-photo-186980.jpeg?auto=compress&cs=tinysrgb&h=350"
-      case "snow": case "sleet":
-        return 'https://images.pexels.com/photos/718857/pexels-photo-718857.jpeg?auto=compress&cs=tinysrgb&h=350'
-      case "rain":
-        return 'https://images.pexels.com/photos/17739/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350'
-      default:
-        return 'https://images.pexels.com/photos/584580/pexels-photo-584580.jpeg?auto=compress&cs=tinysrgb&h=350'
+  getGroundColor2 = () => {
+    if (this.props.city) {
+      switch (this.props.city.icon) {
+        case "fog": case "cloudy": case "partly-cloudy-day": case "partly-cloudy-night":
+          return '#789767'
+        case "clear-day": case "clear-night": case "wind":
+          return '#789767'
+        case "snow": case "sleet":
+          return '#E9F6F6'
+        case "rain":
+          return '#D8E9EE'
+        default:
+          return '#789767'
+      }
     }
   }
 
   isItSnowing = () => {
-    return (this.props.city.icon === 'snow' || 'sleet') ? <Entity particle-system={{preset: 'snow', particleCount: 800}}/> : null;
+    if (this.props.city.icon === "snow" || this.props.city.icon === "sleet" ) {
+      return "dropRadius: 0.08; dropHeight: 0.1; vector: 0 -2 0; opacity: .8; splashBounce: 0.8; count: 4000; color: #E7EBF0; splashGravity: 1.6;"
+    } else if (this.props.city.icon === 'rain' ) {
+        return "count: 4000;"
+    } else {
+      return 'count: 0;'
+    }
   }
 
-  isItRaining = () => {
-    return (this.props.city.icon === 'rain' ) ? "count: 4000;" : "count: 0;";
+  // isItRaining = () => {
+  //   return (this.props.city.icon === 'rain' ) ? "count: 4000;" : "count: 0;";
+  // }
+
+  howCloudy = () => {
+    switch (this.props.city.icon) {
+      case "fog": case "cloudy":
+        return [
+          this.generateClouds(),
+          this.generateClouds(),
+          this.generateClouds(),
+          this.generateClouds()
+        ]
+        break;
+      case "partly-cloudy-day": case "partly-cloudy-night":
+      return [
+        this.generateClouds(),
+        this.generateClouds(),
+        this.generateClouds()
+      ]
+        break;
+      case "clear-day": case "clear-night": case "wind":
+        this.generateClouds()
+        break;
+      case "snow": case "sleet":
+      return [
+        this.generateClouds(),
+        this.generateClouds()
+      ]
+        break;
+      case "rain":
+      return [
+        this.generateClouds(),
+        this.generateClouds()
+      ]
+        break;
+      default:
+      return [
+        this.generateClouds(),
+        this.generateClouds()
+      ]
+        break;
+    }
   }
-
-
-  // snow <Entity particle-system={{preset: 'snow', particleCount: 800}}/>
-  // rain   <a-scene rain>
-  // clear do nothing
-  // clouds figure out!!!
 
   getSunPosition = () => {
     if (this.props.city) {
@@ -199,12 +266,14 @@ class Sun extends React.Component {
   }
 
   render(){
-    
+
     (this.props.city) ? console.log(this.props.city) : null;
 
     return(
-      <a-scene rain={this.props.city ? this.isItRaining() : "count: 0;"}>
+      <a-scene rain={this.props.city ? this.isItSnowing() : "count: 0;"}>
+      {/* <a-scene rain="dropRadius: 0.08; dropHeight: 0.1; vector: 0 -2 0; opacity= .8; splashBounce: 0.8; count: 4000; color: #E7EBF0; splashGravity: 1.6" > */}
 
+      {/* <a-scene> */}
         <Entity environment={{lightPosition: this.getSunPosition(),
           preset: 'starry',
           skyType: 'atmosphere',
@@ -212,15 +281,17 @@ class Sun extends React.Component {
           fog: 0.2,
           ground: 'hills',
           groundYScale: 6.31,
-          groundColor: '#425E44',
-          groundColor2: '#789767',
+          groundColor: this.getGroundColor1(),
+          groundColor2: this.getGroundColor2(),
           groundTexture: 'walkernoise',
           grid: 'none'}}>
         </Entity>
 
-        <Entity primitive="a-light" type="ambient" color="white" />
+        <Entity primitive="a-light" type="ambient" color="white" intensity=".2"/>
 
         {(this.props.city) ? this.isItSnowing() : null}
+        {(this.props.city) ? this.howCloudy() : null}
+        {this.showCityDetails()}
 
         <Entity events={{click: this.goBack}}
           primitive='a-plane'
@@ -231,18 +302,6 @@ class Sun extends React.Component {
           text={{value: 'Exit VR', align: 'center', wrapCount: 12, side: 'double'}}
           opacity='.6'>
         </Entity>
-
-        {this.generateClouds()}
-        {this.generateClouds()}
-        {this.generateClouds()}
-        {this.generateClouds()}
-        {this.generateClouds()}
-        {this.generateClouds()}
-        {this.generateClouds()}
-        {this.generateClouds()}
-        {this.generateClouds()}
-
-        {this.showCityDetails()}
 
         <Entity primitive="a-camera" >
           <Entity primitive="a-cursor" animation__click={{property: 'scale', startEvents: 'click', from: '0.1 0.1 0.1', to: '1 1 1', dur: 150}}/>

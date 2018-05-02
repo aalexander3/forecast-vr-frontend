@@ -31,3 +31,24 @@
 .close-icon:hover {
   color: blue;
 }
+
+.temperatures {
+  border: white double .4rem;
+  border-radius: 100px;
+  height: 7rem;
+  width: 7rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: black;
+  margin: .2rem;
+}
+
+.temperatures h2 {
+  color: white;
+}
+
+.all-temps {
+  display: flex;
+  align-items: center;
+}

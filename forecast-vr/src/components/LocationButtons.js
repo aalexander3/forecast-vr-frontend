@@ -11,7 +11,6 @@ const LocationButtons = (props) => {
   }
 
   const addNewLocation = (location) => {
-    debugger
     props.addCityToWhich(location)
   }
 

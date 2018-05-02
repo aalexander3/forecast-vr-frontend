@@ -7,7 +7,7 @@ import '../styles/LocationCard.css'
 
 const LocationCard = (props) => {
 
-  let {full_city_name, conditions, time, date, temp, citySlug} = props.location
+  let {full_city_name, conditions, time, date, temp, citySlug, low, high} = props.location
 
   const sendDelete = () => {
     props.deleteLocation(props.location)
@@ -30,11 +30,19 @@ const LocationCard = (props) => {
     <div className='location-card'>
       <div className='close-icon' onClick={sendDelete}><Icon type="close-square-o" /></div>
       <h3 className='card-city-name' onClick={selectLocation}>{full_city_name}</h3>
-      {renderIFrame()}
+      {/* {renderIFrame()} */}
       <br/>
       <h4>{conditions} </h4>
       <h4>{date}, {time} </h4>
-      <h4>{temp} F </h4>
+      <div className='all-temps'>
+
+        <h2>{low}&#176; <br/> <p>low</p></h2>
+        <div className='temperatures'>
+          <h2>{temp}&#176;</h2>
+        </div>
+        <br/>
+        <h2>{high}&#176; <br/><p>high</p></h2>
+      </div>
     </div>)
 }
 
