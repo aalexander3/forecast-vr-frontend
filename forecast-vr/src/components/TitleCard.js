@@ -25,7 +25,6 @@ const TitleCard = props => {
       <h3>Tomorrow's view on today's weather</h3>
       <br/><br/>
       {showCityDetails()}
-      <Divider style={{width: '80%', display: 'inline-block'}}/>
     </div>
   )
 }

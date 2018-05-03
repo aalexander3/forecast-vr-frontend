@@ -1,4 +1,10 @@
+// react imports
 import React from 'react'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { compose } from 'redux'
+import { fixOffset } from '../actions/actions.js'
+// aframe imports
 import 'aframe';
 import 'aframe-animation-component';
 import 'aframe-particle-system-component';
@@ -7,7 +13,6 @@ import 'babel-polyfill';
 import {Entity} from 'aframe-react';
 import 'aframe-rain'
 import 'aframe-environment-component'
-import { withRouter } from 'react-router-dom'
 import 'aframe-html-shader'
 
 class Sun extends React.Component {
@@ -208,7 +213,11 @@ class Sun extends React.Component {
 
   getSunPosition = () => {
     if (this.props.city) {
-      switch (this.props.city.time.slice(0,2)) {
+      let hourlyTime = this.props.city.hourly[0].time
+      let offset = this.props.city.offset
+      let timeToUse = fixOffset(hourlyTime, offset).toTimeString().slice(0,2)
+
+      switch (timeToUse) {
         case "06":
           return {x: -2.0, y: 0, z: -1.4}
         case "07":
@@ -266,14 +275,12 @@ class Sun extends React.Component {
   }
 
   render(){
-
-    (this.props.city) ? console.log(this.props.city) : null;
+    console.log(this.props.whichHour);
 
     return(
       <a-scene rain={this.props.city ? this.isItSnowing() : "count: 0;"}>
-      {/* <a-scene rain="dropRadius: 0.08; dropHeight: 0.1; vector: 0 -2 0; opacity= .8; splashBounce: 0.8; count: 4000; color: #E7EBF0; splashGravity: 1.6" > */}
+      {/* <a-scene rain="dropRadius: 0.08; dropHeight: 0.1; vector: 0 -2 0; opacity: .8; splashBounce: 0.8; count: 4000; color: #E7EBF0; splashGravity: 1.6;" > */}
 
-      {/* <a-scene> */}
         <Entity environment={{lightPosition: this.getSunPosition(),
           preset: 'starry',
           skyType: 'atmosphere',
@@ -312,4 +319,8 @@ class Sun extends React.Component {
   }
 }
 
-export default withRouter(Sun)
+const mapStateToProps = state => {
+  return {whichHour: state.whichHour}
+}
+
+export default compose(withRouter, connect(mapStateToProps))(Sun)

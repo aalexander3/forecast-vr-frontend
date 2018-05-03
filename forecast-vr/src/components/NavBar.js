@@ -3,6 +3,7 @@ import '../styles/NavBar.css'
 import TitleCard from './TitleCard'
 // import SearchBar from './SearchBar'
 import LocationButtons from './LocationButtons'
+import Incrementer from './Incrementer'
 
 const NavBar = () => {
   return(
@@ -11,6 +12,8 @@ const NavBar = () => {
       <div id='bottom-nav'>
         <h1>What's it like in... </h1>
         <LocationButtons />
+        <br/>
+        <Incrementer />
       </div>
     </div>
   )

@@ -70,11 +70,12 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = state => {
-  console.log('mapping', state.locations);
+  console.log('mapping in app', state.whichHour);
   return {
     locations: state.locations,
     defaultLocations: state.defaultLocations,
-    whichCities: state.whichCities
+    whichCities: state.whichCities,
+    whichHour: state.whichHour
   }
 }
 

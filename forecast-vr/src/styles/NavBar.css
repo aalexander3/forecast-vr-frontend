@@ -2,8 +2,9 @@
 #nav-bar {
   width: 28%;
   display: inline-block;
-  border-right: #EDECEB solid 3px;
+  /* border-right: #858B9F solid 5px; */
   height: stretch;
+  background-color: #E1E9E5;
 }
 
 #bottom-nav {

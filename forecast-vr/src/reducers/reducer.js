@@ -128,11 +128,31 @@ function cityReducer(state = [], action){
   }
 }
 
+function hourReducer(state = [], action){
+  switch (action.type) {
+    case "INCREMENT":
+      if (state.length < 48){
+      return [...state, action.type]
+    } else {
+      return [...state]
+    }
+    case "DECREMENT":
+      if (state.length > 0){
+      return state.slice(0,-1)
+    } else {
+      return state
+    }
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   locations: locationReducer,
   selectedLocation: selectReducer,
   defaultLocations: defaultReducer,
-  whichCities: cityReducer
+  whichCities: cityReducer,
+  whichHour: hourReducer
 })
 
 export { rootReducer }

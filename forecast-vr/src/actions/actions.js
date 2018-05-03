@@ -26,8 +26,22 @@ export let selectLocation = location => {
   }
 }
 
+export let incrementHour = () => {
+  return {type: 'INCREMENT'}
+}
+
+export let decrementHour = () => {
+  return {type: 'DECREMENT'}
+}
+
 export let addCityToWhich = location => {
   return { type: 'ADD_CITY', location: location}
+}
+
+export const fixOffset = (time, offset) => {
+  let offsetBy = offset + 4
+  let useThisTime = time * 1000 + (offsetBy * 3600000)
+  return new Date(parseInt(useThisTime))
 }
 
 export const getVars = (json, location) => {
@@ -35,15 +49,15 @@ export const getVars = (json, location) => {
   let {summary: dailySummary} = json.daily
   let {sunriseTime, sunsetTime, temperatureLow, temperatureHigh} = json.daily.data[0]
 
-  let offsetBy = json.offset + 4
+  let newSunset = fixOffset(sunsetTime, json.offset)
+  let newSunrise = fixOffset(sunriseTime, json.offset)
 
-  let useThisTime = time * 1000 + (offsetBy * 3600000)
+  let sunrise = newSunrise.toTimeString().slice(0,5)
+  let sunset = newSunset.toTimeString().slice(0,5)
+  let useThisTime = fixOffset(time, json.offset)
 
-  let sunrise = new Date(parseInt(`${sunriseTime}000`)).toTimeString().slice(0,5)
-  let sunset = new Date(parseInt(`${sunsetTime}000`)).toTimeString().slice(0,5)
-
-  let stringTime = new Date(parseInt(useThisTime)).toTimeString().slice(0,5)
-  let date = new Date(parseInt(useThisTime)).toDateString().slice(0, -5)
+  let stringTime = useThisTime.toTimeString().slice(0,5)
+  let date = useThisTime.toDateString().slice(0, -5)
 
   let citySlug = location.full_city_name.toLowerCase().replace(/, | /gi, "-")
   let hourly = json.hourly.data
@@ -66,7 +80,8 @@ export const getVars = (json, location) => {
     citySlug: citySlug,
     hourly: hourly,
     icon: icon,
-    cloudCover: cloudCover
+    cloudCover: cloudCover,
+    offset: json.offset
   }
 }
 

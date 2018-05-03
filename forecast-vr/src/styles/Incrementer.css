@@ -1,0 +1,21 @@
+.slider {
+  position: relative;
+  padding: 0px 30px;
+}
+
+.slider .anticon {
+  position: absolute;
+  top: -2px;
+  width: 16px;
+  height: 16px;
+  line-height: 1;
+  font-size: 16px;
+}
+
+.slider .anticon:first-child {
+  left: 0;
+}
+
+.slider .anticon:last-child {
+  right: 0;
+}
