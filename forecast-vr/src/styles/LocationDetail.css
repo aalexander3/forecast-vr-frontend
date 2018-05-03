@@ -1,11 +1,11 @@
 .close-icon-detail {
   position: absolute;
   top: 2%;
-  transform: scale(1.5);
+  transform: scale(1.2);
 }
 
 .close-icon-detail:hover {
- color: blue;
+ color: #858B9F;
 }
 
 #location-detail {
@@ -21,4 +21,8 @@
   background-color: white;
   opacity: 1;
   padding: 5% 2%
+}
+
+.detail-text {
+  margin: -3rem 2rem 2rem 2rem;
 }

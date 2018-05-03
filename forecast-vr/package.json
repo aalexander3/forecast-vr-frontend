@@ -5,6 +5,7 @@
   "dependencies": {
     "aframe": "0.7.0",
     "aframe-animation-component": "^4.1.2",
+    "aframe-environment-component": "^1.0.0",
     "aframe-html-shader": "^0.2.0",
     "aframe-particle-system-component": "^1.0.11",
     "aframe-rain": "^1.0.2",
@@ -19,6 +20,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
+    "react-ui-thermometer": "^0.1.0",
     "redux": "^4.0.0",
     "redux-thunk": "^2.2.0"
   },

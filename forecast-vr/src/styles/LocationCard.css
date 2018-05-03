@@ -1,12 +1,23 @@
+/*
+@font-face {
+  font-family: Montserrat;
+  src: url('https://fonts.google.com/specimen/Montserrat')
+}
+
+@font-face {
+  font-family: Oswald;
+  src: url('https://fonts.google.com/specimen/Osawld')
+} */
+
 .location-card {
   text-align: center;
   width: 18rem;
   height: 28rem;
-  border: solid black 1px;
+  /* border: solid black 1px; */
   padding: 3%;
   display: inline-block;
-  margin: 2% 4% 2% 2%
-
+  margin: 2% 4% 2% 2%;
+  font-family: 'Montserrat';
 }
 
 .iframe-cards {
@@ -16,39 +27,41 @@
   height: 60%;
 }
 
+.card-city-name {
+  font-size: 24px;
+  font-weight: 600;
+  font-family: 'Open Sans';
+}
+
 .card-city-name:hover {
   position: relative;
-  color: blue;
+  color: #858B9F;
   text-decoration: underline;
-  top: 2px;
+  font-size: 24px;
 }
 
 .close-icon {
   position: absolute;
-  margin: -1rem;
+  margin: -1rem 0rem 0rem 14rem;
 }
 
 .close-icon:hover {
-  color: blue;
+  color: #858B9F;
 }
 
-.temperatures {
-  border: white double .4rem;
-  border-radius: 100px;
-  height: 7rem;
-  width: 7rem;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  background-color: black;
-  margin: .2rem;
+.time-card {
+  margin-top: 1rem;
+  line-height: 0px;
+  font-weight: 200;
+  font-size: 24px;
 }
 
-.temperatures h2 {
-  color: white;
+.date-card {
+  font-weight: 800;
+  font-size: 16px;
 }
 
-.all-temps {
-  display: flex;
-  align-items: center;
+.city-title {
+  margin: -1rem 0rem 0rem 0rem;
+  line-height: 8px;
 }

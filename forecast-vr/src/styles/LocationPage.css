@@ -13,3 +13,7 @@
   margin: 18% 0 0 10%;
   transform: scale(1.2);
 }
+
+#selected-card .close-icon {
+  display: none;
+}

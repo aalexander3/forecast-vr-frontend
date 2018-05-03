@@ -29,21 +29,16 @@ const LocationCard = (props) => {
   return(
     <div className='location-card'>
       <div className='close-icon' onClick={sendDelete}><Icon type="close-square-o" /></div>
-      <h3 className='card-city-name' onClick={selectLocation}>{full_city_name}</h3>
-      {/* {renderIFrame()} */}
-      <br/>
-      <h4>{conditions} </h4>
-      <h4>{date}, {time} </h4>
-      <div className='all-temps'>
+      <div className='city-title'><h3 className='card-city-name' onClick={selectLocation}>{full_city_name.toUpperCase()}</h3></div>
+      <h4 className='conditions'> {parseInt(temp)}&#176; and {conditions} </h4>
 
-        <h2>{low}&#176; <br/> <p>low</p></h2>
-        <div className='temperatures'>
-          <h2>{temp}&#176;</h2>
-        </div>
-        <br/>
-        <h2>{high}&#176; <br/><p>high</p></h2>
-      </div>
-    </div>)
+      {renderIFrame()}
+      <br/>
+
+      <h4 className='time-card'> {time} </h4>
+      <h4 className='date-card'> {date} </h4>
+    </div>
+  )
 }
 
 const mapDispatchToProps = dispatch => {
