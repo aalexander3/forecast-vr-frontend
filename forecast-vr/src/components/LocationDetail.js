@@ -9,18 +9,8 @@ import { withRouter } from 'react-router-dom'
 
 class LocationDetail extends React.Component {
 
-  state = {
-    fullscreen: false
-  }
-
   sendDelete = () => {
     this.props.deleteDetail(this.props.location)
-  }
-
-  handleClick = () => {
-    this.setState({
-      fullscreen: true
-    }, () => this.props.history.replace(`/${this.props.selection.citySlug}`))
   }
 
   render(){
@@ -31,7 +21,6 @@ class LocationDetail extends React.Component {
       <div id="location-detail">
         <div className='close-icon-detail' onClick={this.sendDelete}><Icon type="close-square-o" /></div>
         <div className='detail-text'>
-          <Button className='buttons' type="primary" onClick={this.handleClick}>ENTER FULLSCREEN VR</Button>
           <br/><br/>
           <h1>{full_city_name}</h1>
           <p>{dailySummary}</p>

@@ -13,14 +13,14 @@
   float: right;
   top: 0;
   left: 35%;
-  width: 70%;
+  width: 65%;
   display: inline-block;
-  border-left: #EDECEB solid 3px;
   height: stretch;
   z-index: 10;
-  background-color: white;
-  opacity: 1;
-  padding: 5% 2%
+  background-color: #E8DED5;
+  opacity: .8;
+  padding: 5% 2%;
+  overflow: auto;
 }
 
 .detail-text {

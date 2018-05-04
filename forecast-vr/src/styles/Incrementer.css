@@ -1,6 +1,7 @@
 .slider {
   position: relative;
   padding: 0px 30px;
+
 }
 
 .slider .anticon {
@@ -18,4 +19,16 @@
 
 .slider .anticon:last-child {
   right: 0;
+}
+
+.incrementer {
+  margin-top: 5%;
+}
+
+.ant-slider-track {
+  background-color: #E2BEAD;
+}
+
+.ant-slider-handle {
+  border: 2px solid #E2BEAD;
 }

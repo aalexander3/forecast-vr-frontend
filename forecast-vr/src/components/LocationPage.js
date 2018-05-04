@@ -8,7 +8,7 @@ import '../styles/LocationPage.css'
 const LocationPage = props => {
 
   const makeLocationCards = () => {
-    return props.locations.map(loc => <LocationCard key={loc.full_city_name} location={loc} />)
+    return props.locations.map(city => <LocationCard key={city.full_city_name} city={city} />)
   }
 
   // const locationDiv = () => {
@@ -16,7 +16,7 @@ const LocationPage = props => {
   // }
 
   const makeSelectedCard = () => {
-    return <div id='selected-card'><LocationCard key={props.selectedLocation.full_city_name} location={props.selectedLocation}/></div>
+    return <div id='selected-card'><LocationCard key={props.selectedLocation.full_city_name} city={props.selectedLocation}/></div>
   }
 
   const makeLocationDetail = () => {

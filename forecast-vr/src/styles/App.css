@@ -10,7 +10,8 @@ body {
 
 .buttons {
   background-color: #858B9F;
-  border: solid #858B9F .25px
+  border: solid #858B9F .25px;
+  color: white;
 }
 
 .App-logo {

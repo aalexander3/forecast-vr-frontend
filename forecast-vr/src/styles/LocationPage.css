@@ -1,8 +1,10 @@
 #location-page {
   position: relative;
   display: inline-block;
-  width: 66%;
+  width: 72%;
   vertical-align: top;
+  height: -webkit-fill-available;
+  overflow-y: scroll;
 }
 
 .location-cards {
