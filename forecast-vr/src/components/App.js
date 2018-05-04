@@ -38,11 +38,11 @@ class App extends Component {
           <Route exact path='/' component={ LandingPage } />
 
           <Route path="/new-york-city" render={() => <Sun city={this.findLocation("New York City")} /> } />
+          <Route path="/sao-paulo" render={() => <Sun city={this.findLocation("Sao Paulo")} /> } />
           <Route path="/london" render={() => <Sun city={this.findLocation("London")} /> } />
           <Route path="/paris" render={() => <Sun city={this.findLocation("Paris")} /> } />
           <Route path="/delhi" render={() => <Sun city={this.findLocation("Delhi")} /> } />
           <Route path="/istanbul" render={() => <Sun city={this.findLocation("Istanbul")} /> } />
-          <Route path="/sao-paulo" render={() => <Sun city={this.findLocation("Sao Paulo")} /> } />
           <Route path="/dubai" render={() => <Sun city={this.findLocation("Dubai")} /> } />
           <Route path="/sydney" render={() => <Sun city={this.findLocation("Sydney")} /> } />
           <Route path="/seattle" render={() => <Sun city={this.findLocation("Seattle")} /> } />
@@ -54,7 +54,6 @@ class App extends Component {
           <Route path="/denver" render={() => <Sun city={this.findLocation("Denver")} /> } />
 
         </Switch>
-        {/* {(this.props.locations.length > 0) ? this.makeRoutes() : null} */}
       </div>
     );
   }
@@ -70,7 +69,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = state => {
-  console.log('mapping in app', state.whichHour);
   return {
     locations: state.locations,
     defaultLocations: state.defaultLocations,
@@ -80,4 +78,3 @@ const mapStateToProps = state => {
 }
 
 export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(App);
-// export default App;

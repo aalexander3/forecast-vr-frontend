@@ -4,11 +4,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { Icon } from 'antd'
 import '../styles/LocationCard.css'
+import { image_object } from '../constants/image_object'
 
 const LocationCard = (props) => {
+  console.log(image_object);
+
 
   let {full_city_name, conditions, time, date, temp, citySlug, low, high, hourly, offset} = props.location
-  let {time: hourlyTime, summary, temperature} = hourly[props.whichHour]
+  let {time: hourlyTime, summary, temperature, icon: hourlyIcon} = hourly[props.whichHour]
 
   let timeToUse = fixOffset(hourlyTime, offset).toTimeString()
   let dateToUse = fixOffset(hourlyTime, offset).toDateString().slice(0, -5)
@@ -21,8 +24,33 @@ const LocationCard = (props) => {
     props.selectLocation(props.location)
   }
 
+  const switchImageSource = () => {
+    let okayTimes = ['06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
+    let currentTime;
+
+    if (okayTimes.includes(timeToUse.slice(0,2))) {
+      currentTime = timeToUse.slice(0,2)
+    } else {
+      currentTime = "21"
+    }
+    
+    switch (hourlyIcon) {
+      case "fog": case "cloudy": case "partly-cloudy-day": case "partly-cloudy-night":
+        return image_object['cloudy'][currentTime]
+      case "clear-day": case "clear-night": case "wind":
+        return image_object['clear'][currentTime]
+      case "snow": case "sleet":
+        return image_object['snowy'][currentTime]
+      case "rain":
+        return image_object['rainy'][currentTime]
+      default:
+        return image_object['clear']['21']
+    }
+  }
+
   const renderIFrame = () => {
-    return <iframe seamless title={full_city_name} className='iframe-cards' src={"http://localhost:3000/" + citySlug}/>
+    return <img className='iframe-cards' alt={full_city_name} src={switchImageSource()} />
+    // return <iframe seamless title={full_city_name} className='iframe-cards' src={"http://localhost:3000/" + citySlug}/>
   }
 
   return (

@@ -160,7 +160,7 @@ class Sun extends React.Component {
     if (this.props.city.icon === "snow" || this.props.city.icon === "sleet" ) {
       return "dropRadius: 0.08; dropHeight: 0.1; vector: 0 -2 0; opacity: .8; splashBounce: 0.8; count: 4000; color: #E7EBF0; splashGravity: 1.6;"
     } else if (this.props.city.icon === 'rain' ) {
-        return "count: 4000;"
+      return "count: 4000;"
     } else {
       return 'count: 0;'
     }
@@ -275,7 +275,6 @@ class Sun extends React.Component {
   }
 
   render(){
-    console.log(this.props.whichHour);
 
     return(
       <a-scene rain={this.props.city ? this.isItSnowing() : "count: 0;"}>
@@ -294,9 +293,8 @@ class Sun extends React.Component {
           grid: 'none'}}>
         </Entity>
 
-        <Entity primitive="a-light" type="ambient" color="white" intensity=".2"/>
+        <Entity primitive="a-light" type="ambient" color="white" intensity=".3"/>
 
-        {(this.props.city) ? this.isItSnowing() : null}
         {(this.props.city) ? this.howCloudy() : null}
         {this.showCityDetails()}
 
@@ -314,7 +312,6 @@ class Sun extends React.Component {
           <Entity primitive="a-cursor" animation__click={{property: 'scale', startEvents: 'click', from: '0.1 0.1 0.1', to: '1 1 1', dur: 150}}/>
         </Entity>
       </a-scene>
-
     )
   }
 }
