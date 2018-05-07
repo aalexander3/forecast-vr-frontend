@@ -17,6 +17,7 @@ import 'aframe-html-shader'
 
 class Sun extends React.Component {
 
+
   generatePosition = () => {
     let x =  Math.random() * (140) -70;
     let y =  Math.random() * (60 - 15) + 15;
@@ -166,10 +167,6 @@ class Sun extends React.Component {
     }
   }
 
-  // isItRaining = () => {
-  //   return (this.props.city.icon === 'rain' ) ? "count: 4000;" : "count: 0;";
-  // }
-
   howCloudy = () => {
     switch (this.props.city.icon) {
       case "fog": case "cloudy":
@@ -254,6 +251,23 @@ class Sun extends React.Component {
     }
   }
 
+  getLandmark = () => {
+    if (this.props.city) {
+      switch (this.props.city.full_city_name) {
+        case "Paris":
+          return <a-entity collada-model="url(/models/eiffeltower.dae)" scale=".1 .1 .1" position="-2 6 -18" rotation="0 45 0"></a-entity>
+        case "New York City":
+          return <a-entity collada-model="url(/models/empirestate.dae)" scale="2.5 2.5 2.5" position="-2 8 -18" rotation="0 45 0"></a-entity>
+        case "Denver":
+          return <a-entity collada-model="url(/models/mountain.dae)" scale=".25 .25 .25" position="-10 5.5 -40" rotation="0 145 0"></a-entity>
+        case "Honolulu":
+          return <a-entity collada-model="url(/models/cocee.dae)" scale=".025 .025 .025" position="-30 0 -55" rotation="0 145 0"></a-entity>
+        default:
+          return null
+      }
+    }
+  }
+
   goBack = () => {
     this.props.history.replace('/')
   }
@@ -285,18 +299,24 @@ class Sun extends React.Component {
           skyType: 'atmosphere',
           seed: 1,
           fog: 0.2,
-          ground: 'hills',
+          ground: 'flat',
           groundYScale: 6.31,
           groundColor: this.getGroundColor1(),
           groundColor2: this.getGroundColor2(),
-          groundTexture: 'walkernoise',
+          groundTexture: 'squares',
+          dressing: 'towers',
+          dressingAmount: 50,
+          dressingColor: '#797278',
+          dressingScale: 5,
+          dressingVariance: '.8 2 1',
           grid: 'none'}}>
         </Entity>
 
-        <Entity primitive="a-light" type="ambient" color="white" intensity=".3"/>
+        <Entity primitive="a-light" type="ambient" color="white" intensity=".5"/>
 
         {(this.props.city) ? this.howCloudy() : null}
         {this.showCityDetails()}
+        {this.getLandmark()}
 
         <Entity events={{click: this.goBack}}
           primitive='a-plane'
