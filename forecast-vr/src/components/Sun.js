@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { compose } from 'redux'
 import { fixOffset } from '../actions/actions.js'
+import CityButtons from './CityButtons'
+import Cloud from './Cloud'
 // aframe imports
 import 'aframe';
 import 'aframe-animation-component';
@@ -16,112 +18,6 @@ import 'aframe-environment-component'
 import 'aframe-html-shader'
 
 class Sun extends React.Component {
-
-
-  generatePosition = () => {
-    let x =  Math.random() * (140) -70;
-    let y =  Math.random() * (60 - 15) + 15;
-    let z =  Math.random() * (140) -70;
-    return `${x} ${y} ${z}`
-  }
-
-  generateStartingPosition = () => {
-    let x =  Math.random() * (140) -70;
-    let y =  Math.random() * (60 - 15) + 15;
-    let z =  Math.random() * (140) -70;
-    return `${x} ${y} ${z}`
-  }
-
-  generateEndingPosition = () => {
-    let x =  Math.random() * (140) ;
-    let y =  Math.random() * (60 - 15) + 15;
-    let z =  Math.random() * (140) -70;
-    return `${x} ${y} ${z}`
-  }
-
-  generateSize = () => {
-    let x =  Math.random() * (3);
-    let y =  Math.random() * (3);
-    let z =  Math.random() * (3);
-    return `${x} ${y} ${z}`
-  }
-
-  generateClouds = () => {
-    return [
-      this.getCircle(),
-      this.getCircle(),
-      this.getCircle(),
-      this.getCircle(),
-      this.getCircle(),
-      this.getCircle(),
-      this.getCircle(),
-      this.getCircle(),
-      this.getBig(),
-      this.getBig(),
-      this.getSpiky(),
-      this.getSpiky(),
-      this.getFluff(),
-      this.getFluff(),
-      this.getFluff(),
-      this.getFluff()
-    ]
-  }
-
-  getCircle = () => {
-    let circleCloud = (
-      <a-torus-knot scale={this.generateSize()} color="white" arc="180" p="3" q="8" radius="1.2" segments-radial='5' radius-tubular="0.3" position={this.generateStartingPosition()} opacity='.4'>
-        <a-animation attribute="rotation"
-           dur="20000"
-           fill="forwards"
-           to='0 0 360'
-           direction='alternate-reverse'
-           repeat="indefinite">
-       </a-animation>
-     </a-torus-knot>)
-    return circleCloud
-  }
-
-  getFluff = () => {
-    let fluffyCloud = (
-      <a-torus-knot scale={this.generateSize()} color="white" arc="180" p="3" q="23" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="2" position={this.generatePosition()} opacity='.4'>
-        <a-animation attribute="scale"
-           dur="20000"
-           fill="forwards"
-           to={this.generateSize()}
-           direction='alternate-reverse'
-           repeat="indefinite">
-       </a-animation>
-      </a-torus-knot>)
-    return fluffyCloud
-  }
-
-  getBig = () => {
-    let bigCloud = (
-    <a-torus-knot scale={this.generateSize()} color="white" arc="180" p="3" q="6" radius="2" segments-radial='14' radius-tubular="2" position={this.generatePosition()} opacity='.4'>
-      <a-animation attribute="position"
-         dur="60000"
-         fill="forwards"
-         to={this.generateEndingPosition()}
-         direction='alternate-reverse'
-         repeat="indefinite">
-     </a-animation>
-    </a-torus-knot>)
-    return bigCloud
-  }
-
-  getSpiky = () => {
-    let spikyCloud = (
-      <a-torus-knot scale={this.generateSize()} color="white" arc="180" p="3" q="6" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="1" position={this.generatePosition()} opacity='.4'>
-        <a-animation attribute="material.color"
-           dur="10000"
-           from='#F4DFE4'
-           to='#F9EBDB'
-           direction='alternate-reverse'
-           repeat="indefinite">
-       </a-animation>
-      </a-torus-knot>)
-    return spikyCloud
-  }
 
   getGroundColor1 = () => {
     if (this.props.city) {
@@ -171,40 +67,34 @@ class Sun extends React.Component {
     switch (this.props.city.icon) {
       case "fog": case "cloudy":
         return [
-          this.generateClouds(),
-          this.generateClouds(),
-          this.generateClouds(),
-          this.generateClouds()
+          <Cloud />,
+          <Cloud />,
+          <Cloud />,
+          <Cloud />
         ]
-        break;
       case "partly-cloudy-day": case "partly-cloudy-night":
-      return [
-        this.generateClouds(),
-        this.generateClouds(),
-        this.generateClouds()
-      ]
-        break;
+        return [
+          <Cloud />,
+          <Cloud />,
+          <Cloud />
+        ]
       case "clear-day": case "clear-night": case "wind":
-        this.generateClouds()
-        break;
+        return <Cloud />
       case "snow": case "sleet":
-      return [
-        this.generateClouds(),
-        this.generateClouds()
-      ]
-        break;
+        return [
+          <Cloud />,
+          <Cloud />
+        ]
       case "rain":
-      return [
-        this.generateClouds(),
-        this.generateClouds()
-      ]
-        break;
+        return [
+          <Cloud />,
+          <Cloud />
+        ]
       default:
-      return [
-        this.generateClouds(),
-        this.generateClouds()
-      ]
-        break;
+        return [
+          <Cloud />,
+          <Cloud />
+        ]
     }
   }
 
@@ -257,15 +147,44 @@ class Sun extends React.Component {
         case "Paris":
           return <a-entity collada-model="url(/models/eiffeltower.dae)" scale=".1 .1 .1" position="-2 6 -18" rotation="0 45 0"></a-entity>
         case "New York City":
-          return <a-entity collada-model="url(/models/empirestate.dae)" scale="2.5 2.5 2.5" position="-2 8 -18" rotation="0 45 0"></a-entity>
+          return <a-entity collada-model="url(/models/empirestate.dae)" scale="3 3 3" position="-2 9.2 -18" rotation="0 45 0"></a-entity>
         case "Denver":
           return <a-entity collada-model="url(/models/mountain.dae)" scale=".25 .25 .25" position="-10 5.5 -40" rotation="0 145 0"></a-entity>
+        case "London":
+          return <a-entity collada-model="url(/models/BigBen/model.dae)" scale=".25 .25 .25" position="-15 0 -30" rotation="0 -90 0"></a-entity>
+        case "Dubai":
+          return <a-entity collada-model="url(/models/Burj/model.dae)" scale=".08 .08 .08" position="-15 0 -30" rotation="0 -45 0"></a-entity>
+        case "Seattle":
+          return <a-entity collada-model="url(/models/spaceneedle.dae)" scale=".7 .7 .7" position="40 0 -40" rotation="0 135 0"></a-entity>
         case "Honolulu":
           return <a-entity collada-model="url(/models/cocee.dae)" scale=".025 .025 .025" position="-30 0 -55" rotation="0 145 0"></a-entity>
         default:
           return null
       }
     }
+  }
+
+  getCityPosition = (xButton) => {
+    return `${xButton} 1 -8`
+  }
+
+  makeLocationButtons = () => {
+    let xButton = -9;
+    let i = 0
+    return this.props.locations.map(city => {
+      xButton++;
+      i++;
+      return <CityButtons city={city} color={this.randomizeColor(i)} position={this.getCityPosition(xButton)} goToCity={this.goToCity}/>
+    })
+  }
+
+  randomizeColor = (i) => {
+    let colors = ['#BFDDE1', '#99C6D8', '#AAB89B', '#D7D1AC', '#E9DCD1', '#E5E4E3', '#BFDDE1', '#99C6D8', '#AAB89B', '#D7D1AC', '#E9DCD1', '#E5E4E3', '#BFDDE1', '#99C6D8', '#AAB89B', '#D7D1AC', '#E9DCD1', '#E5E4E3', '#BFDDE1', '#99C6D8', '#AAB89B', '#D7D1AC', '#E9DCD1', '#E5E4E3' ]
+    return colors[i]
+  }
+
+  goToCity = (city) => {
+    this.props.history.replace(`/${city.citySlug}`)
   }
 
   goBack = () => {
@@ -277,10 +196,10 @@ class Sun extends React.Component {
       return (
         <Entity
           primitive='a-plane'
-          color='red'
+          color='#E2A596'
           width='1'
           height='1'
-          position="4 2 -4"
+          position="-10 1 -8"
           text={{value: `Currently in \n ${this.props.city.full_city_name}: \n ${this.props.city.temp} F  \n ${this.props.city.conditions}`, align: 'center', wrapCount: 14, side: 'double'}}
           opacity='.6'>
         </Entity>
@@ -292,7 +211,6 @@ class Sun extends React.Component {
 
     return(
       <a-scene rain={this.props.city ? this.isItSnowing() : "count: 0;"}>
-      {/* <a-scene rain="dropRadius: 0.08; dropHeight: 0.1; vector: 0 -2 0; opacity: .8; splashBounce: 0.8; count: 4000; color: #E7EBF0; splashGravity: 1.6;" > */}
 
         <Entity environment={{lightPosition: this.getSunPosition(),
           preset: 'starry',
@@ -317,14 +235,25 @@ class Sun extends React.Component {
         {(this.props.city) ? this.howCloudy() : null}
         {this.showCityDetails()}
         {this.getLandmark()}
+        {(this.props.locations) ? this.makeLocationButtons() : null}
 
         <Entity events={{click: this.goBack}}
           primitive='a-plane'
           color='black'
           width='1'
           height='1'
-          position="-4 2 -4"
+          position="-11 1 -8"
           text={{value: 'Exit VR', align: 'center', wrapCount: 12, side: 'double'}}
+          opacity='.6'>
+        </Entity>
+
+        <Entity events={{click: this.goBack}}
+          primitive='a-plane'
+          color='#ECDCB9'
+          width='1'
+          height='1'
+          position="-9 1 -8"
+          text={{value: 'Teleport to:', align: 'center', wrapCount: 12, side: 'double'}}
           opacity='.6'>
         </Entity>
 
@@ -337,7 +266,10 @@ class Sun extends React.Component {
 }
 
 const mapStateToProps = state => {
-  return {whichHour: state.whichHour}
+  return {
+    whichHour: state.whichHour,
+    locations: state.locations
+  }
 }
 
 export default compose(withRouter, connect(mapStateToProps))(Sun)
