@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import LocationCard from './LocationCard'
 import LocationDetail from './LocationDetail'
 import '../styles/LocationPage.css'
+// import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
 const LocationPage = props => {
@@ -33,7 +34,6 @@ const LocationPage = props => {
 
   return (
     <div id="location-page">
-
       {detailVsCards()}
     </div>
   )

@@ -7,12 +7,19 @@ import { Divider} from 'antd'
 const TitleCard = props => {
   let [default_location] = props.locations
 
+  const getTheTime = () => {
+    let currentTime = Date.now()
+    let useThisTime = new Date(currentTime).toTimeString().slice(0,5)
+    return useThisTime
+  }
+
+
   const showCityDetails = () => {
     if (default_location){
       return (
         <div>
           <h3>{default_location.full_city_name}</h3>
-          <h3>{default_location.date}, {default_location.time} </h3>
+          <h3>{default_location.date}, {getTheTime()} </h3>
         </div>
       )
     }

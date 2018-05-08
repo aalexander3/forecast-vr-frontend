@@ -46,7 +46,7 @@ export const fixOffset = (time, offset) => {
 
 export const getVars = (json, location) => {
   let {time, temperature, summary: shortSummary, icon, windSpeed, cloudCover, humidity} = json.currently
-  let {summary: dailySummary} = json.daily
+  let {summary: dailySummary, data} = json.daily
   let {sunriseTime, sunsetTime, temperatureLow, temperatureHigh} = json.daily.data[0]
 
   let newSunset = fixOffset(sunsetTime, json.offset)
@@ -61,6 +61,7 @@ export const getVars = (json, location) => {
 
   let citySlug = location.full_city_name.toLowerCase().replace(/, | /gi, "-")
   let hourly = json.hourly.data
+
 
   return {
     full_city_name: location.full_city_name,
@@ -81,7 +82,8 @@ export const getVars = (json, location) => {
     hourly: hourly,
     icon: icon,
     cloudCover: cloudCover,
-    offset: json.offset
+    offset: json.offset,
+    daily: data
   }
 }
 

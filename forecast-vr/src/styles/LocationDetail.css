@@ -17,12 +17,47 @@
   display: inline-block;
   height: stretch;
   z-index: 10;
-  background-color: #E8DED5;
+  background-color: #91B587;
+  /* background: linear-gradient(#e66465, #9198e5); */
   opacity: .8;
-  padding: 5% 2%;
-  overflow: auto;
+  padding: 2% 3%;
+  text-align: center;
 }
 
 .detail-text {
-  margin: -3rem 2rem 2rem 2rem;
+  margin: 0rem 2rem 2rem 2rem;
+}
+
+.cool-map {
+  width: 95%;
+  height: 25rem;
+  margin: 2%;
+  border: none;
+  border-radius: 10px;
+}
+
+.current-conditions {
+  display: inline-block;
+  border: white solid 2px;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 80%;
+  margin: 0% 10%;
+  text-align: center;
+  background: linear-gradient(#ECE9E6, #EBECEF);
+}
+
+.temperatures {
+  display: inline-grid;
+  padding: 2%;
+  vertical-align: top;
+}
+
+.thermometer {
+  height: 10rem;
+  display: inline-flex;
+  width: 19px;
+  border: black ridge 1px;
+  background: linear-gradient(#fdbb2d, #B21F1D, #1a2a6c);
+  border-radius: 20px;
 }

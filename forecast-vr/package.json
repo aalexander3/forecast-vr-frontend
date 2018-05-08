@@ -15,6 +15,7 @@
     "babel-polyfill": "^6.26.0",
     "dotenv": "^5.0.1",
     "react": "^16.3.2",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.3.2",
     "react-emojione": "^5.0.0",
     "react-redux": "^5.0.7",

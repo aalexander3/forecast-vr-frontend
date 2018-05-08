@@ -171,6 +171,7 @@ class Sun extends React.Component {
   makeLocationButtons = () => {
     let xButton = -9;
     let i = 0
+
     return this.props.locations.map(city => {
       xButton++;
       i++;
@@ -217,16 +218,12 @@ class Sun extends React.Component {
           skyType: 'atmosphere',
           seed: 1,
           fog: 0.2,
+          shadow: true,
           ground: 'flat',
           groundYScale: 6.31,
           groundColor: this.getGroundColor1(),
           groundColor2: this.getGroundColor2(),
           groundTexture: 'squares',
-          dressing: 'towers',
-          dressingAmount: 50,
-          dressingColor: '#797278',
-          dressingScale: 5,
-          dressingVariance: '.8 2 1',
           grid: 'none'}}>
         </Entity>
 
