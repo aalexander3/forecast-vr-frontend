@@ -29,20 +29,20 @@
 }
 
 .cool-map {
-  width: 95%;
-  height: 25rem;
-  margin: 2%;
+  width: 88%;
+  height: 24rem;
+  /* margin: 2%; */
   border: none;
   border-radius: 10px;
 }
 
 .current-conditions {
   display: inline-block;
-  border: white solid 2px;
+  /* border: white solid 2px; */
   border-radius: 10px;
   padding: 1rem;
-  width: 80%;
-  margin: 0% 10%;
+  width: 95%;
+  height: 24rem;
   text-align: center;
   background: linear-gradient(#ECE9E6, #EBECEF);
 }
@@ -51,6 +51,8 @@
   display: inline-grid;
   padding: 2%;
   vertical-align: top;
+  float: left;
+  margin-top: 5%;
 }
 
 .thermometer {
@@ -60,4 +62,51 @@
   border: black ridge 1px;
   background: linear-gradient(#fdbb2d, #B21F1D, #1a2a6c);
   border-radius: 20px;
+  float: left;
+  margin: 2% 2% 2% 10%;
+}
+
+.this-week {
+  display: inline-flex;
+  overflow-x: scroll;
+}
+
+.sun-riser {
+  display: inline-block;;
+  transform: scale(1.5);
+  border-top: dotted black 3px;
+  width: 20%;
+  height: 8rem;
+  padding: 2%;
+  margin: 6% 6% 0 10%;
+  border-radius: 100px;
+}
+
+.sun-icon {
+  width: 2rem;
+  height: 2rem;
+  margin: .3rem;
+}
+
+.quick-weathers {
+  display: inline-block;
+  width: 50%;
+}
+
+.little-icons {
+  height: 4rem;
+  width: 6rem;
+  opacity: .8;
+  border-radius: 10px;
+  margin: 3%;
+  color: black;
+  display: inline-grid;
+}
+
+.little-icons h3 {
+  font-weight: 200;
+}
+
+.little-icons h4 {
+  font-weight: 600;
 }

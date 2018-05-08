@@ -45,7 +45,7 @@ export const fixOffset = (time, offset) => {
 }
 
 export const getVars = (json, location) => {
-  let {time, temperature, summary: shortSummary, icon, windSpeed, cloudCover, humidity} = json.currently
+  let {time, temperature, summary: shortSummary, icon, windSpeed, cloudCover, humidity, dewPoint, precipProbability, uvIndex} = json.currently
   let {summary: dailySummary, data} = json.daily
   let {sunriseTime, sunsetTime, temperatureLow, temperatureHigh} = json.daily.data[0]
 
@@ -72,18 +72,21 @@ export const getVars = (json, location) => {
     temp: temperature,
     high: temperatureHigh,
     low: temperatureLow,
-    humidity: humidity,
     conditions: shortSummary,
-    windSpeed: windSpeed,
     dailySummary: dailySummary,
     sunriseTime: sunrise,
     sunsetTime: sunset,
     citySlug: citySlug,
     hourly: hourly,
     icon: icon,
-    cloudCover: cloudCover,
     offset: json.offset,
-    daily: data
+    daily: data,
+    humidity: humidity,
+    windSpeed: windSpeed,
+    cloudCover: cloudCover,
+    dewPoint: dewPoint,
+    precipProbability: precipProbability,
+    uvIndex: uvIndex
   }
 }
 
