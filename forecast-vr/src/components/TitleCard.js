@@ -25,9 +25,19 @@ const TitleCard = props => {
     }
   }
 
+  const changeToImage = (e) => {
+    e.target.style.color = '#F9C651'
+  }
+
+  const changeToBlack = (e) => {
+    e.target.style.color = '#000000'
+  }
+
   return(
     <div id="title-card">
-      <h1 className='title-title'>F{emojify(':sunny:')}RECAST {emojify(':cloud_tornado:')}R</h1>
+      <div onMouseOver={changeToImage} onMouseOut={changeToBlack}>
+        <h1 className='title-title'>F{emojify(':sunny:')}RECAST VR</h1>
+      </div>
 
       <h3>Tomorrow's view on today's weather</h3>
       <br/><br/>

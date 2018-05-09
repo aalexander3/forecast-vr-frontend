@@ -34,6 +34,7 @@ const LocationPage = props => {
 
   return (
     <div id="location-page">
+      {(props.locations.length === 0) ? <img className='sunny-spinny' src='https://img.clipartxtras.com/2866cdc5bd6ecce5d9e50cce922444b1_free-sunshine-clipart-pictures-12-clipartix-free-sun-sunglasses-clipart_263-264.png' alt='Spinning sun placeholder' /> : null }
       {detailVsCards()}
     </div>
   )

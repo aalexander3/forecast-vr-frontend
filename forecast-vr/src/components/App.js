@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/App.css';
 import LandingPage from './LandingPage'
 import Sun from './Sun'
+import Mars from './Mars'
 import { bindActionCreators, compose } from 'redux';
 import { newFetchLocation, batchFetch, getVars } from  '../actions/actions';
 import { connect } from 'react-redux';
@@ -58,6 +59,7 @@ class App extends Component {
           <Route path="/denver" render={() => <Sun city={this.findLocation("Denver")} /> } />
           <Route path="/mexico-city" render={() => <Sun city={this.findLocation("Mexico City")} /> } />
           <Route path="/cayambe" render={() => <Sun city={this.findLocation("Cayambe")} /> } />
+          <Route path="/mars" render={() => <Mars /> } />
 
         </Switch>
       </div>

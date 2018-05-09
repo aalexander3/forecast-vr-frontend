@@ -83,10 +83,14 @@ class Sun extends React.Component {
       case "snow": case "sleet":
         return [
           <Cloud />,
+          <Cloud />,
+          <Cloud />,
           <Cloud />
         ]
       case "rain":
         return [
+          <Cloud />,
+          <Cloud />,
           <Cloud />,
           <Cloud />
         ]
@@ -157,7 +161,15 @@ class Sun extends React.Component {
         case "Seattle":
           return <a-entity collada-model="url(/models/spaceneedle.dae)" scale=".7 .7 .7" position="40 0 -40" rotation="0 135 0"></a-entity>
         case "Honolulu":
-          return <a-entity collada-model="url(/models/cocee.dae)" scale=".025 .025 .025" position="-30 0 -55" rotation="0 145 0"></a-entity>
+          return <a-entity collada-model="url(/models/coconut.dae)" scale="50 50 50" position="-30 0 -55" rotation="0 145 0"></a-entity>
+        case "Sao Paulo":
+          return <a-entity collada-model="url(/models/SaoPaulo/model.dae)" scale=".5 .5 .5" position="-30 0 -55" rotation="0 60 0"></a-entity>
+        case "Istanbul":
+          return <a-entity collada-model="url(/models/Istanbul/model.dae)" scale=".5 .5 .5" position="-30 0 -55" rotation="0 60 0"></a-entity>
+        case "Jakarta":
+          return <a-entity collada-model="url(/models/jakarta.dae)" scale=".5 .5 .5" position="-30 0 -55" rotation="0 60 0"></a-entity>
+        case "Cairo":
+          return <a-entity collada-model="url(/models/sphinx/model.dae)" scale="10 10 10" position="-30 0 -55" rotation="0 30 0"></a-entity>
         default:
           return null
       }
@@ -190,6 +202,10 @@ class Sun extends React.Component {
 
   goBack = () => {
     this.props.history.replace('/')
+  }
+
+  toMars = () => {
+    this.props.history.replace('/mars')
   }
 
   showCityDetails = () => {
@@ -251,6 +267,16 @@ class Sun extends React.Component {
           height='1'
           position="-9 1 -8"
           text={{value: 'Teleport to:', align: 'center', wrapCount: 12, side: 'double'}}
+          opacity='.6'>
+        </Entity>
+
+        <Entity events={{click: this.toMars}}
+          primitive='a-plane'
+          color='#E9DCD1'
+          width='1'
+          height='1'
+          position="13 1 -8"
+          text={{value: 'Mars', align: 'center', wrapCount: 12, side: 'double'}}
           opacity='.6'>
         </Entity>
 

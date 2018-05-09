@@ -37,3 +37,18 @@
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }
+
+
+.sunny-spinny {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  animation: App-logo-spin infinite 20s linear;
+  height: 120%;
+  width: auto;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

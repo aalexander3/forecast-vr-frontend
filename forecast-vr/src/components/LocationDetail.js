@@ -46,11 +46,11 @@ class LocationDetail extends React.Component {
                 </div>
                 <div className='quick-weathers'>
                   <div className='little-icons' >
-                    <h3>{humidity * 100} %</h3>
+                    <h3>{humidity * 100}% </h3>
                     <h4>Humidity</h4>
                   </div>
                   <div className='little-icons' >
-                    <h3>{precipProbability * 100} %</h3>
+                    <h3>{precipProbability * 100}% </h3>
                     <h4>Precipitation</h4>
                   </div>
                   <div className='little-icons' >
@@ -75,7 +75,7 @@ class LocationDetail extends React.Component {
                     <h4>UV Index</h4>
                   </div>
                   <div className='little-icons' >
-                    <h3>{cloudCover} okta</h3>
+                    <h3>{cloudCover * 100}% </h3>
                     <h4>Cloud Cover</h4>
                   </div>
                 </div>
