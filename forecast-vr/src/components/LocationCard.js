@@ -62,7 +62,7 @@ const LocationCard = (props) => {
   return (
     <div className='location-card'>
       <div className='close-icon' onClick={sendDelete}><Icon type="close-square-o" /></div>
-      <div className='city-title'><h3 className='card-city-name' onClick={selectLocation}>{full_city_name.toUpperCase()}</h3></div>
+      <div className='city-title' onClick={selectLocation}><h3 className='card-city-name' >{full_city_name.toUpperCase()}</h3></div>
       <h4 className='conditions'> {parseInt(temperature)}&#176;F - {summary} </h4>
       {renderIFrame()}
       <br/>

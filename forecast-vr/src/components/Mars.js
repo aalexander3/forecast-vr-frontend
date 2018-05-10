@@ -100,7 +100,7 @@ class Sun extends React.Component {
           width='1'
           height='1'
           position="-10 1 -8"
-          text={{value: `Currently on \n Mars: \n Clear`, align: 'center', wrapCount: 14, side: 'double'}}
+          text={{value: `Currently on \n Mars: \n Dusty \n 10 F`,  align: 'center', wrapCount: 14, side: 'double'}}
           opacity='.6'>
         </Entity>
       )
