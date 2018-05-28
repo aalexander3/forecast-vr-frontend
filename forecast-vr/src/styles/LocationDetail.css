@@ -1,7 +1,6 @@
 .close-icon-detail {
   position: absolute;
   top: 2%;
-  transform: scale(1.2);
 }
 
 .close-icon-detail:hover {
@@ -24,25 +23,23 @@
   text-align: center;
 }
 
-.detail-text {
-  margin: 0rem 2rem 2rem 2rem;
+.detail-text h4 {
+  font-size: 13px;
 }
 
 .cool-map {
-  width: 88%;
-  height: 24rem;
-  /* margin: 2%; */
+  width: 100%;
+  height: 22rem;
   border: none;
   border-radius: 10px;
 }
 
 .current-conditions {
   display: inline-block;
-  /* border: white solid 2px; */
   border-radius: 10px;
   padding: 1rem;
-  width: 95%;
-  height: 24rem;
+  width: 100%;
+  height: 20rem;
   text-align: center;
   background: linear-gradient(#ECE9E6, #EBECEF);
 }
@@ -56,7 +53,7 @@
 }
 
 .thermometer {
-  height: 10rem;
+  height: 8rem;
   display: inline-flex;
   width: 19px;
   border: black ridge 1px;
@@ -69,6 +66,7 @@
 .this-week {
   display: inline-flex;
   overflow-x: scroll;
+  width: 100%;
 }
 
 .sun-riser {

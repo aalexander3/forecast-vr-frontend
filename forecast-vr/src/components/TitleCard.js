@@ -40,7 +40,7 @@ const TitleCard = props => {
       </div>
 
       <h3>Tomorrow's view on today's weather</h3>
-      <br/><br/>
+      <br/>
       {showCityDetails()}
     </div>
   )

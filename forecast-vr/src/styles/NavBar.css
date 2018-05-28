@@ -1,6 +1,6 @@
 
 #nav-bar {
-  width: 28%;
+  width: 34%;
   display: inline-block;
   /* border-right: #858B9F solid 5px; */
   height: stretch;
@@ -9,5 +9,5 @@
 }
 
 #bottom-nav {
-  margin: 10%;
+  margin: 6%;
 }

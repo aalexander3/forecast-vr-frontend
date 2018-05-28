@@ -1,6 +1,6 @@
 .small-detail-card {
-  height: 6rem;
-  width: 6rem;
+  height: 5rem;
+  width: 5rem;
   background-color: black;
   opacity: .8;
   border-radius: 10px;
@@ -14,13 +14,13 @@
 
 .small-detail-card p {
   color: white;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 8px;
 }
 
 .weather-icon {
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   filter: invert(100%);
   margin: .3rem;
 }

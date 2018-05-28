@@ -1,19 +1,19 @@
 #location-page {
   position: relative;
   display: inline-block;
-  width: 72%;
+  width: 66%;
   vertical-align: top;
   height: -webkit-fill-available;
   overflow-y: scroll;
 }
 
 .location-cards {
-  margin: 2%;
+  margin: 2% 1%;
 }
 
 #selected-card {
-  margin: 18% 0 0 10%;
-  transform: scale(1.2);
+  margin: 18% 0 0 2%;
+  transform: scale(1);
 }
 
 #selected-card .close-icon {
