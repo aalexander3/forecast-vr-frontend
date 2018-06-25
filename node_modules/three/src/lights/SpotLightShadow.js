@@ -1,6 +1,6 @@
-import { LightShadow } from './LightShadow.js';
-import { _Math } from '../math/Math.js';
-import { PerspectiveCamera } from '../cameras/PerspectiveCamera.js';
+import { LightShadow } from './LightShadow';
+import { _Math } from '../math/Math';
+import { PerspectiveCamera } from '../cameras/PerspectiveCamera';
 
 /**
  * @author mrdoob / http://mrdoob.com/

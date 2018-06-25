@@ -1,4 +1,4 @@
-import { Line } from './Line.js';
+import { Line } from './Line';
 
 /**
  * @author mgreter / http://github.com/mgreter

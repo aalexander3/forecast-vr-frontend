@@ -856,9 +856,9 @@
 					event.preventDefault();
 					event.stopPropagation();
 
-					scope.axis = intersect.object.name;
-
 					scope.dispatchEvent( mouseDownEvent );
+
+					scope.axis = intersect.object.name;
 
 					scope.update();
 

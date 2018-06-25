@@ -1,4 +1,4 @@
-import { MeshPhongMaterial } from './MeshPhongMaterial.js';
+import { MeshPhongMaterial } from './MeshPhongMaterial';
 
 /**
  * @author takahirox / http://github.com/takahirox

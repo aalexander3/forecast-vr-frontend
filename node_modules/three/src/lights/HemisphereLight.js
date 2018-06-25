@@ -1,6 +1,6 @@
-import { Light } from './Light.js';
-import { Color } from '../math/Color.js';
-import { Object3D } from '../core/Object3D.js';
+import { Light } from './Light';
+import { Color } from '../math/Color';
+import { Object3D } from '../core/Object3D';
 
 /**
  * @author alteredq / http://alteredqualia.com/

@@ -1,5 +1,5 @@
-import { LightShadow } from './LightShadow.js';
-import { OrthographicCamera } from '../cameras/OrthographicCamera.js';
+import { LightShadow } from './LightShadow';
+import { OrthographicCamera } from '../cameras/OrthographicCamera';
 
 /**
  * @author mrdoob / http://mrdoob.com/

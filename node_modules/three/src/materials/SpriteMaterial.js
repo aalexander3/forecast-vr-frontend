@@ -1,5 +1,5 @@
-import { Material } from './Material.js';
-import { Color } from '../math/Color.js';
+import { Material } from './Material';
+import { Color } from '../math/Color';
 
 /**
  * @author alteredq / http://alteredqualia.com/

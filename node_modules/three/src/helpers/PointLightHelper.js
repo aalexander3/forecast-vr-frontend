@@ -3,9 +3,9 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-import { Mesh } from '../objects/Mesh.js';
-import { MeshBasicMaterial } from '../materials/MeshBasicMaterial.js';
-import { SphereBufferGeometry } from '../geometries/SphereGeometry.js';
+import { Mesh } from '../objects/Mesh';
+import { MeshBasicMaterial } from '../materials/MeshBasicMaterial';
+import { SphereBufferGeometry } from '../geometries/SphereGeometry';
 
 function PointLightHelper( light, sphereSize, color ) {
 

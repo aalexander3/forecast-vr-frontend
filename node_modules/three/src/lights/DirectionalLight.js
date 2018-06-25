@@ -1,6 +1,6 @@
-import { Light } from './Light.js';
-import { DirectionalLightShadow } from './DirectionalLightShadow.js';
-import { Object3D } from '../core/Object3D.js';
+import { Light } from './Light';
+import { DirectionalLightShadow } from './DirectionalLightShadow';
+import { Object3D } from '../core/Object3D';
 
 /**
  * @author mrdoob / http://mrdoob.com/

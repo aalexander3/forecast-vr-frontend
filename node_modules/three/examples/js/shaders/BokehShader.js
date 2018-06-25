@@ -70,7 +70,7 @@ THREE.BokehShader = {
 		"	#if PERSPECTIVE_CAMERA == 1",
 		"	return perspectiveDepthToViewZ( depth, nearClip, farClip );",
 		"	#else",
-		"	return orthographicDepthToViewZ( depth, nearClip, farClip );",
+		"	return orthoDepthToViewZ( depth, nearClip, farClip );",
 		"	#endif",
 		"}",
 		

@@ -29,8 +29,6 @@ THREE.LuminosityShader = {
 
 	fragmentShader: [
 
-		"#include <common>",
-
 		"uniform sampler2D tDiffuse;",
 
 		"varying vec2 vUv;",
@@ -39,9 +37,11 @@ THREE.LuminosityShader = {
 
 			"vec4 texel = texture2D( tDiffuse, vUv );",
 
-			"float l = linearToRelativeLuminance( texel.rgb );",
+			"vec3 luma = vec3( 0.299, 0.587, 0.114 );",
 
-			"gl_FragColor = vec4( l, l, l, texel.w );",
+			"float v = dot( texel.xyz, luma );",
+
+			"gl_FragColor = vec4( v, v, v, texel.w );",
 
 		"}"
 

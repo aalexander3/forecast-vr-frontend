@@ -1,4 +1,4 @@
-import { MeshStandardMaterial } from './MeshStandardMaterial.js';
+import { MeshStandardMaterial } from './MeshStandardMaterial';
 
 /**
  * @author WestLangley / http://github.com/WestLangley
