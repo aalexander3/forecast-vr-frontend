@@ -14,6 +14,12 @@ body {
   color: white;
 }
 
+.buttons:hover, .buttons:focus, .buttons:active {
+  background-color: white;
+  border: solid #537770 .25px;
+  color: #537770;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;

@@ -125,8 +125,6 @@ function locationReducer(state = [], action){
   switch (action.type) {
     case 'ADD_LOCATION':
       return [...state, action.location]
-    case 'START_ADD_LOCATION_REQUEST':
-      return [...state]
     case "BATCH_LOCATIONS":
       return action.locations
     case 'DELETE_LOCATION':
@@ -153,7 +151,11 @@ function selectReducer(state = null, action){
 function cityReducer(state = [], action){
   switch (action.type) {
     case 'ADD_CITY':
-      return [...state, action.location]
+      if (state.includes(action.location)){
+        return [...state]
+      } else {
+          return [...state, action.location]
+      }
     case 'DELETE_CITY':
       let index = state.indexOf(action.location)
       let firstPart = [...state.slice(0, index)]
