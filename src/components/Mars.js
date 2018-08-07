@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux'
 import { fixOffset } from '../actions/actions.js'
 import CityButtons from './CityButtons'
-import Cloud from './Cloud'
 // aframe imports
 import 'aframe';
 import 'aframe-animation-component';

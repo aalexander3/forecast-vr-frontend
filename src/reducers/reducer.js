@@ -108,11 +108,11 @@ let defaultLocations = [
     }
 ]
 
-let defaultCities = [{
-  full_city_name: "New York City",
-  latitude: 40.71,
-  longitude: -74.00,
-}]
+// let defaultCities = [{
+//   full_city_name: "New York City",
+//   latitude: 40.71,
+//   longitude: -74.00,
+// }]
 
 function defaultReducer(state = defaultLocations, action){
   switch (action.type) {

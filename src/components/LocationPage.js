@@ -12,10 +12,6 @@ const LocationPage = props => {
     return props.locations.map(city => <LocationCard key={city.full_city_name} city={city} />)
   }
 
-  // const locationDiv = () => {
-  //   return <div className='location-cards'>{makeLocationCards()}</div>
-  // }
-
   const makeSelectedCard = () => {
     return <div id='selected-card'><LocationCard key={props.selectedLocation.full_city_name} city={props.selectedLocation}/></div>
   }
@@ -33,7 +29,7 @@ const LocationPage = props => {
   }
 
   return (
-    <div id="location-page">
+    <div id="location-page" style={(props.locations.length === 0) ? {overflowY: 'hidden'} : {overflowY: 'scroll'}}>
       {(props.locations.length === 0) ? <img className='sunny-spinny' src='https://img.clipartxtras.com/2866cdc5bd6ecce5d9e50cce922444b1_free-sunshine-clipart-pictures-12-clipartix-free-sun-sunglasses-clipart_263-264.png' alt='Spinning sun placeholder' /> : null }
       {detailVsCards()}
     </div>

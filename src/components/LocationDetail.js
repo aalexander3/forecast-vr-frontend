@@ -5,7 +5,7 @@ import { deleteDetail } from '../actions/actions.js'
 import { withRouter } from 'react-router-dom'
 import SmallDetails from './SmallDetails'
 import '../styles/LocationDetail.css'
-import { Icon, Button, Tabs  } from 'antd'
+import { Icon, Tabs  } from 'antd'
 
 const TabPane = Tabs.TabPane
 
@@ -24,7 +24,7 @@ class LocationDetail extends React.Component {
 
   render(){
 
-    let {full_city_name, humidity, cloudCover, dewPoint, conditions, precipProbability, uvIndex, date, time, temp, windSpeed, dailySummary, sunriseTime, sunsetTime, latitude, longitude, citySlug, high, low} = this.props.selection
+    let {full_city_name, humidity, cloudCover, dewPoint, precipProbability, uvIndex, date, time, temp, windSpeed, dailySummary, sunriseTime, sunsetTime, latitude, longitude, high, low} = this.props.selection
 
     return (
       <div id="location-detail">
@@ -65,7 +65,7 @@ class LocationDetail extends React.Component {
               </TabPane>
               <TabPane tab="Sun Stats" key="2">
                 <div className='sun-riser'>
-                  <img className="sun-icon" src='https://image.flaticon.com/icons/svg/131/131042.svg' />
+                  <img className="sun-icon" alt="sun-icon" src='https://image.flaticon.com/icons/svg/131/131042.svg' />
                   <h4 style={{float: 'left', top: '50%', left: '-12%', position: 'absolute'}}> {sunriseTime} </h4>
                   <h4 style={{float: 'right', top: '50%', right: '-12%', position: 'absolute'}}> {sunsetTime} </h4>
                 </div>

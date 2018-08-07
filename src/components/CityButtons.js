@@ -11,7 +11,6 @@ class CityButtons extends React.Component {
   }
 
   render(){
-    console.log(this.props);
 
     return(
         <Entity events={{click: this.pushCity}}

@@ -2,14 +2,12 @@ import React from 'react'
 import '../styles/SmallDetails.css'
 
 const SmallDetails = props => {
-  let {time, temperatureHigh, temperatureLow, icon} = props.day
-  console.log(props.day);
+  let {temperatureHigh, temperatureLow, icon} = props.day
 
   const whatsTheDay = () => {
     let date = new Date(props.day.time * 1000)
     return date.toDateString().slice(0,3)
   }
-
 
   const getImageSrc = () => {
     switch (icon) {
@@ -34,7 +32,7 @@ const SmallDetails = props => {
 
   return (
     <div className='small-detail-card'>
-      <img className="weather-icon" src={getImageSrc()} />
+      <img className="weather-icon" alt={icon} src={getImageSrc()} />
       <p> {whatsTheDay()} </p>
       <p> {temperatureHigh} / {temperatureLow} </p>
     </div>

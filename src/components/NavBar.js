@@ -4,6 +4,7 @@ import TitleCard from './TitleCard'
 // import SearchBar from './SearchBar'
 import LocationButtons from './LocationButtons'
 import Incrementer from './Incrementer'
+import Footer from './Footer'
 
 const NavBar = () => {
   return(
@@ -15,6 +16,7 @@ const NavBar = () => {
         <br/>
         <Incrementer />
       </div>
+      <Footer />
     </div>
   )
 }

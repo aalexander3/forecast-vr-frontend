@@ -10,9 +10,8 @@ import { image_object } from '../constants/image_object'
 
 
 const LocationCard = (props) => {
-  console.log(props);
 
-  let {full_city_name, conditions, time, date, temp, citySlug, low, high, hourly, offset} = props.city
+  let {full_city_name, time, citySlug, hourly, offset} = props.city
   let {time: hourlyTime, summary, temperature, icon: hourlyIcon} = hourly[props.whichHour]
 
   let timeToUse = fixOffset(hourlyTime, offset).toTimeString()

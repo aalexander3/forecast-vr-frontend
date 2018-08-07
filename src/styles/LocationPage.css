@@ -3,8 +3,8 @@
   display: inline-block;
   width: 66%;
   vertical-align: top;
-  height: -webkit-fill-available;
-  overflow-y: scroll;
+  height: stretch;
+  overflow-x: hidden;
 }
 
 .location-cards {
@@ -37,7 +37,6 @@
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }
-
 
 .sunny-spinny {
   position: absolute;

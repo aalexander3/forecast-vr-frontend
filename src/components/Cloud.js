@@ -4,7 +4,6 @@ import React from 'react'
 import 'aframe';
 import 'aframe-animation-component';
 import 'babel-polyfill';
-import {Entity} from 'aframe-react';
 
 class Cloud extends React.Component {
 
