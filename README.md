@@ -1,5 +1,5 @@
 # Forecast VR
-Forecast VR is a web app built by [Arren Alexander]. The app renders a virtual visual representation of current conditions of 21 major cities around the world. The application uses the [Dark Sky API] for its source of weather information. 
+Forecast VR is a react and redux web app built by [Arren Alexander]. The app renders a virtual reality representation of current conditions of 21 major cities around the world. The application uses the [Dark Sky API] for its source of weather information. 
 
 ## View
 Forcast VR is on heroku! You can view the deployed app [here]!
@@ -13,4 +13,4 @@ Forcast VR is on heroku! You can view the deployed app [here]!
 
 [here]: https://forecast-vr.herokuapp.com
 [Dark Sky API]: https://darksky.net/dev/docs
-[Arren Alexander]: https://github.com/aalexander3/libros
+[Arren Alexander]: https://github.com/aalexander3
