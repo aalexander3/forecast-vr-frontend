@@ -30,57 +30,45 @@ class LocationDetail extends React.Component {
       <div id="location-detail">
         <div className='close-icon-detail' onClick={this.sendDelete}><Icon type="close-square-o" /></div>
         <div className='detail-text'>
-          <h1 style={{fontSize: '40px', lineHeight: '20px'}}>{full_city_name.toUpperCase()}</h1>
+          <h1 style={{lineHeight: '20px'}}>{full_city_name.toUpperCase()}</h1>
           <h4>{date}, {time}</h4>
           <h4>{dailySummary}</h4>
           <div className='current-conditions'>
             <div className='this-week'>
               {this.forecastThisWeek()}
             </div>
-            <Tabs defaultActiveKey="1">
-              <TabPane tab="Today's Temps" key="1">
-                <div className="thermometer"></div>
-                <div className='temperatures'>
-                  <h2>{temp}&#176;F </h2>
-                  <h4>{high} / {low}</h4>
+
+              <div className="thermometer"></div>
+              <div className='temperatures'>
+                <h2>{temp}&#176;F </h2>
+                <h4>{high} / {low}</h4>
+              </div>
+              <div className='quick-weathers'>
+                <div className='little-icons' >
+                  <h3>{humidity * 100}% </h3>
+                  <h4>Humidity</h4>
                 </div>
-                <div className='quick-weathers'>
-                  <div className='little-icons' >
-                    <h3>{humidity * 100}% </h3>
-                    <h4>Humidity</h4>
-                  </div>
-                  <div className='little-icons' >
-                    <h3>{precipProbability * 100}% </h3>
-                    <h4>Precipitation</h4>
-                  </div>
-                  <div className='little-icons' >
-                    <h3>{dewPoint}&#176; </h3>
-                    <h4>Dew Point</h4>
-                  </div>
-                  <div className='little-icons' >
-                    <h3>{windSpeed} MPH</h3>
-                    <h4>Wind Speed</h4>
-                  </div>
+                <div className='little-icons' >
+                  <h3>{precipProbability * 100}% </h3>
+                  <h4>Precipitation</h4>
                 </div>
-              </TabPane>
-              <TabPane tab="Sun Stats" key="2">
-                <div className='sun-riser'>
-                  <img className="sun-icon" alt="sun-icon" src='https://image.flaticon.com/icons/svg/131/131042.svg' />
-                  <h4 style={{float: 'left', top: '50%', left: '-12%', position: 'absolute'}}> {sunriseTime} </h4>
-                  <h4 style={{float: 'right', top: '50%', right: '-12%', position: 'absolute'}}> {sunsetTime} </h4>
+                <div className='little-icons' >
+                  <h3>{dewPoint}&#176; </h3>
+                  <h4>Dew Point</h4>
                 </div>
-                <div className='quick-weathers'>
-                  <div className='little-icons' >
-                    <h3>{uvIndex} </h3>
-                    <h4>UV Index</h4>
-                  </div>
-                  <div className='little-icons' >
-                    <h3>{cloudCover * 100}% </h3>
-                    <h4>Cloud Cover</h4>
-                  </div>
+                <div className='little-icons' >
+                  <h3>{windSpeed} MPH</h3>
+                  <h4>Wind Speed</h4>
                 </div>
-              </TabPane>
-            </Tabs>
+                <div className='little-icons' >
+                  <h3>{uvIndex} </h3>
+                  <h4>UV Index</h4>
+                </div>
+                <div className='little-icons' >
+                  <h3>{cloudCover * 100}% </h3>
+                  <h4>Cloud Cover</h4>
+                </div>
+              </div>
           </div>
         </div>
         <iframe className='cool-map' seamless title="cool-map" src={`https://maps.darksky.net/@temperature,${latitude},${longitude},5.js?embed=true&timeControl=false&fieldControl=true&defaultField=temperature&defaultUnits=_f`}>

@@ -1,11 +1,32 @@
-#nav-bar {
-  width: 34%;
-  display: inline-block;
-  height: stretch;
-  background-color: #E6E7EB;
-  opacity: .8;
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+  #nav-bar {
+    display: inline-block;
+    height: auto;
+    background-color: #E6E7EB;
+    opacity: .8;
+  }
+
+  #bottom-nav {
+    margin: 3%;
+  }
+
+  #bottom-nav h1 {
+    font-size: 1.5rem;
+  }
 }
 
-#bottom-nav {
-  margin: 5%;
+@media only screen  and (min-width : 1224px) {
+
+  #nav-bar {
+    width: 34%;
+    display: inline-block;
+    height: stretch;
+    background-color: #E6E7EB;
+    opacity: .8;
+  }
+
+  #bottom-nav {
+    margin: 5%;
+  }
+
 }

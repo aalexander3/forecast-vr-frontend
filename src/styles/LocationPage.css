@@ -1,7 +1,6 @@
 #location-page {
   position: relative;
   display: inline-block;
-  width: 66%;
   vertical-align: top;
   height: stretch;
   overflow-x: hidden;
@@ -11,16 +10,13 @@
   margin: 2% 1%;
 }
 
-#selected-card {
-  margin: 18% 0 0 2%;
-  transform: scale(1);
-}
+
 
 #selected-card .close-icon {
   display: none;
 }
 
-.location-page-transitions-enter {
+/* .location-page-transitions-enter {
   opacity: 0.01;
 }
 
@@ -36,18 +32,52 @@
 .location-page-transitions-leave.location-page-transitions-leave-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
+} */
+
+@media only screen and (min-width : 320px) and (max-width : 1224px) {
+    .sunny-spinny {
+      display: none;
+    }
+
+    #location-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      vertical-align: top;
+      height: auto;
+    }
+
+    #selected-card {
+      
+    }
 }
 
-.sunny-spinny {
-  position: absolute;
-  top: 30%;
-  left: 30%;
-  animation: App-logo-spin infinite 20s linear;
-  height: 120%;
-  width: auto;
-}
+@media only screen  and (min-width : 1224px) {
+  #location-page {
+    position: relative;
+    display: inline-block;
+    width: 66%;
+    vertical-align: top;
+    height: stretch;
+    overflow-x: hidden;
+  }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  #selected-card {
+    margin: 18% 0 0 2%;
+  }
+
+  .sunny-spinny {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    animation: App-logo-spin infinite 20s linear;
+    height: 120%;
+    width: auto;
+  }
+
+  @keyframes App-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
 }

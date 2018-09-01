@@ -4,10 +4,6 @@ body {
   font-family: 'Montserrat';
 }
 
-.App {
-  text-align: center;
-}
-
 .buttons {
   background-color: #537770;
   border: solid #537770 .25px;
@@ -20,27 +16,18 @@ body {
   color: #537770;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+@media only screen and (min-width : 320px) and (max-width : 1224px) {
+  .buttons {
+    margin: .25rem .35rem;
+    width: 6.5rem;
+    font-size: 10px;
+  }
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
 
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@media only screen  and (min-width : 1224px) {
+  .buttons {
+    margin: .25rem .45rem;
+    width: 8rem;
+  }
 }

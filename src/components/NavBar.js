@@ -13,7 +13,6 @@ const NavBar = () => {
       <div id='bottom-nav'>
         <h1>What's it like in... </h1>
         <LocationButtons />
-        <br/>
         <Incrementer />
       </div>
       <Footer />

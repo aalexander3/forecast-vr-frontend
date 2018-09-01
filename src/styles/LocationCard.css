@@ -1,19 +1,8 @@
-/*
-@font-face {
-  font-family: Montserrat;
-  src: url('https://fonts.google.com/specimen/Montserrat')
-}
-
-@font-face {
-  font-family: Oswald;
-  src: url('https://fonts.google.com/specimen/Osawld')
-} */
 
 .location-card {
   text-align: center;
   width: 18rem;
   height: 24rem;
-  /* border: solid black 1px; */
   padding: 2%;
   display: inline-block;
   margin: 2% 1% 2% 1%;
@@ -64,4 +53,16 @@
 .city-title {
   margin: -1rem 0rem 0rem 0rem;
   line-height: 8px;
+}
+
+@media only screen and (min-width : 320px) and (max-width : 1224px) {
+  .location-card {
+    text-align: center;
+    /* width: 18rem; */
+    height: 24rem;
+    padding: 2%;
+    display: inline-block;
+    margin: 10% 1% 6% 1%;
+    font-family: 'Montserrat';
+  }
 }

@@ -1,67 +1,3 @@
-.close-icon-detail {
-  position: absolute;
-  top: 2%;
-}
-
-.close-icon-detail:hover {
- color: #858B9F;
-}
-
-#location-detail {
-  position: absolute;
-  float: right;
-  top: 0;
-  left: 35%;
-  width: 65%;
-  display: inline-block;
-  height: stretch;
-  z-index: 10;
-  background-color: #91B587;
-  /* background: linear-gradient(#e66465, #9198e5); */
-  opacity: .8;
-  padding: 2% 3%;
-  text-align: center;
-}
-
-.detail-text h4 {
-  font-size: 13px;
-}
-
-.cool-map {
-  width: 100%;
-  height: 22rem;
-  border: none;
-  border-radius: 10px;
-}
-
-.current-conditions {
-  display: inline-block;
-  border-radius: 10px;
-  padding: 1rem;
-  width: 100%;
-  height: 20rem;
-  text-align: center;
-  background: linear-gradient(#ECE9E6, #EBECEF);
-}
-
-.temperatures {
-  display: inline-grid;
-  padding: 2%;
-  vertical-align: top;
-  float: left;
-  margin-top: 5%;
-}
-
-.thermometer {
-  height: 8rem;
-  display: inline-flex;
-  width: 19px;
-  border: black ridge 1px;
-  background: linear-gradient(#fdbb2d, #B21F1D, #1a2a6c);
-  border-radius: 20px;
-  float: left;
-  margin: 2% 2% 2% 10%;
-}
 
 .this-week {
   display: inline-flex;
@@ -86,25 +22,183 @@
   margin: .3rem;
 }
 
-.quick-weathers {
-  display: inline-block;
-  width: 50%;
+@media only screen and (min-width : 320px) and (max-width : 1224px) {
+  #location-detail {
+    width: 24rem;
+    height: auto;
+    z-index: 10;
+    background-color: #91B587;
+    opacity: .8;
+    padding: 6% 8%;
+    text-align: center;
+  }
+
+  .close-icon-detail {
+    position: absolute;
+    top: 1%;
+    left: 2%;
+    transform: scale(1.2);
+  }
+
+  .close-icon-detail:hover {
+    color: #858B9F;
+  }
+
+  .detail-text {
+    margin-bottom: 4%;
+  }
+  .detail-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .current-conditions {
+    display: inline-block;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    background: linear-gradient(#ECE9E6, #EBECEF);
+  }
+
+  .this-week {
+    display: inline-flex;
+    overflow-x: scroll;
+  }
+
+  .quick-weathers {
+    display: inline-block;
+  }
+
+  .temperatures {
+    display: none;
+  }
+
+  .thermometer {
+    display: none;
+  }
+
+  .little-icons {
+    height: 4rem;
+    width: 6rem;
+    opacity: .8;
+    border-radius: 10px;
+    margin: .1%;
+    color: black;
+    display: inline-grid;
+  }
+
+  .little-icons h3 {
+    font-weight: 200;
+  }
+
+  .little-icons h4 {
+    font-weight: 600;
+  }
+
+  .cool-map {
+    width: 100%;
+    height: 14rem;
+    border: none;
+    border-radius: 10px;
+  }
 }
 
-.little-icons {
-  height: 4rem;
-  width: 6rem;
-  opacity: .8;
-  border-radius: 10px;
-  margin: 3%;
-  color: black;
-  display: inline-grid;
-}
 
-.little-icons h3 {
-  font-weight: 200;
-}
+@media only screen  and (min-width : 1224px) {
+  #location-detail {
+    position: absolute;
+    float: right;
+    top: 0;
+    left: 35%;
+    width: 65%;
+    display: inline-block;
+    height: stretch;
+    z-index: 10;
+    background-color: #91B587;
+    opacity: .8;
+    padding: 2% 3%;
+    text-align: center;
+  }
 
-.little-icons h4 {
-  font-weight: 600;
+  .close-icon-detail {
+    position: absolute;
+    top: 2%;
+  }
+
+  .close-icon-detail:hover {
+   color: #858B9F;
+  }
+
+  .detail-text h1 {
+    font-size: 40px;
+  }
+
+  .detail-text h4 {
+    font-size: 13px;
+  }
+
+  .this-week {
+    display: inline-flex;
+    overflow-x: scroll;
+  }
+
+  .current-conditions {
+    display: inline-block;
+    border-radius: 10px;
+    padding: 1rem;
+    width: 100%;
+    height: 20rem;
+    text-align: center;
+    background: linear-gradient(#ECE9E6, #EBECEF);
+  }
+
+  .quick-weathers {
+    display: inline-block;
+    width: 50%;
+  }
+
+  .temperatures {
+    display: inline-grid;
+    padding: 2%;
+    vertical-align: top;
+    float: left;
+    margin-top: 5%;
+  }
+
+  .thermometer {
+    height: 8rem;
+    display: inline-flex;
+    width: 19px;
+    border: black ridge 1px;
+    background: linear-gradient(#fdbb2d, #B21F1D, #1a2a6c);
+    border-radius: 20px;
+    float: left;
+    margin: 2% 2% 2% 10%;
+  }
+
+  .little-icons {
+    height: 4rem;
+    width: 6rem;
+    opacity: .8;
+    border-radius: 10px;
+    margin: 3%;
+    color: black;
+    display: inline-grid;
+  }
+
+  .little-icons h3 {
+    font-weight: 200;
+  }
+
+  .little-icons h4 {
+    font-weight: 600;
+  }
+
+  .cool-map {
+    width: 100%;
+    height: 22rem;
+    border: none;
+    border-radius: 10px;
+  }
 }
