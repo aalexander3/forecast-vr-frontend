@@ -16,7 +16,7 @@ body {
   color: #537770;
 }
 
-@media only screen and (min-width : 320px) and (max-width : 1224px) {
+@media only screen and (min-width : 320px) and (max-width : 560px) {
   .buttons {
     margin: .25rem .35rem;
     width: 6.5rem;
@@ -25,7 +25,7 @@ body {
 }
 
 
-@media only screen  and (min-width : 1224px) {
+@media only screen  and (min-width : 560px) {
   .buttons {
     margin: .25rem .45rem;
     width: 8rem;

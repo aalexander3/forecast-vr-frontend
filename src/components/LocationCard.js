@@ -62,7 +62,7 @@ const LocationCard = (props) => {
     <div className='location-card'>
       <div className='close-icon' onClick={sendDelete}><Icon type="close-square-o" /></div>
       <div className='city-title' onClick={selectLocation}><h3 className='card-city-name' >{full_city_name.toUpperCase()}</h3></div>
-      <h4 className='conditions'> {parseInt(temperature)}&#176;F - {summary} </h4>
+      <h4 className='conditions'> {parseInt(temperature, 10)}&#176;F - {summary} </h4>
       {renderIFrame()}
       <br/>
       <h4 className='time-card'> {timeToUse.slice(0,3) + time.slice(-2)} </h4>

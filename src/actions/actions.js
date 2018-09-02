@@ -41,7 +41,7 @@ export let addCityToWhich = location => {
 export const fixOffset = (time, offset) => {
   let offsetBy = offset + 4
   let useThisTime = time * 1000 + (offsetBy * 3600000)
-  return new Date(parseInt(useThisTime))
+  return new Date(parseInt(useThisTime, 10))
 }
 
 export const getVars = (json, location) => {

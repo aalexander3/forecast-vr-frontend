@@ -5,9 +5,7 @@ import { deleteDetail } from '../actions/actions.js'
 import { withRouter } from 'react-router-dom'
 import SmallDetails from './SmallDetails'
 import '../styles/LocationDetail.css'
-import { Icon, Tabs  } from 'antd'
-
-const TabPane = Tabs.TabPane
+import { Icon } from 'antd'
 
 
 class LocationDetail extends React.Component {
@@ -24,7 +22,7 @@ class LocationDetail extends React.Component {
 
   render(){
 
-    let {full_city_name, humidity, cloudCover, dewPoint, precipProbability, uvIndex, date, time, temp, windSpeed, dailySummary, sunriseTime, sunsetTime, latitude, longitude, high, low} = this.props.selection
+    let {full_city_name, humidity, cloudCover, dewPoint, precipProbability, uvIndex, date, time, temp, windSpeed, dailySummary, latitude, longitude, high, low} = this.props.selection
 
     return (
       <div id="location-detail">
@@ -38,12 +36,13 @@ class LocationDetail extends React.Component {
               {this.forecastThisWeek()}
             </div>
 
-              <div className="thermometer"></div>
-              <div className='temperatures'>
-                <h2>{temp}&#176;F </h2>
-                <h4>{high} / {low}</h4>
-              </div>
+              {/* <div className="thermometer"></div> */}
+
               <div className='quick-weathers'>
+                <div className='little-icons'>
+                  <h3>{temp}&#176;F </h3>
+                  <h4>{high} / {low}</h4>
+                </div>
                 <div className='little-icons' >
                   <h3>{humidity * 100}% </h3>
                   <h4>Humidity</h4>

@@ -22,7 +22,7 @@ const LocationPage = props => {
 
   const detailVsCards = () => {
     if (props.selectedLocation){
-      return [makeLocationDetail(), makeSelectedCard()]
+      return [makeSelectedCard(), makeLocationDetail()]
     } else {
         return makeLocationCards()
     }

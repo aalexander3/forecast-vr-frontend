@@ -34,7 +34,7 @@
   transition: opacity 300ms ease-in;
 } */
 
-@media only screen and (min-width : 320px) and (max-width : 1224px) {
+@media only screen and (min-width : 320px) and (max-width : 560px) {
     .sunny-spinny {
       display: none;
     }
@@ -49,11 +49,11 @@
     }
 
     #selected-card {
-      
+
     }
 }
 
-@media only screen  and (min-width : 1224px) {
+@media only screen  and (min-width : 560px) {
   #location-page {
     position: relative;
     display: inline-block;
