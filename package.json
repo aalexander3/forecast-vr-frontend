@@ -1,6 +1,9 @@
 {
   "name": "forecast-vr",
   "version": "0.1.0",
+  "engines": {
+    "node": "9.11.1"
+  },
   "private": true,
   "dependencies": {
     "aframe": "0.7.0",
