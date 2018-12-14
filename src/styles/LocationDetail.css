@@ -124,6 +124,7 @@
   .close-icon-detail {
     position: absolute;
     top: 2%;
+    cursor: pointer;
   }
 
   .close-icon-detail:hover {

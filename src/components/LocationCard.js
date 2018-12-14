@@ -17,15 +17,17 @@ const LocationCard = (props) => {
   let timeToUse = fixOffset(hourlyTime, offset).toTimeString()
   let dateToUse = fixOffset(hourlyTime, offset).toDateString().slice(0, -5)
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     props.history.replace(`/${citySlug}`)
   }
 
-  const sendDelete = () => {
+  const sendDelete = (e) => {
+    e.stopPropagation()
     props.deleteLocation(props.city)
   }
 
-  const selectLocation = () => {
+  const selectLocation = (e) => {
+    console.log(e);
     props.selectLocation(props.city)
   }
 
@@ -59,9 +61,9 @@ const LocationCard = (props) => {
   }
 
   return (
-    <div className='location-card'>
+    <div className='location-card' onClick={selectLocation}>
       <div className='close-icon' onClick={sendDelete}><Icon type="close-square-o" /></div>
-      <div className='city-title' onClick={selectLocation}><h3 className='card-city-name' >{full_city_name.toUpperCase()}</h3></div>
+      <div className='city-title'><h3 className='card-city-name' >{full_city_name.toUpperCase()}</h3></div>
       <h4 className='conditions'> {parseInt(temperature, 10)}&#176;F - {summary} </h4>
       {renderIFrame()}
       <br/>

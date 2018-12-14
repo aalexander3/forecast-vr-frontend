@@ -1,7 +1,6 @@
 .slider {
   position: relative;
   padding: 0px 30px;
-
 }
 
 .slider .anticon {
@@ -11,6 +10,7 @@
   height: 16px;
   line-height: 1;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .slider .anticon:first-child {
