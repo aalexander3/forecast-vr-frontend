@@ -30,6 +30,10 @@ export let incrementHour = () => {
   return {type: 'INCREMENT'}
 }
 
+export let changeHour = (hour) => {
+  return {type: 'CHANGE_HOUR_TO', payload: hour}
+}
+
 export let decrementHour = () => {
   return {type: 'DECREMENT'}
 }
@@ -96,11 +100,3 @@ export let newFetchLocation = location => {
         return {location: getVars(json, location)}
   })
 }
-
-// const stringifyDate = (date, time) => {
-//   const newTime = time.slice(17, -9)
-//   const newDate = date.slice(16, -11)
-//   const day = time.slice(0, 3)
-//   const dayTimeString = day + ' ' + newDate + ' ' + newTime
-//   return dayTimeString
-// }

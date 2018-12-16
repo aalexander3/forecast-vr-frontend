@@ -22,7 +22,7 @@ class LocationDetail extends React.Component {
 
   render(){
 
-    let {full_city_name, humidity, cloudCover, dewPoint, precipProbability, uvIndex, date, time, temp, windSpeed, dailySummary, latitude, longitude, high, low} = this.props.selection
+    let { full_city_name, humidity, cloudCover, dewPoint, precipProbability, uvIndex, date, time, temp, windSpeed, dailySummary, latitude, longitude, high, low } = this.props.selection
 
     return (
       <div id="location-detail">
@@ -36,35 +36,33 @@ class LocationDetail extends React.Component {
               {this.forecastThisWeek()}
             </div>
 
-              {/* <div className="thermometer"></div> */}
-
               <div className='quick-weathers'>
                 <div className='little-icons'>
                   <h3>{temp}&#176;F </h3>
                   <h4>{high} / {low}</h4>
                 </div>
                 <div className='little-icons' >
-                  <h3>{humidity * 100}% </h3>
+                  <h3>{(humidity * 100).toFixed(2)}% </h3>
                   <h4>Humidity</h4>
                 </div>
                 <div className='little-icons' >
-                  <h3>{precipProbability * 100}% </h3>
+                  <h3>{(precipProbability * 100).toFixed(2)}% </h3>
                   <h4>Precipitation</h4>
                 </div>
                 <div className='little-icons' >
-                  <h3>{dewPoint}&#176; </h3>
+                  <h3>{dewPoint.toFixed(2)}&#176; </h3>
                   <h4>Dew Point</h4>
                 </div>
                 <div className='little-icons' >
-                  <h3>{windSpeed} MPH</h3>
+                  <h3>{windSpeed.toFixed(2)} MPH</h3>
                   <h4>Wind Speed</h4>
                 </div>
                 <div className='little-icons' >
-                  <h3>{uvIndex} </h3>
+                  <h3>{uvIndex.toFixed(2)} </h3>
                   <h4>UV Index</h4>
                 </div>
                 <div className='little-icons' >
-                  <h3>{cloudCover * 100}% </h3>
+                  <h3>{(cloudCover * 100).toFixed(2)}% </h3>
                   <h4>Cloud Cover</h4>
                 </div>
               </div>

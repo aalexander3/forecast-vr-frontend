@@ -3,7 +3,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { compose } from 'redux'
-import { fixOffset } from '../actions/actions.js'
+import { fixOffset, incrementHour, decrementHour } from '../actions/actions.js'
 import CityButtons from './CityButtons'
 import Cloud from './Cloud'
 // aframe imports
@@ -20,8 +20,12 @@ import 'aframe-html-shader'
 class Sun extends React.Component {
 
   getGroundColor1 = () => {
+    const { city } = this.props
+    let icon;
+    if (city) icon = city.hourly[this.props.whichHour].icon;
+
     if (this.props.city) {
-      switch (this.props.city.icon) {
+      switch (icon) {
         case "fog": case "cloudy": case "partly-cloudy-day": case "partly-cloudy-night":
           return '#797278'
         case "clear-day": case "clear-night": case "wind":
@@ -37,8 +41,13 @@ class Sun extends React.Component {
   }
 
   getGroundColor2 = () => {
+
+    const { city } = this.props
+    let icon;
+    if (city) icon = city.hourly[this.props.whichHour].icon;
+
     if (this.props.city) {
-      switch (this.props.city.icon) {
+      switch (icon) {
         case "fog": case "cloudy": case "partly-cloudy-day": case "partly-cloudy-night":
           return '#789767'
         case "clear-day": case "clear-night": case "wind":
@@ -54,57 +63,48 @@ class Sun extends React.Component {
   }
 
   isItSnowing = () => {
-    if (this.props.city.icon === "snow" || this.props.city.icon === "sleet" ) {
+    const { city } = this.props
+    let icon;
+    if (city) icon = city.hourly[this.props.whichHour].icon;
+
+    if (icon === "snow" || icon === "sleet" ) {
       return "dropRadius: 0.08; dropHeight: 0.1; vector: 0 -2 0; opacity: .8; splashBounce: 0.8; count: 4000; color: #E7EBF0; splashGravity: 1.6;"
-    } else if (this.props.city.icon === 'rain' ) {
+    } else if (icon === 'rain' ) {
       return "count: 4000;"
     } else {
       return 'count: 0;'
     }
   }
 
+  makeXClouds = number => {
+    return new Array(number).fill(<Cloud />)
+  }
+
   howCloudy = () => {
-    switch (this.props.city.icon) {
+    const { city } = this.props
+    let icon;
+    if (city) icon = city.hourly[this.props.whichHour].icon;
+
+    switch (icon) {
       case "fog": case "cloudy":
-        return [
-          <Cloud />,
-          <Cloud />,
-          <Cloud />,
-          <Cloud />
-        ]
+        return this.makeXClouds(6)
       case "partly-cloudy-day": case "partly-cloudy-night":
-        return [
-          <Cloud />,
-          <Cloud />,
-          <Cloud />
-        ]
+        return this.makeXClouds(4)
       case "clear-day": case "clear-night": case "wind":
         return <Cloud />
       case "snow": case "sleet":
-        return [
-          <Cloud />,
-          <Cloud />,
-          <Cloud />,
-          <Cloud />
-        ]
+        return this.makeXClouds(5)
       case "rain":
-        return [
-          <Cloud />,
-          <Cloud />,
-          <Cloud />,
-          <Cloud />
-        ]
+        return this.makeXClouds(6)
       default:
-        return [
-          <Cloud />,
-          <Cloud />
-        ]
+        return this.makeXClouds(3)
     }
   }
 
   getSunPosition = () => {
     if (this.props.city) {
-      let hourlyTime = this.props.city.hourly[0].time
+      const { hourly } = this.props.city
+      let hourlyTime = hourly[this.props.whichHour].time
       let offset = this.props.city.offset
       let timeToUse = fixOffset(hourlyTime, offset).toTimeString().slice(0,2)
 
@@ -209,7 +209,11 @@ class Sun extends React.Component {
   }
 
   showCityDetails = () => {
-    if (this.props.city){
+    const { city } = this.props
+
+    if (city){
+      const { hourly } = city
+      const { temperature, summary } = hourly[this.props.whichHour]
       return (
         <Entity
           primitive='a-plane'
@@ -217,7 +221,7 @@ class Sun extends React.Component {
           width='1'
           height='1'
           position="-10 1 -8"
-          text={{value: `Currently in \n ${this.props.city.full_city_name}: \n ${this.props.city.temp} F  \n ${this.props.city.conditions}`, align: 'center', wrapCount: 14, side: 'double'}}
+          text={{value: `In ${city.full_city_name}: \n ${temperature} F  \n ${summary}`, align: 'center', wrapCount: 14, side: 'double'}}
           opacity='.6'>
         </Entity>
       )
@@ -225,7 +229,7 @@ class Sun extends React.Component {
   }
 
   render(){
-
+    console.log(this.props.city)
     return(
       <a-scene rain={this.props.city ? this.isItSnowing() : "count: 0;"}>
 
@@ -245,22 +249,42 @@ class Sun extends React.Component {
 
         <Entity primitive="a-light" type="ambient" color="white" intensity=".5"/>
 
-        {(this.props.city) ? this.howCloudy() : null}
+        {(this.props.city) && this.howCloudy()}
         {this.showCityDetails()}
         {this.getLandmark()}
-        {(this.props.locations) ? this.makeLocationButtons() : null}
+        {(this.props.locations) && this.makeLocationButtons() }
 
         <Entity events={{click: this.goBack}}
           primitive='a-plane'
           color='black'
           width='1'
           height='1'
-          position="-11 1 -8"
+          position="-13 1 -8"
           text={{value: 'Exit VR', align: 'center', wrapCount: 12, side: 'double'}}
           opacity='.6'>
         </Entity>
 
-        <Entity events={{click: this.goBack}}
+        <Entity events={{click: this.props.decrementHour}}
+          primitive='a-plane'
+          color='#AAB89B'
+          width='1'
+          height='1'
+          position="-12 1 -8"
+          text={{value: 'Previous Hour', align: 'center', wrapCount: 12, side: 'double'}}
+          opacity='.6'>
+        </Entity>
+
+        <Entity events={{click: this.props.incrementHour}}
+          primitive='a-plane'
+          color='#99C6D8'
+          width='1'
+          height='1'
+          position="-11 1 -8"
+          text={{value: 'Next Hour', align: 'center', wrapCount: 12, side: 'double'}}
+          opacity='.6'>
+        </Entity>
+
+        <Entity
           primitive='a-plane'
           color='#ECDCB9'
           width='1'
@@ -290,9 +314,9 @@ class Sun extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    whichHour: state.whichHour,
+    whichHour: state.whichHour.length,
     locations: state.locations
   }
 }
 
-export default compose(withRouter, connect(mapStateToProps))(Sun)
+export default compose(withRouter, connect(mapStateToProps, { incrementHour, decrementHour }))(Sun)

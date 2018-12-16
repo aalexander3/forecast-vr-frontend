@@ -2,18 +2,22 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { Slider, Icon } from 'antd';
 import { bindActionCreators } from 'redux';
-import { incrementHour, decrementHour } from  '../actions/actions';
+import { incrementHour, decrementHour, changeHour } from  '../actions/actions';
 import '../styles/Incrementer.css'
 
 
 const Incrementer = (props) => {
 
-  const handleDecrease = () => {
+  const handleDecrease = (e) => {
     props.decrementHour()
   }
 
-  const handleIncrease = () => {
+  const handleIncrease = (e) => {
     props.incrementHour()
+  }
+
+  const handleChange = (e) => {
+    props.changeHour(e)
   }
 
   return (
@@ -23,9 +27,9 @@ const Incrementer = (props) => {
       {(props.hour === 0) ? <h3>Showing current conditions</h3> : (props.hour === 1) ? <h3>Forecasting {props.hour} hour from now</h3> : <h3>Forecasting {props.hour} hours from now</h3>}
       <div className="slider">
         <Icon type="minus-circle" onClick={handleDecrease} />
-        <Slider min={0} max={48} value={props.hour} style={{color: '#CC979E'}} />
+        <Slider min={0} max={48} value={props.hour} style={{color: '#CC979E'}} onChange={handleChange} />
         <Icon type="plus-circle" onClick={handleIncrease} />
-     </div>
+      </div>
     </div>
   )
 }
@@ -36,8 +40,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    incrementHour: incrementHour,
-    decrementHour: decrementHour
+    incrementHour,
+    decrementHour,
+    changeHour
   }, dispatch)
 }
 
