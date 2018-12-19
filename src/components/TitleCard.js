@@ -12,7 +12,6 @@ const TitleCard = props => {
     return useThisTime
   }
 
-
   const showCityDetails = () => {
     if (default_location){
       return (

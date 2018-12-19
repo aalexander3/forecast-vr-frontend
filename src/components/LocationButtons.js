@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import ButtonCard from './ButtonCard'
-import { selectLocation, addCityToWhich, deleteDetail } from '../actions/actions.js'
+import { selectLocation, addCityToWhich, deleteDetail } from '../actions/locationActions.js'
 import { bindActionCreators } from 'redux';
 
 const LocationButtons = (props) => {

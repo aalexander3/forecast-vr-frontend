@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { Slider, Icon } from 'antd';
 import { bindActionCreators } from 'redux';
-import { incrementHour, decrementHour, changeHour } from  '../actions/actions';
+import { incrementHour, decrementHour, changeHour } from  '../actions/hourActions';
 import '../styles/Incrementer.css'
 
 

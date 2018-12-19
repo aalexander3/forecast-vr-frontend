@@ -12,7 +12,7 @@ import registerServiceWorker from './registerServiceWorker';
 require('dotenv').config()
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk),
-   window.devToolsExtension ? window.devToolsExtension() : f => f
+   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
  ));
 
 store.subscribe(() => {
@@ -25,6 +25,6 @@ ReactDOM.render(
     </Router>
   </Provider>,
    document.getElementById('root'));
-registerServiceWorker();
+// registerServiceWorker();
 
 // store.dispatch({type: '@@INIT'})
