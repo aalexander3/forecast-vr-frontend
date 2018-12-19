@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import ButtonCard from './ButtonCard'
-import { selectLocation, addCityToWhich, deleteDetail } from '../actions/locationActions.js'
+import { addCityToWhich, deleteDetail } from '../actions/locationActions.js'
 import { bindActionCreators } from 'redux';
 
 const LocationButtons = (props) => {
@@ -28,7 +28,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    selectLocation: selectLocation,
     addCityToWhich: addCityToWhich,
     deleteDetail: deleteDetail
   }, dispatch)

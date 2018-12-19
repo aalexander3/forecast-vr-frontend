@@ -9,4 +9,7 @@
 ## move fetches to an adapter
  - self explanatory
 
-## 
+## differentiate between selectLocation and selected location --
+ - aka clean up the reducer
+
+# clean up sun vs. mars components!
