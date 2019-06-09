@@ -12,17 +12,13 @@ const LocationPage = props => {
     return props.locations.map(city => <LocationCard key={city.full_city_name} city={city} />)
   }
 
-  const makeSelectedCard = () => {
-    return <div id='selected-card'><LocationCard key={props.selectedLocation.full_city_name} city={props.selectedLocation}/></div>
-  }
-
   const makeLocationDetail = () => {
     return (props.selectedLocation) ? <div className='location-detail'><LocationDetail /></div> : null
   }
 
   const detailVsCards = () => {
     if (props.selectedLocation){
-      return [makeSelectedCard(), makeLocationDetail()]
+      return makeLocationDetail()
     } else {
         return makeLocationCards()
     }

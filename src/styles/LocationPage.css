@@ -11,29 +11,6 @@
 }
 
 
-
-#selected-card .close-icon {
-  display: none;
-}
-
-/* .location-page-transitions-enter {
-  opacity: 0.01;
-}
-
-.location-page-transitions-enter.location-page-transitions-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
-}
-
-.location-page-transitions-leave {
-  opacity: 1;
-}
-
-.location-page-transitions-leave.location-page-transitions-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
-} */
-
 @media only screen and (min-width : 320px) and (max-width : 560px) {
     .sunny-spinny {
       display: none;
@@ -47,10 +24,6 @@
       vertical-align: top;
       height: auto;
     }
-
-    #selected-card {
-
-    }
 }
 
 @media only screen  and (min-width : 560px) {
@@ -61,10 +34,6 @@
     vertical-align: top;
     height: stretch;
     overflow-x: hidden;
-  }
-
-  #selected-card {
-    margin: 18% 0 0 2%;
   }
 
   .sunny-spinny {
