@@ -229,7 +229,6 @@ class Sun extends React.Component {
   }
 
   render(){
-    console.log(this.props.city)
     return(
       <a-scene rain={this.props.city ? this.isItSnowing() : "count: 0;"}>
 

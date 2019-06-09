@@ -27,7 +27,6 @@ const LocationCard = (props) => {
   }
 
   const selectLocation = (e) => {
-    console.log(e);
     props.selectLocation(props.city)
   }
 

@@ -16,7 +16,7 @@ class LocationDetail extends React.Component {
 
   forecastThisWeek = () => {
     return this.props.selection.daily.slice(0,7).map(day => {
-      return <SmallDetails day={day} />
+      return <SmallDetails day={day} key={day} />
     })
   }
 
