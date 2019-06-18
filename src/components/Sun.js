@@ -332,7 +332,7 @@ class Sun extends Component {
 
 const mapStateToProps = state => {
   return {
-    whichHour: state.whichHour.length,
+    whichHour: state.whichHour,
     locations: state.locations
   }
 }

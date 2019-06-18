@@ -1,10 +1,10 @@
 import React from 'react'
 import { Button } from 'antd'
 
-const ButtonCard = (props) => {
+const ButtonCard = ({ location, addNewLocation }) => {
 
-  const sendTheClickRequest = (e) => {
-    props.addNewLocation(props.location)
+  const sendTheClickRequest = e => {
+    addNewLocation(location)
   }
 
   return (
@@ -12,7 +12,7 @@ const ButtonCard = (props) => {
       className='buttons'
       type="secondary"
       onClick={sendTheClickRequest}>
-      { props.location.full_city_name }
+      { location.full_city_name }
     </Button>
   )
 }
