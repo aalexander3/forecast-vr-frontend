@@ -1,5 +1,4 @@
 import React from 'react'
-import '../styles/TitleCard.css'
 import { connect } from 'react-redux';
 import { emojify } from 'react-emojione';
 

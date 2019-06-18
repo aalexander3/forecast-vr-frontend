@@ -3,7 +3,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { compose } from 'redux'
-import { fixOffset } from '../actions/actions.js'
+import { fixOffset } from '../actions/actionHelper.js'
 import CityButtons from './CityButtons'
 // aframe imports
 import 'aframe';

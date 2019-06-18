@@ -1,5 +1,4 @@
 import React from 'react'
-import '../styles/SmallDetails.css'
 
 const SmallDetails = props => {
   let {temperatureHigh, temperatureLow, icon} = props.day

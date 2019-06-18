@@ -1,9 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { Slider, Icon } from 'antd';
-import { bindActionCreators } from 'redux';
 import { incrementHour, decrementHour, changeHour } from  '../actions/hourActions';
-import '../styles/Incrementer.css'
 
 
 const Incrementer = (props) => {
@@ -35,15 +33,7 @@ const Incrementer = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  return {hour: state.whichHour.length}
+  return { hour: state.whichHour.length }
 }
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    incrementHour,
-    decrementHour,
-    changeHour
-  }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Incrementer)
+export default connect(mapStateToProps, { incrementHour, decrementHour, changeHour })(Incrementer)

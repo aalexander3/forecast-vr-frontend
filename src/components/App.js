@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import '../styles/App.css';
 import LandingPage from './LandingPage'
 import Adapter from '../adapters/Adapter'
 import Sun from './Sun'
 import Mars from './Mars'
-import { bindActionCreators, compose } from 'redux';
+import { compose } from 'redux';
 import { newFetchLocation, batchFetch } from  '../actions/locationActions';
 import { getVars } from  '../actions/actionHelper';
 import { connect } from 'react-redux';
@@ -12,7 +11,7 @@ import { Route, Switch, withRouter } from 'react-router-dom'
 
 class App extends Component {
   componentDidMount = () => {
-    this.doThisOnce()
+    this.getAllCities()
   }
 
   appFetch = (location) => {
@@ -20,32 +19,20 @@ class App extends Component {
       .then(json => getVars(json, location))
   }
 
-  doThisOnce = () => {
+  getAllCities = () => {
     Promise.all(this.props.defaultLocations.map(city => this.appFetch(city)))
       .then(locations => this.props.batchFetch(locations))
   }
 
   render() {
-
     return (
-      <div>
-        <Switch>
-          <Route exact path='/' component={ LandingPage } />
-          <Route exact path="/mars" render={() => <Mars /> } />
-          <Route path='/:location' component={Sun} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path='/' component={ LandingPage } />
+        <Route exact path='/mars' component={ Mars } />
+        <Route path='/:location' component={ Sun } />
+      </Switch>
     );
   }
-}
-
-
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    newFetchLocation: newFetchLocation,
-    batchFetch: batchFetch
-  }, dispatch)
 }
 
 const mapStateToProps = state => {
@@ -57,4 +44,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(App);
+export default compose(withRouter, connect(mapStateToProps, { newFetchLocation, batchFetch }))(App);

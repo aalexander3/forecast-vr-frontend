@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { deleteDetail } from '../actions/locationActions'
+import { fixOffset } from '../actions/actionHelper'
 import { withRouter } from 'react-router-dom'
 import SmallDetails from './SmallDetails'
 import LittleIcon from './LittleIcon'
-import '../styles/LocationDetail.css'
 import { Icon, Button } from 'antd'
 
 class LocationDetail extends Component {
@@ -46,9 +46,9 @@ class LocationDetail extends Component {
             <div className='this-week'>
               {this.forecastThisWeek()}
             </div>
-    
+
             <div className='quick-weathers'>
-              <LittleIcon data={`${temp} °F`} text={`${high} / ${low}`}/>
+              <LittleIcon data={`${temperature} °F`} text={`${high} / ${low}`}/>
               <LittleIcon data={`${(humidity * 100).toFixed(2)}%`} text={`Humidity`} />
               <LittleIcon data={`${(precipProbability * 100).toFixed(2)}%`} text={`Precipitation`} />
               <LittleIcon data={`${dewPoint.toFixed(2)}°`} text={`Dew Point`} />

@@ -3,12 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
 import { withRouter } from 'react-router-dom'
 import { Icon, Button } from 'antd'
-
 import { deleteLocation, selectLocation } from '../actions/locationActions'
 import { fixOffset } from '../actions/actionHelper'
-import '../styles/LocationCard.css'
 import { image_object } from '../constants/image_object'
-
 
 const LocationCard = (props) => {
 
