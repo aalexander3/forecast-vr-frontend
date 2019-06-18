@@ -2,7 +2,7 @@
   "name": "forecast-vr",
   "version": "0.1.0",
   "engines": {
-    "node": "9.11.1"
+    "node": "11.12.0"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +21,7 @@
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.3.2",
     "react-emojione": "^5.0.0",
+    "react-media": "^1.9.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",

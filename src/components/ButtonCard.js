@@ -8,7 +8,8 @@ const ButtonCard = (props) => {
   }
 
   return (
-    <Button className='buttons'
+    <Button
+      className='buttons'
       type="secondary"
       onClick={sendTheClickRequest}>
       { props.location.full_city_name }

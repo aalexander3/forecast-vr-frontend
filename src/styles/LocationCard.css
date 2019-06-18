@@ -72,15 +72,25 @@
   line-height: 8px;
 }
 
-@media only screen and (min-width : 320px) and (max-width : 560px) {
+@media only screen and (min-width : 320px) and (max-width : 1000px) {
   .location-card {
     text-align: center;
-    /* width: 18rem; */
+    width: 18rem;
     height: 24rem;
-    padding: 2%;
+    padding: 4% 2%;
     display: inline-block;
-    margin: 10% 1% 6% 1%;
     font-family: 'Montserrat';
+  }
+
+  .close-icon {
+    position: absolute;
+    margin: -1rem 0rem 0rem 14rem;
+    cursor: pointer;
+  }
+
+  .iframe-cards {
+    width: 18vh;
+    height: 18vh;
   }
 }
 
