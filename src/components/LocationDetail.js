@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { bindActionCreators, compose } from 'redux';
-import { deleteDetail, fixOffset } from '../actions/actions.js'
-
+import { deleteDetail } from '../actions/locationActions'
 import { withRouter } from 'react-router-dom'
 import SmallDetails from './SmallDetails'
+import LittleIcon from './LittleIcon'
 import '../styles/LocationDetail.css'
 import { Icon, Button } from 'antd'
 
-
 class LocationDetail extends Component {
-
 
   handleClick = (e) => {
     const { citySlug } = this.props.selection
@@ -48,37 +46,16 @@ class LocationDetail extends Component {
             <div className='this-week'>
               {this.forecastThisWeek()}
             </div>
-
-              <div className='quick-weathers'>
-                <div className='little-icons'>
-                  <h3>{temperature}&#176;F </h3>
-                  <h4>{high} / {low}</h4>
-                </div>
-                <div className='little-icons' >
-                  <h3>{(humidity * 100).toFixed(2)}% </h3>
-                  <h4>Humidity</h4>
-                </div>
-                <div className='little-icons' >
-                  <h3>{(precipProbability * 100).toFixed(2)}% </h3>
-                  <h4>Precipitation</h4>
-                </div>
-                <div className='little-icons' >
-                  <h3>{dewPoint.toFixed(2)}&#176; </h3>
-                  <h4>Dew Point</h4>
-                </div>
-                <div className='little-icons' >
-                  <h3>{windSpeed.toFixed(2)} MPH</h3>
-                  <h4>Wind Speed</h4>
-                </div>
-                <div className='little-icons' >
-                  <h3>{uvIndex.toFixed(2)} </h3>
-                  <h4>UV Index</h4>
-                </div>
-                <div className='little-icons' >
-                  <h3>{(cloudCover * 100).toFixed(2)}% </h3>
-                  <h4>Cloud Cover</h4>
-                </div>
-              </div>
+    
+            <div className='quick-weathers'>
+              <LittleIcon data={`${temp} °F`} text={`${high} / ${low}`}/>
+              <LittleIcon data={`${(humidity * 100).toFixed(2)}%`} text={`Humidity`} />
+              <LittleIcon data={`${(precipProbability * 100).toFixed(2)}%`} text={`Precipitation`} />
+              <LittleIcon data={`${dewPoint.toFixed(2)}°`} text={`Dew Point`} />
+              <LittleIcon data={`${windSpeed.toFixed(2)} MPH`} text={`Wind Speed`} />
+              <LittleIcon data={`${uvIndex.toFixed(2)}`} text={`UV Index`} />
+              <LittleIcon data={`${(cloudCover * 100).toFixed(2)}%`} text={`Cloud Cover`} />
+            </div>
           </div>
         </div>
         <iframe className='cool-map' seamless title="cool-map" src={`https://maps.darksky.net/@temperature,${latitude},${longitude},5.js?embed=true&timeControl=false&fieldControl=true&defaultField=temperature&defaultUnits=_f`}>

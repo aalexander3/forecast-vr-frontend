@@ -7,13 +7,6 @@ import 'babel-polyfill';
 
 class Cloud extends React.Component {
 
-  generatePosition = () => {
-    let x =  Math.random() * (140) -70;
-    let y =  Math.random() * (60 - 15) + 15;
-    let z =  Math.random() * (140) -70;
-    return `${x} ${y} ${z}`
-  }
-
   generateStartingPosition = () => {
     let x =  Math.random() * (140) -70;
     let y =  Math.random() * (60 - 15) + 15;
@@ -22,7 +15,7 @@ class Cloud extends React.Component {
   }
 
   generateEndingPosition = () => {
-    let x =  Math.random() * (140) ;
+    let x =  Math.random() * (140);
     let y =  Math.random() * (60 - 15) + 15;
     let z =  Math.random() * (140) -70;
     return `${x} ${y} ${z}`
@@ -72,7 +65,7 @@ class Cloud extends React.Component {
 
   getFluff = () => {
     let fluffyCloud = (
-      <a-torus-knot scale={this.generateSize()} color="white" arc="180" p="3" q="23" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="2" position={this.generatePosition()} opacity='.4'>
+      <a-torus-knot scale={this.generateSize()} color="white" arc="180" p="3" q="23" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="2" position={this.generateStartingPosition()} opacity='.4'>
         <a-animation attribute="scale"
            dur="20000"
            fill="forwards"
@@ -86,7 +79,7 @@ class Cloud extends React.Component {
 
   getBig = () => {
     let bigCloud = (
-    <a-torus-knot scale={this.generateSize()} color="white" arc="180" p="3" q="6" radius="2" segments-radial='14' radius-tubular="2" position={this.generatePosition()} opacity='.4'>
+    <a-torus-knot scale={this.generateSize()} color="white" arc="180" p="3" q="6" radius="2" segments-radial='14' radius-tubular="2" position={this.generateStartingPosition()} opacity='.4'>
       <a-animation attribute="position"
          dur="60000"
          fill="forwards"
@@ -100,7 +93,7 @@ class Cloud extends React.Component {
 
   getSpiky = () => {
     let spikyCloud = (
-      <a-torus-knot scale={this.generateSize()} color="white" arc="180" p="3" q="6" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="1" position={this.generatePosition()} opacity='.4'>
+      <a-torus-knot scale={this.generateSize()} color="white" arc="180" p="3" q="6" radius="2" segments-radial='14' segments-tubular="14" radius-tubular="1" position={this.generateStartingPosition()} opacity='.4'>
         <a-animation attribute="material.color"
            dur="10000"
            from='#F4DFE4'

@@ -1,9 +1,10 @@
 // react imports
-import React from 'react'
+import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { compose } from 'redux'
-import { fixOffset, incrementHour, decrementHour } from '../actions/actions.js'
+import { fixOffset } from '../actions/actionHelper'
+import { incrementHour, decrementHour } from '../actions/hourActions'
 import CityButtons from './CityButtons'
 import Cloud from './Cloud'
 // aframe imports
@@ -17,14 +18,32 @@ import 'aframe-rain'
 import 'aframe-environment-component'
 import 'aframe-html-shader'
 
-class Sun extends React.Component {
+class Sun extends Component {
+
+  state = {
+    city: null
+  }
+
+  componentDidMount(){
+    this.findLocation(this.props.match.params.location)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.location !== this.props.match.params.location || (prevProps.locations.length === 0 && this.props.locations.length > 0)) {
+      this.findLocation(this.props.match.params.location)
+    }
+  }
+
+  findLocation = (cityName) => {
+    let city = this.props.locations.find(city => city.citySlug === cityName)
+    this.setState({city})
+  }
 
   getGroundColor1 = () => {
-    const { city } = this.props
-    let icon;
-    if (city) icon = city.hourly[this.props.whichHour].icon;
+    const { city } = this.state
 
-    if (this.props.city) {
+    if (city) {
+      let icon = city.hourly[this.props.whichHour].icon;
       switch (icon) {
         case "fog": case "cloudy": case "partly-cloudy-day": case "partly-cloudy-night":
           return '#797278'
@@ -42,11 +61,11 @@ class Sun extends React.Component {
 
   getGroundColor2 = () => {
 
-    const { city } = this.props
+    const { city } = this.state
     let icon;
     if (city) icon = city.hourly[this.props.whichHour].icon;
 
-    if (this.props.city) {
+    if (city) {
       switch (icon) {
         case "fog": case "cloudy": case "partly-cloudy-day": case "partly-cloudy-night":
           return '#789767'
@@ -63,7 +82,7 @@ class Sun extends React.Component {
   }
 
   isItSnowing = () => {
-    const { city } = this.props
+    const { city } = this.state
     let icon;
     if (city) icon = city.hourly[this.props.whichHour].icon;
 
@@ -81,7 +100,7 @@ class Sun extends React.Component {
   }
 
   howCloudy = () => {
-    const { city } = this.props
+    const { city } = this.state
     let icon;
     if (city) icon = city.hourly[this.props.whichHour].icon;
 
@@ -102,10 +121,10 @@ class Sun extends React.Component {
   }
 
   getSunPosition = () => {
-    if (this.props.city) {
-      const { hourly } = this.props.city
+    if (this.state.city) {
+      const { hourly } = this.state.city
       let hourlyTime = hourly[this.props.whichHour].time
-      let offset = this.props.city.offset
+      let offset = this.state.city.offset
       let timeToUse = fixOffset(hourlyTime, offset).toTimeString().slice(0,2)
 
       switch (timeToUse) {
@@ -146,8 +165,8 @@ class Sun extends React.Component {
   }
 
   getLandmark = () => {
-    if (this.props.city) {
-      switch (this.props.city.full_city_name) {
+    if (this.state.city) {
+      switch (this.state.city.full_city_name) {
         case "Paris":
           return <a-entity collada-model="url(/models/eiffeltower.dae)" scale=".1 .1 .1" position="-2 6 -18" rotation="0 45 0"></a-entity>
         case "New York City":
@@ -209,7 +228,7 @@ class Sun extends React.Component {
   }
 
   showCityDetails = () => {
-    const { city } = this.props
+    const { city } = this.state
 
     if (city){
       const { hourly } = city
@@ -230,7 +249,7 @@ class Sun extends React.Component {
 
   render(){
     return(
-      <a-scene rain={this.props.city ? this.isItSnowing() : "count: 0;"}>
+      <a-scene rain={this.state.city ? this.isItSnowing() : "count: 0;"}>
 
         <Entity environment={{lightPosition: this.getSunPosition(),
           preset: 'starry',
@@ -248,7 +267,7 @@ class Sun extends React.Component {
 
         <Entity primitive="a-light" type="ambient" color="white" intensity=".5"/>
 
-        {(this.props.city) && this.howCloudy()}
+        {(this.state.city) && this.howCloudy()}
         {this.showCityDetails()}
         {this.getLandmark()}
         {(this.props.locations) && this.makeLocationButtons() }
