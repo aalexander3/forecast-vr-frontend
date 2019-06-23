@@ -7,16 +7,11 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import thunk from 'redux-thunk'
 import './styles/index.js';
 import App from './components/App';
-import registerServiceWorker from './registerServiceWorker';
-
 require('dotenv').config()
 
-const store = createStore(rootReducer, compose(applyMiddleware(thunk),
-   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
- ));
-
-store.subscribe(() => {
-})
+const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
+// window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+store.subscribe(() => {})
 
 ReactDOM.render(
   <Provider store={store}>
@@ -26,5 +21,3 @@ ReactDOM.render(
   </Provider>,
    document.getElementById('root'));
 // registerServiceWorker();
-
-// store.dispatch({type: '@@INIT'})

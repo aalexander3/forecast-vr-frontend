@@ -1,19 +1,19 @@
-const hourReducer = (state = [], action) => {
+const hourReducer = (state = 0, action) => {
   switch (action.type) {
     case "INCREMENT":
-      if (state.length < 48){
-      return [...state, action.type]
+      if (state < 48){
+      return state + 1
     } else {
-      return [...state]
+      return state
     }
     case "DECREMENT":
-      if (state.length > 0){
-      return state.slice(0,-1)
+      if (state > 0){
+      return state - 1
     } else {
       return state
     }
     case "CHANGE_HOUR_TO":
-      return new Array(action.payload).fill("INCREMENT")
+      return action.payload
     default:
       return state
   }

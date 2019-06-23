@@ -37,10 +37,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    locations: state.locations,
     defaultLocations: state.defaultLocations,
-    whichCities: state.whichCities,
-    whichHour: state.whichHour
   }
 }
 

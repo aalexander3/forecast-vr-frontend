@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
+import { compose } from 'redux';
 import { deleteDetail } from '../actions/locationActions'
 import { fixOffset } from '../actions/actionHelper'
 import { withRouter } from 'react-router-dom'
@@ -68,14 +68,13 @@ class LocationDetail extends Component {
 const mapStateToProps = state => {
   return {
     selection: state.selectedLocation,
-    whichHour: state.whichHour.length
+    whichHour: state.whichHour
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    deleteDetail: deleteDetail
-  }, dispatch)
-}
+const enhance =  compose(
+  withRouter,
+  connect(mapStateToProps, { deleteDetail })
+)
 
-export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(LocationDetail)
+export default enhance(LocationDetail)

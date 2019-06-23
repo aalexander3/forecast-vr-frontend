@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux'
 import { fixOffset } from '../actions/actionHelper'
 import { incrementHour, decrementHour } from '../actions/hourActions'
-import CityButtons from './CityButtons'
 import Cloud from './Cloud'
+import CitySceneHOC from './CitySceneHOC'
+import { sunPosition, iconConstant, cityModels } from '../constants'
 // aframe imports
 import 'aframe';
 import 'aframe-animation-component';
@@ -44,54 +45,26 @@ class Sun extends Component {
 
     if (city) {
       let icon = city.hourly[this.props.whichHour].icon;
-      switch (icon) {
-        case "fog": case "cloudy": case "partly-cloudy-day": case "partly-cloudy-night":
-          return '#797278'
-        case "clear-day": case "clear-night": case "wind":
-          return '#425E44'
-        case "snow": case "sleet":
-          return '#E7EBF0'
-        case "rain":
-          return '#C1C8D9'
-        default:
-          return '#425E44'
-      }
+      if (iconConstant[icon]) return iconConstant[icon].primaryColor
+      return iconConstant['default'].primaryColor
     }
   }
 
   getGroundColor2 = () => {
-
     const { city } = this.state
-    let icon;
-    if (city) icon = city.hourly[this.props.whichHour].icon;
-
     if (city) {
-      switch (icon) {
-        case "fog": case "cloudy": case "partly-cloudy-day": case "partly-cloudy-night":
-          return '#789767'
-        case "clear-day": case "clear-night": case "wind":
-          return '#789767'
-        case "snow": case "sleet":
-          return '#E9F6F6'
-        case "rain":
-          return '#D8E9EE'
-        default:
-          return '#789767'
-      }
+      let icon = city.hourly[this.props.whichHour].icon;
+      if (iconConstant[icon]) return iconConstant[icon].secondaryColor
+      return iconConstant['default'].secondaryColor
     }
   }
 
   isItSnowing = () => {
     const { city } = this.state
-    let icon;
-    if (city) icon = city.hourly[this.props.whichHour].icon;
-
-    if (icon === "snow" || icon === "sleet" ) {
-      return "dropRadius: 0.08; dropHeight: 0.1; vector: 0 -2 0; opacity: .8; splashBounce: 0.8; count: 4000; color: #E7EBF0; splashGravity: 1.6;"
-    } else if (icon === 'rain' ) {
-      return "count: 4000;"
-    } else {
-      return 'count: 0;'
+    if (city) {
+      let icon = city.hourly[this.props.whichHour].icon;
+      if (iconConstant[icon]) return iconConstant[icon].rainCount
+      return iconConstant['default'].rainCount
     }
   }
 
@@ -101,126 +74,30 @@ class Sun extends Component {
 
   howCloudy = () => {
     const { city } = this.state
-    let icon;
-    if (city) icon = city.hourly[this.props.whichHour].icon;
-
-    switch (icon) {
-      case "fog": case "cloudy":
-        return this.makeXClouds(6)
-      case "partly-cloudy-day": case "partly-cloudy-night":
-        return this.makeXClouds(4)
-      case "clear-day": case "clear-night": case "wind":
-        return <Cloud />
-      case "snow": case "sleet":
-        return this.makeXClouds(5)
-      case "rain":
-        return this.makeXClouds(6)
-      default:
-        return this.makeXClouds(3)
+    if (city) {
+      let icon = city.hourly[this.props.whichHour].icon;
+      if (iconConstant[icon]) {
+        return this.makeXClouds(iconConstant[icon].numClouds)
+      } else {
+        return this.makeXClouds(iconConstant['default'].numClouds)
+      }
     }
   }
 
   getSunPosition = () => {
+    const { city } = this.state
     if (this.state.city) {
-      const { hourly } = this.state.city
+      const { hourly, offset } = city
       let hourlyTime = hourly[this.props.whichHour].time
-      let offset = this.state.city.offset
       let timeToUse = fixOffset(hourlyTime, offset).toTimeString().slice(0,2)
-
-      switch (timeToUse) {
-        case "06":
-          return {x: -2.0, y: 0, z: -1.4}
-        case "07":
-          return {x: -1.75, y: 0.25, z: -1.4}
-        case "08":
-          return {x: -1.5, y: 0.5, z: -1.4}
-        case "09":
-          return {x: -1.25, y: 0.75, z: -1.4}
-        case "10":
-          return {x: -1, y: 1, z: -1.4}
-        case "11":
-          return {x: -.75, y: 1.25, z: -1.4}
-        case "12":
-          return {x: -.5, y: 1.5, z: -1.4}
-        case "13":
-          return {x: 0, y: 2, z: -1.4}
-        case "14":
-          return {x: .25, y: 1.75, z: -1.4}
-        case "15":
-          return {x: .5, y: 1.5, z: -1.4}
-        case "16":
-          return {x: .75, y: 1.25, z: -1.4}
-        case "17":
-          return {x: 1.0, y: .9, z: -1.4}
-        case "18":
-          return {x: 1.25, y: 0.65, z: -1.4}
-        case "19":
-          return {x: 1.5, y: 0.3, z: -1.4}
-        case "20":
-          return {x: 1.75, y: 0, z: -1.4}
-        default:
-          return {x: -2.0, y: -2.0, z: -1.4}
-      }
+      if (sunPosition[timeToUse]) return sunPosition[timeToUse]
+      return sunPosition['default']
     }
   }
 
   getLandmark = () => {
-    if (this.state.city) {
-      switch (this.state.city.full_city_name) {
-        case "Paris":
-          return <a-entity collada-model="url(/models/eiffeltower.dae)" scale=".1 .1 .1" position="-2 6 -18" rotation="0 45 0"></a-entity>
-        case "New York City":
-          return <a-entity collada-model="url(/models/empirestate.dae)" scale="3 3 3" position="-2 9.2 -18" rotation="0 45 0"></a-entity>
-        case "Denver":
-          return <a-entity collada-model="url(/models/mountain.dae)" scale=".25 .25 .25" position="-10 5.5 -40" rotation="0 145 0"></a-entity>
-        case "London":
-          return <a-entity collada-model="url(/models/BigBen/model.dae)" scale=".25 .25 .25" position="-15 0 -30" rotation="0 -90 0"></a-entity>
-        case "Dubai":
-          return <a-entity collada-model="url(/models/Burj/model.dae)" scale=".08 .08 .08" position="-15 0 -30" rotation="0 -45 0"></a-entity>
-        case "Seattle":
-          return <a-entity collada-model="url(/models/spaceneedle.dae)" scale=".7 .7 .7" position="40 0 -40" rotation="0 135 0"></a-entity>
-        case "Honolulu":
-          return <a-entity collada-model="url(/models/coconut.dae)" scale="50 50 50" position="-30 0 -55" rotation="0 145 0"></a-entity>
-        case "Sao Paulo":
-          return <a-entity collada-model="url(/models/SaoPaulo/model.dae)" scale=".5 .5 .5" position="-30 0 -55" rotation="0 60 0"></a-entity>
-        case "Istanbul":
-          return <a-entity collada-model="url(/models/Istanbul/model.dae)" scale=".5 .5 .5" position="-30 0 -55" rotation="0 60 0"></a-entity>
-        case "Jakarta":
-          return <a-entity collada-model="url(/models/jakarta.dae)" scale=".5 .5 .5" position="-30 0 -55" rotation="0 60 0"></a-entity>
-        case "Cairo":
-          return <a-entity collada-model="url(/models/sphinx/model.dae)" scale="10 10 10" position="-30 0 -55" rotation="0 30 0"></a-entity>
-        default:
-          return null
-      }
-    }
-  }
-
-  getCityPosition = (xButton) => {
-    return `${xButton} 1 -8`
-  }
-
-  makeLocationButtons = () => {
-    let xButton = -9;
-    let i = 0
-
-    return this.props.locations.map(city => {
-      xButton++;
-      i++;
-      return <CityButtons city={city} color={this.randomizeColor(i)} position={this.getCityPosition(xButton)} goToCity={this.goToCity}/>
-    })
-  }
-
-  randomizeColor = (i) => {
-    let colors = ['#BFDDE1', '#99C6D8', '#AAB89B', '#D7D1AC', '#E9DCD1', '#E5E4E3', '#BFDDE1', '#99C6D8', '#AAB89B', '#D7D1AC', '#E9DCD1', '#E5E4E3', '#BFDDE1', '#99C6D8', '#AAB89B', '#D7D1AC', '#E9DCD1', '#E5E4E3', '#BFDDE1', '#99C6D8', '#AAB89B', '#D7D1AC', '#E9DCD1', '#E5E4E3' ]
-    return colors[i]
-  }
-
-  goToCity = (city) => {
-    this.props.history.replace(`/${city.citySlug}`)
-  }
-
-  goBack = () => {
-    this.props.history.replace('/')
+    const { city } = this.state
+    if (city) return cityModels[city.full_city_name]
   }
 
   toMars = () => {
@@ -250,8 +127,8 @@ class Sun extends Component {
   render(){
     return(
       <a-scene rain={this.state.city ? this.isItSnowing() : "count: 0;"}>
-
-        <Entity environment={{lightPosition: this.getSunPosition(),
+        <Entity environment={{
+          lightPosition: this.getSunPosition(),
           preset: 'starry',
           skyType: 'atmosphere',
           seed: 1,
@@ -262,17 +139,18 @@ class Sun extends Component {
           groundColor: this.getGroundColor1(),
           groundColor2: this.getGroundColor2(),
           groundTexture: 'squares',
-          grid: 'none'}}>
+          grid: 'none'
+        }}>
         </Entity>
-
         <Entity primitive="a-light" type="ambient" color="white" intensity=".5"/>
 
         {(this.state.city) && this.howCloudy()}
         {this.showCityDetails()}
         {this.getLandmark()}
-        {(this.props.locations) && this.makeLocationButtons() }
+        {(this.props.locations) && this.props.makeLocationButtons() }
 
-        <Entity events={{click: this.goBack}}
+        <Entity
+          events={{click: this.props.goBack}}
           primitive='a-plane'
           color='black'
           width='1'
@@ -332,9 +210,18 @@ class Sun extends Component {
 
 const mapStateToProps = state => {
   return {
-    whichHour: state.whichHour.length,
+    whichHour: state.whichHour,
     locations: state.locations
   }
 }
 
-export default compose(withRouter, connect(mapStateToProps, { incrementHour, decrementHour }))(Sun)
+const enhance = compose(
+  withRouter,
+  connect(
+    mapStateToProps,
+    { incrementHour, decrementHour }
+  ),
+  CitySceneHOC
+)
+
+export default enhance(Sun)

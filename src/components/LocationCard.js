@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { bindActionCreators, compose } from 'redux';
+import { compose } from 'redux';
 import { withRouter } from 'react-router-dom'
 import { Icon, Button } from 'antd'
 import { deleteLocation, selectLocation } from '../actions/locationActions'
@@ -54,7 +54,6 @@ const LocationCard = (props) => {
 
   const renderIFrame = () => {
     return <img className='iframe-cards' alt={full_city_name} src={switchImageSource()} />
-    // return <iframe seamless title={full_city_name} className='iframe-cards' src={"http://localhost:3000/" + citySlug}/>
   }
 
   return (
@@ -72,14 +71,7 @@ const LocationCard = (props) => {
 }
 
 const mapStateToProps = state => {
-  return {whichHour: state.whichHour.length}
+  return { whichHour: state.whichHour }
 }
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    deleteLocation: deleteLocation,
-    selectLocation: selectLocation
-  }, dispatch)
-}
-
-export default compose(withRouter, connect(mapStateToProps, mapDispatchToProps))(LocationCard)
+export default compose(withRouter, connect(mapStateToProps, { deleteLocation, selectLocation }))(LocationCard)
